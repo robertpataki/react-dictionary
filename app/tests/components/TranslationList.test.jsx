@@ -20,11 +20,13 @@ describe('TranslationList', () => {
     var translations = [
       {
         id: 1,
-        text: 'Translation #1',
-        createdAt: 500
+        expression: 'szia',
+        meaning: 'hi',
+        createdAt: 500,
       }, {
         id: 2,
-        text: 'Translation #2',
+        expression: 'haver',
+        meaning: 'pal',
         createdAt: 500
       }
     ];

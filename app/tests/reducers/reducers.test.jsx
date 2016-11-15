@@ -20,19 +20,26 @@ describe('Reducers', () => {
     it('should add new translation', () => {
       var action = {
         type: 'ADD_TRANSLATION',
-        text: 'New translation to be done later'
+        expression: 'később',
+        meaning: 'later',
       }
 
       var response = reducers.translationsReducer(df([]), df(action));
       expect(response.length).toBe(1);
-      expect(response[0].text).toEqual(action.text);
+      expect(response[0].expression).toEqual(action.expression);
+      expect(response[0].meaning).toEqual(action.meaning);
     });
 
     it('should add existing translations', () => {
       var action = {
         type: 'ADD_TRANSLATIONS',
         translations: [
-          {id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined}
+          {
+            id: 1,
+            expression: 'szamár',
+            meaning: 'donkey',
+            createdAt: 100,
+          }
         ]
       };
 

@@ -27,8 +27,8 @@ module.exports = {
 
     // Filter by searchText
     filteredTranslations = filteredTranslations.filter((translation) => {
-      var text = translation.text.toLowerCase();
-      return searchText.length === 0 || text.indexOf(searchText) >= 0;
+      var expression = translation.expression.toLowerCase();
+      return searchText.length === 0 || expression.indexOf(searchText) >= 0;
     });
 
     return filteredTranslations;

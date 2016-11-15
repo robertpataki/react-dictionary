@@ -17,7 +17,8 @@ export var translationsReducer = (state = [], action) => {
         ...state,
         {
           id: uuid.v4(),
-          text: action.text,
+          expression: action.expression,
+          meaning: action.meaning,
           createdAt: moment().unix()
         }
       ];

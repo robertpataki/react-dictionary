@@ -46,10 +46,11 @@ describe('TranslationAPI', () => {
       expect(actualTranslations).toEqual([]);
     });
 
-    it('should return array if valid array in localstorage', () => {
+    it('should return array if valid data is found in localstorage', () => {
       var translations = [{
         id: 23,
-        text: 'test all files'
+        expression: 'nem tudom',
+        meaning: 'I don\'t know',
       }];
 
       localStorage.setItem('translations', JSON.stringify(translations));
@@ -62,13 +63,16 @@ describe('TranslationAPI', () => {
   describe('filterTranslations', () => {
     var translations = [{
       id: 1,
-      text: 'Some text here'
+      expression: 'akármi',
+      meaning: 'anything'
     }, {
       id: 2,
-      text: 'Some more text here'
+      expression: 'macska',
+      meaning: 'cat'
     }, {
       id: 3,
-      text: 'Even more text here'
+      expression: 'madár',
+      meaning: 'bird'
     }];
 
     // Filter by search keyword
@@ -78,7 +82,7 @@ describe('TranslationAPI', () => {
     });
 
     it('should return every translation item if the search keyword is a valid string', () => {
-      var filteredTranslations = TranslationAPI.filterTranslations(translations, 'some');
+      var filteredTranslations = TranslationAPI.filterTranslations(translations, 'ma');
       expect(filteredTranslations.length).toBe(2);
     });
   });
