@@ -1,0 +1,13 @@
+button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+*:focus {
+	outline: none;
+}
+
+label {
+  -webkit-user-select: none;
+  cursor: default;
+}
