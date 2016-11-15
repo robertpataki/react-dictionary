@@ -1,7 +1,7 @@
 {
-  "name": "react-todo",
+  "name": "react-translation",
   "version": "1.0.0",
-  "description": "Simple react todo example",
+  "description": "Simple react translation example",
   "main": "index.js",
   "scripts": {
     "test": "karma start",

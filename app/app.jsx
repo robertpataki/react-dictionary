@@ -2,32 +2,32 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const {Provider} = require('react-redux');
 
-const TodoApp = require('TodoApp');
+const DictionaryApp = require('DictionaryApp');
 
 const actions = require('actions');
 const store = require('configureStore').configure();
-const TodoAPI = require('TodoAPI');
+const TranslationAPI = require('TranslationAPI');
 
 // Load Foundation
 $(document).foundation();
 
 store.subscribe(() => {
   var state = store.getState();
-  TodoAPI.setTodos(state.todos);
+  TranslationAPI.setTranslations(state.translations);
 
   console.log('New state: ', state);
 })
 
-var initialTodos = TodoAPI.getTodos();
-console.log(initialTodos);
-store.dispatch(actions.addTodos(initialTodos));
+var initialTranslations = TranslationAPI.getTranslations();
+console.log(initialTranslations);
+store.dispatch(actions.AddTranslations(initialTranslations));
 
 // App css
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
   <Provider store={store}>
-    <TodoApp />
+    <DictionaryApp />
   </Provider>,
   document.getElementById('app')
 );

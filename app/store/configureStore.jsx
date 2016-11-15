@@ -4,8 +4,7 @@ const reducers = require('reducers');
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
     searchText: reducers.searchTextReducer,
-    todos: reducers.todosReducer,
-    showCompleted: reducers.toggleShowCompletedReducer
+    translations: reducers.translationsReducer
   });
 
   var store = redux.createStore(reducer, initialState, redux.compose(

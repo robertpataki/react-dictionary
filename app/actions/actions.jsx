@@ -5,29 +5,16 @@ export var setSearchText = (searchText) => {
   };
 };
 
-export var toggleShowCompleted = () => {
+export var AddTranslation = (text) => {
   return {
-    type: 'TOGGLE_SHOW_COMPLETED'
-  };
-};
-
-export var addTodo = (text) => {
-  return {
-    type: 'ADD_TODO',
+    type: 'ADD_TRANSLATION',
     text
   };
 };
 
-export var addTodos = (todos) => {
+export var AddTranslations = (translations) => {
   return {
-    type: 'ADD_TODOS',
-    todos
-  };
-};
-
-export var toggleTodo = (id) => {
-  return {
-    type: 'TOGGLE_TODO',
-    id
+    type: 'ADD_TRANSLATIONS',
+    translations
   };
 };

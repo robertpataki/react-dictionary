@@ -10,44 +10,21 @@ export var searchTextReducer = (state = '', action) => {
   }
 };
 
-export var toggleShowCompletedReducer = (state = false, action) => {
+export var translationsReducer = (state = [], action) => {
   switch (action.type) {
-    case 'TOGGLE_SHOW_COMPLETED':
-      return !state;
-    default:
-      return state;
-  }
-};
-
-export var todosReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
+    case 'ADD_TRANSLATION':
       return [
         ...state,
         {
           id: uuid.v4(),
           text: action.text,
-          completed: false,
-          createdAt: moment().unix(),
-          completedAt: undefined
+          createdAt: moment().unix()
         }
       ];
-    case 'TOGGLE_TODO':
-      return state.map((todo) => {
-        if(todo.id === action.id) {
-          var nextCompleted = !todo.completed;
-          return {
-            ...todo,
-            completed: nextCompleted,
-            completedAt: nextCompleted ? moment().unix() : undefined
-          }
-        }
-        return todo;
-      });
-      case 'ADD_TODOS':
+      case 'ADD_TRANSLATIONS':
         return [
           ...state,
-          ...action.todos
+          ...action.translations
         ];
     default:
       return state;

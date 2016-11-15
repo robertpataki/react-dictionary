@@ -16,71 +16,29 @@ describe('Reducers', () => {
     });
   });
 
-  describe('toggleShowCompletedReducer', () => {
-    it('should toggle showCompleted', () => {
+  describe('translationsReducer', () => {
+    it('should add new translation', () => {
       var action = {
-        type: 'TOGGLE_SHOW_COMPLETED'
-      };
-
-      var response = reducers.toggleShowCompletedReducer(df(false), df(action));
-      expect(response).toEqual(true);
-    });
-  });
-
-  describe('todosReducer', () => {
-    it('should add new todo', () => {
-      var action = {
-        type: 'ADD_TODO',
-        text: 'New todo to be done later'
+        type: 'ADD_TRANSLATION',
+        text: 'New translation to be done later'
       }
 
-      var response = reducers.todosReducer(df([]), df(action));
+      var response = reducers.translationsReducer(df([]), df(action));
       expect(response.length).toBe(1);
       expect(response[0].text).toEqual(action.text);
     });
 
-    it('should toggle todo', () => {
+    it('should add existing translations', () => {
       var action = {
-        type: 'TOGGLE_TODO',
-        id: 1
-      }
-      var todos = [{
-        id: 1,
-        text: 'Todo #1',
-        createdAt: 123,
-        completedAt: 125,
-        completed: true
-      }, {
-        id: 2,
-        text: 'Todo #2',
-        createdAt: 321,
-        completedAt: 322,
-        completed: true
-      }, {
-        id: 3,
-        text: 'Todo #3',
-        createdAt: 333,
-        completedAt: undefined,
-        completed: false
-      }];
-
-      var response = reducers.todosReducer(df(todos), df(action));
-
-      expect(response[0].completed).toBe(false);
-      expect(response[0].completedAt).toEqual(undefined);
-    });
-
-    it('should add existing todos', () => {
-      var action = {
-        type: 'ADD_TODOS',
-        todos: [
+        type: 'ADD_TRANSLATIONS',
+        translations: [
           {id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined}
         ]
       };
 
-      var response = reducers.todosReducer(df([]), df(action));
+      var response = reducers.translationsReducer(df([]), df(action));
       expect(response.length).toEqual(1);
-      expect(response[0]).toEqual(action.todos[0]);
+      expect(response[0]).toEqual(action.translations[0]);
     });
   });
 });
