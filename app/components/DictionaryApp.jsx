@@ -9,16 +9,12 @@ import TranslationSearch from 'TranslationSearch';
 var DictionaryApp = React.createClass({
   render: function() {
     return (
-      <div>
-        <h1 className="page-title">Dictionary App</h1>
-
-        <div className="row">
-          <div className="columns small-centered small-11 medium-6 large-4">
-            <div className="container">
-              <TranslationSearch/>
-              <TranslationList/>
-              <AddTranslation/>
-            </div>
+      <div className="row">
+        <div className="columns small-centered small-12 medium-12 large-12">
+          <div className="container">
+            <TranslationSearch/>
+            <TranslationList/>
+            <AddTranslation/>
           </div>
         </div>
       </div>

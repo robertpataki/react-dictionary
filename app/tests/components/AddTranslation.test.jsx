@@ -12,41 +12,76 @@ describe('AddTranslation', () => {
     expect(AddTranslation).toExist();
   });
 
-  it('should dispatch ADD_TRANSLATION when valid translation text is passed', () => {
-    var action = {
-      type: 'ADD_TRANSLATION',
-      text: 'Adding a new translation'
-    }
+  describe('Adding a valid translation', () => {
+    it('should dispatch ADD_TRANSLATION when a valid translation is passed', () => {
+      var action = {
+        type: 'ADD_TRANSLATION',
+        expression: 'kutya',
+        meaning: 'dog'
+      }
 
-    var spy = expect.createSpy();
-    var addTranslation = TestUtils.renderIntoDocument(<AddTranslation dispatch={spy} />);
+      var spy = expect.createSpy();
+      var addTranslation = TestUtils.renderIntoDocument(<AddTranslation dispatch={spy} />);
 
-    var $el = $(ReactDOM.findDOMNode(addTranslation));
-    var formEl = $($el.find('form'))[0];
-    var translationInput = $(formEl).find('input')[0];
+      var $el = $(ReactDOM.findDOMNode(addTranslation));
+      var formEl = $($el.find('form'))[0];
+      var expressionInput = $(formEl).find('input')[0];
+      var meaningInput = $(formEl).find('input')[1];
 
-    translationInput.value = action.text;
+      expressionInput.value = action.expression;
+      meaningInput.value = action.meaning;
 
-    TestUtils.Simulate.submit(formEl);
+      TestUtils.Simulate.submit(formEl);
 
-    expect(translationInput.value).toBe('');
-    expect(spy).toHaveBeenCalledWith(action);
+      expect(expressionInput.value).toBe('');
+      expect(meaningInput.value).toBe('');
+      expect(spy).toHaveBeenCalledWith(action);
+    });
   });
 
-  it('should not dispatch ADD_TRANSLATION with an invalid translation text is passed', () => {
-    var spy = expect.createSpy();
-    var addTranslation = TestUtils.renderIntoDocument(<AddTranslation dispatch={spy} />);
+  describe('Trying to add an invalid translation', () => {
+    it('should not dispatch ADD_TRANSLATION when the expression is invalid', () => {
+      var action = {
+        type: 'ADD_TRANSLATION',
+        meaning: 'dog'
+      }
 
-    var $el = $(ReactDOM.findDOMNode(addTranslation));
-    var formEl = $($el.find('form'))[0];
-    var translationInput = $(formEl).find('input')[0];
+      var spy = expect.createSpy();
+      var addTranslation = TestUtils.renderIntoDocument(<AddTranslation dispatch={spy} />);
 
-    var translationText = '';
-    translationInput.value = translationText;
+      var $el = $(ReactDOM.findDOMNode(addTranslation));
+      var formEl = $($el.find('form'))[0];
+      var expressionInput = $(formEl).find('input')[0];
+      var meaningInput = $(formEl).find('input')[1];
 
-    TestUtils.Simulate.submit(formEl);
+      meaningInput.value = action.meaning;
 
-    expect(translationInput.value).toBe('');
-    expect(spy).toNotHaveBeenCalled();
+      TestUtils.Simulate.submit(formEl);
+
+      expect(meaningInput.value).toBe(action.meaning);
+      expect(spy).toNotHaveBeenCalled();
+    });
+
+    it('should not dispatch ADD_TRANSLATION when the meaning is invalid', () => {
+      var action = {
+        type: 'ADD_TRANSLATION',
+        expression: 'kutya'
+      }
+
+      var spy = expect.createSpy();
+      var addTranslation = TestUtils.renderIntoDocument(<AddTranslation dispatch={spy} />);
+
+      var $el = $(ReactDOM.findDOMNode(addTranslation));
+      var formEl = $($el.find('form'))[0];
+      var expressionInput = $(formEl).find('input')[0];
+      var meaningInput = $(formEl).find('input')[1];
+
+      expressionInput.value = action.expression;
+
+      TestUtils.Simulate.submit(formEl);
+
+      expect(expressionInput.value).toBe(action.expression);
+      expect(spy).toNotHaveBeenCalled();
+    });
   });
 });

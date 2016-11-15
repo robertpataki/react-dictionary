@@ -5,10 +5,11 @@ export var setSearchText = (searchText) => {
   };
 };
 
-export var AddTranslation = (text) => {
+export var AddTranslation = (expression, meaning) => {
   return {
     type: 'ADD_TRANSLATION',
-    text
+    expression,
+    meaning
   };
 };
 

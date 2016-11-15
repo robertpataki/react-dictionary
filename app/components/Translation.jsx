@@ -6,12 +6,13 @@ const actions = require('actions');
 // Raw component
 export var Translation = React.createClass({
   render: function() {
-    var {id, text, createdAt} = this.props;
+    var {id, expression, meaning, createdAt} = this.props;
 
     return (
       <div className='translation'>
         <div>
-          <p>{text}</p>
+          <span>{expression}</span>
+          <span>{meaning}</span>
         </div>
       </div>
     )

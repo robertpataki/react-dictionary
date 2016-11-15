@@ -15,10 +15,11 @@ describe('Actions', () => {
   it('should generate add translation action', () => {
     var action = {
       type: 'ADD_TRANSLATION',
-      text: 'Something to do'
+      expression: 'Valami',
+      meaning: 'Something'
     };
 
-    var response = actions.AddTranslation(action.text);
+    var response = actions.AddTranslation(action.expression, action.meaning);
     expect(response).toEqual(action);
   });
 
@@ -26,8 +27,8 @@ describe('Actions', () => {
     var action = {
       type: 'ADD_TRANSLATIONS',
       translations: [
-        {id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined},
-        {id: 2, text: 'Meh', createdAt: 200, completed: true, completedAt: 400}
+        { id: 1, expression: 'puszi', meaning: 'kiss', createdAt: 100 },
+        { id: 2, expression: 'csoda', meaning: 'expression', createdAt: 200 }
       ]
     };
 

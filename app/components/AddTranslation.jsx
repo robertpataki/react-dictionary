@@ -7,22 +7,25 @@ export var AddTranslation = React.createClass({
     e.preventDefault();
 
     var {dispatch} = this.props;
-    var translationText = this.refs.translationText.value;
+    var expressionText = this.refs.expressionText.value;
+    var meaningText = this.refs.meaningText.value;
 
-    if(translationText.length > 0) {
-      this.refs.translationText.value = '';
+    if(expressionText.length > 0 && meaningText.length > 0) {
+      this.refs.expressionText.value = '';
+      this.refs.meaningText.value = '';
 
-      dispatch(actions.AddTranslation(translationText));
+      dispatch(actions.AddTranslation(expressionText, meaningText));
     }
 
-    this.refs.translationText.focus();
+    this.refs.expressionText.focus();
   },
 
   render: function() {
     return (
       <div className="container__footer">
         <form ref="form" onSubmit={this.onSubmit} className="add-translation">
-          <input type="text" ref="translationText" placeholder="What's next" />
+          <input type="text" ref="expressionText" placeholder="Expression" />
+          <input type="text" ref="meaningText" placeholder="Meaning" />
           <button type="submit" className="button expanded">Add Translation</button>
         </form>
       </div>
