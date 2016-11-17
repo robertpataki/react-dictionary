@@ -29,7 +29,7 @@ export var TranslationList = React.createClass({
 
     return (
       <div className="row expanded">
-        <div className="translations">
+        <div className={ !translations.length ? "translations translations--empty" : "translations" }>
           {renderTranslations()}
         </div>
       </div>
