@@ -7,8 +7,9 @@ export var TranslationSearch = React.createClass({
     var {dispatch, searchText} = this.props;
 
     return (
-      <div className="container__header">
-        <div>
+      <div className="row expanded">
+        <div className="container container--header">
+          <h3>Find translation</h3>
           <input type="text" name="searchText" ref="searchText" placeholder="Ener keyword" value={searchText} onChange={() => {
             var searchText = this.refs.searchText.value;
             dispatch(actions.setSearchText(searchText));

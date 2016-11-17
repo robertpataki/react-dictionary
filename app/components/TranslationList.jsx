@@ -28,8 +28,10 @@ export var TranslationList = React.createClass({
     };
 
     return (
-      <div>
-        {renderTranslations()}
+      <div className="row expanded">
+        <div className="translations">
+          {renderTranslations()}
+        </div>
       </div>
     );
   }

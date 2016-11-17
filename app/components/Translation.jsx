@@ -17,10 +17,8 @@ export var Translation = React.createClass({
 
     return (
       <div className='translation'>
-        <div>
-          <span>{ expression }</span>
-          <span>{ meaning }</span>
-        </div>
+        <span className="translation__expression">{ expression }</span>
+        <span className="translation__meaning">{ meaning }</span>
       </div>
     )
   }
