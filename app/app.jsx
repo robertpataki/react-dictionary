@@ -14,12 +14,9 @@ $(document).foundation();
 store.subscribe(() => {
   var state = store.getState();
   TranslationAPI.setTranslations(state.translations);
-
-  console.log('New state: ', state);
 })
 
 var initialTranslations = TranslationAPI.getTranslations();
-console.log(initialTranslations);
 store.dispatch(actions.AddTranslations(initialTranslations));
 
 // App css
