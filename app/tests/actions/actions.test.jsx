@@ -27,8 +27,8 @@ describe('Actions', () => {
     var action = {
       type: 'ADD_TRANSLATIONS',
       translations: [
-        { id: 1, expression: 'puszi', meaning: 'kiss', createdAt: 100 },
-        { id: 2, expression: 'csoda', meaning: 'expression', createdAt: 200 }
+        { id: '1-1', expression: 'puszi', meaning: 'kiss', createdAt: 100 },
+        { id: '2-2', expression: 'csoda', meaning: 'expression', createdAt: 200 }
       ]
     };
 

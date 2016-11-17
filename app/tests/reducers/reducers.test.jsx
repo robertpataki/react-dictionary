@@ -35,7 +35,7 @@ describe('Reducers', () => {
         type: 'ADD_TRANSLATIONS',
         translations: [
           {
-            id: 1,
+            id: '1-2',
             expression: 'szamár',
             meaning: 'donkey',
             createdAt: 100,

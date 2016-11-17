@@ -14,7 +14,7 @@ describe('TranslationAPI', () => {
 
     it('should set valid translations array', () => {
       var translations = [{
-        id: 23,
+        id: '2-2',
         text: 'test all files'
       }];
 
@@ -48,7 +48,7 @@ describe('TranslationAPI', () => {
 
     it('should return array if valid data is found in localstorage', () => {
       var translations = [{
-        id: 23,
+        id: '2-3',
         expression: 'nem tudom',
         meaning: 'I don\'t know',
       }];
@@ -62,15 +62,15 @@ describe('TranslationAPI', () => {
 
   describe('filterTranslations', () => {
     var translations = [{
-      id: 1,
+      id: '1-1',
       expression: 'akármi',
       meaning: 'anything'
     }, {
-      id: 2,
+      id: '2-2',
       expression: 'macska',
       meaning: 'cat'
     }, {
-      id: 3,
+      id: '3-3',
       expression: 'madár',
       meaning: 'bird'
     }];

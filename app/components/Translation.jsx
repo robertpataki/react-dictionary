@@ -6,7 +6,7 @@ const actions = require('actions');
 // Raw component
 export var Translation = React.createClass({
   propTypes: {
-    id: React.PropTypes.number.isRequired,
+    id: React.PropTypes.string.isRequired,
     createdAt: React.PropTypes.number.isRequired,
     expression: React.PropTypes.string.isRequired,
     meaning: React.PropTypes.string.isRequired,

@@ -19,12 +19,12 @@ describe('TranslationList', () => {
   it('should render 1 translation component for each Translation item', () => {
     var translations = [
       {
-        id: 1,
+        id: '1-2-3-4',
         expression: 'szia',
         meaning: 'hi',
         createdAt: 500,
       }, {
-        id: 2,
+        id: '2-3-4-5',
         expression: 'haver',
         meaning: 'pal',
         createdAt: 500
