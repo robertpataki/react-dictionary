@@ -1,7 +1,7 @@
-const moment = require('moment');
-const uuid = require('node-uuid');
+import moment from 'moment';
+import uuid from 'node-uuid';
 
-export var searchTextReducer = (state = '', action) => {
+export const searchTextReducer = (state = '', action) => {
   switch (action.type) {
     case 'SET_SEARCH_TEXT':
       return action.searchText;
@@ -10,23 +10,52 @@ export var searchTextReducer = (state = '', action) => {
   }
 };
 
-export var translationsReducer = (state = [], action) => {
+export const toggleShowCompletedReducer = (state = false, action) => {
   switch (action.type) {
-    case 'ADD_TRANSLATION':
+    case 'TOGGLE_SHOW_COMPLETED':
+      return !state;
+    default:
+      return state;
+  }
+};
+
+export const todosReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
       return [
         ...state,
-        {
-          id: uuid.v4(),
-          expression: action.expression,
-          meaning: action.meaning,
-          createdAt: moment().unix()
-        }
+        action.todo
       ];
-      case 'ADD_TRANSLATIONS':
-        return [
-          ...state,
-          ...action.translations
-        ];
+    case 'UPDATE_TODO':
+      return state.map((todo) => {
+        if(todo.id === action.id) {
+          return {
+            ...todo,
+            ...action.updates,
+          };
+        }
+        return todo;
+      });
+    case 'ADD_TODOS':
+      return [
+        ...state,
+        ...action.todos,
+      ];
+    case 'LOG_OUT':
+      return [];
+    default:
+      return state;
+  }
+};
+
+export const authReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'LOG_IN':
+      return {
+        uid: action.uid
+      };
+    case 'LOG_OUT':
+      return {};
     default:
       return state;
   }

@@ -11,3 +11,7 @@ label {
   -webkit-user-select: none;
   cursor: default;
 }
+
+input[type="checkbox"] {
+  cursor: pointer;
+}

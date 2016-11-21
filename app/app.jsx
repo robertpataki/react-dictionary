@@ -1,30 +1,36 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const {Provider} = require('react-redux');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { browserHistory } from 'react-router';
 
-const DictionaryApp = require('DictionaryApp');
+import * as configureStore from 'configureStore';
+import * as actions from 'actions';
+import firebase from 'app/firebase/';
+import router from 'app/router/';
 
-const actions = require('actions');
-const store = require('configureStore').configure();
-const TranslationAPI = require('TranslationAPI');
+// Authentication state based redirects
+firebase.auth().onAuthStateChanged((user) => {
+  if(user) {
+    store.dispatch(actions.login(user.uid));
+    store.dispatch(actions.startAddTodos());
+    browserHistory.push('/todos');
+  } else {
+    browserHistory.push('/');
+    store.dispatch(actions.logout());
+  }
+});
 
 // Load Foundation
 $(document).foundation();
-
-store.subscribe(() => {
-  var state = store.getState();
-  TranslationAPI.setTranslations(state.translations);
-})
-
-var initialTranslations = TranslationAPI.getTranslations();
-store.dispatch(actions.AddTranslations(initialTranslations));
-
 // App css
 require('style!css!sass!applicationStyles');
 
+// Redux Store setup
+const store = configureStore.configure();
+
 ReactDOM.render(
-  <Provider store={store}>
-    <DictionaryApp />
+  <Provider store={ store }>
+    { router }
   </Provider>,
   document.getElementById('app')
 );

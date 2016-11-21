@@ -1,4 +1,4 @@
-# React Dictionary App
+# Boilerplate Todo App
 
 ## Start the server
 
@@ -6,23 +6,8 @@
 
 ## Run Webpack
 
-    $ webpack -w
+        $ webpack -w
 
 ## Testing
 
     $ npm test
-
-
-## Notes
-
-Dictionary
-  Translations
-    Translation
-      expression
-      meaning
-
-
-AddTodo => AddTranslation
-TodoSearch => TranslationSearch
-Todo => Translation
-TodoAPI => TranslationAPI

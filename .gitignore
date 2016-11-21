@@ -22,3 +22,6 @@ npm-debug.log
 
 # Bower
 bower_components
+
+# Project specific
+config/*
