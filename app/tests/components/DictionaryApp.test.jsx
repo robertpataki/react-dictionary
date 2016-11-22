@@ -17,7 +17,12 @@ describe('DictionaryApp', () => {
   });
 
   it('should render TodoList', () => {
-    const store = configureStore.configure();
+    const authData = {
+      uid: '123abc',
+      name: 'Dwayne \'The Rock\' Johnson',
+      pic: 'http://img.wennermedia.com/480-width/1405624408_the-rock-zoom.jpg',
+    };
+    const store = configureStore.configure({ auth: authData });
     const provider = TestUtils.renderIntoDocument(
       <Provider store={ store }>
         <DictionaryApp />
