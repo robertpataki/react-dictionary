@@ -7,11 +7,7 @@ var expect = require('expect');
 var { Translation } = require('Translation');
 
 describe('Translation', () => {
-  it('should exist', () => {
-    expect(Translation).toExist();
-  });
-
-  it('should render an expression and its matching meaning', () => {
+  beforeEach((done) => {
     const data = {
       id: '123abc',
       expression: 'Szia',
@@ -21,6 +17,13 @@ describe('Translation', () => {
 
     const translation = TestUtils.renderIntoDocument(<Translation { ...data } />);
     const $wrapper = $(ReactDOM.findDOMNode(translation));
+  })
+
+  it('should exist', () => {
+    expect(Translation).toExist();
+  });
+
+  it('should render an expression and its matching meaning', () => {
     const $expression = $wrapper.find(`:contains('${data.expression}')`);
     const $meaning = $wrapper.find(`:contains('${data.meaning}')`);
 

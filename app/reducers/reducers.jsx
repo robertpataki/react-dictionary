@@ -20,20 +20,22 @@ export const translationsReducer = (state = [], action) => {
         action.translation
       ];
     case actionTypes.UPDATE_TRANSLATION:
-      return state.map((todo) => {
-        if(todo.id === action.id) {
+      return state.map((translation) => {
+        if(translation.id === action.id) {
           return {
-            ...todo,
+            ...translation,
             ...action.updates,
           };
         }
-        return todo;
+        return translation;
       });
     case actionTypes.ADD_TRANSLATIONS:
       return [
         ...state,
         ...action.translations,
       ];
+    case actionTypes.DELETE_TRANSLATION:
+      return state.filter((translation) => translation.id !== action.id);
     case actionTypes.LOGOUT:
       return [];
     default:

@@ -61,6 +61,23 @@ describe('Actions', () => {
       expect(response).toEqual(action);
     });
 
+    it('should generate a delete translation action', () => {
+      const translation = {
+        id: '123abc',
+        expression: 'viszlát',
+        meaning: 'bye',
+        createdAt: 100,
+      };
+
+      const action = {
+        type: actionTypes.DELETE_TRANSLATION,
+        id: translation.id,
+      };
+
+      const response = actions.deleteTranslation(translation.id);
+      expect(response).toEqual(action);
+    });
+
 
     describe('Tests with Firebase translations', () => {
       let testTranslationRef;

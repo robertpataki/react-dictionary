@@ -1,7 +1,7 @@
 {
-  "name": "react-todo",
-  "version": "1.0.0",
-  "description": "Simple react todo example",
+  "name": "dictionary-mvp",
+  "version": "0.0.2",
+  "description": "Simple dictionary app",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test karma start",

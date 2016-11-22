@@ -19,7 +19,7 @@ describe('Reducers', () => {
   });
 
   describe('translationsReducer', () => {
-    it('should add new todo', () => {
+    it('should add new translation', () => {
       const action = {
         type: actionTypes.ADD_TRANSLATION,
         translation: {
@@ -60,6 +60,21 @@ describe('Reducers', () => {
 
       const response = translationsReducer(df(translations), df(action));
       expect(response.length).toEqual(0);
+    });
+
+    it('should delete the selected translation', () => {
+      const translations = [
+        { id: '123abc', expression: 'medve', meaning: 'bear', createdAt: 100 },
+        { id: '234bcd', expression: 'macska', meaning: 'cat', createdAt: 200 },
+      ];
+      const action = {
+        type: actionTypes.DELETE_TRANSLATION,
+        id: '123abc'
+      };
+
+      const response = translationsReducer(df(translations), df(action));
+      expect(response.length).toEqual(1);
+      expect(response[0]).toEqual(translations[1]);
     });
   });
 

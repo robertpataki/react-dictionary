@@ -4,6 +4,9 @@ import * as actionTypes from 'actionTypes';
 
 import firebase, { firebaseRef, facebookAuthProvider } from 'app/firebase';
 
+///////////
+//////// Translation Search
+/////
 export const setSearchText = (searchText) => {
   return {
     type: actionTypes.SET_SEARCH_TEXT,
@@ -11,6 +14,9 @@ export const setSearchText = (searchText) => {
   };
 };
 
+///////////
+//////// Translation CRUD
+/////
 export const addTranslation = (translation) => {
   return {
     type: actionTypes.ADD_TRANSLATION,
@@ -38,6 +44,36 @@ export const startAddTranslation = (expression, meaning) => {
   };
 };
 
+export const updateTranslation = (id, updates) => {
+  return {
+    type: actionTypes.UPDATE_TRANSLATION,
+    id,
+    updates
+  };
+};
+
+// Remove translation
+export const deleteTranslation = (id) => {
+  return {
+    type: actionTypes.DELETE_TRANSLATION,
+    id,
+  };
+};
+
+export const startDeleteTranslation = (id) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    const translationsRef = firebaseRef.child(`users/${uid}/translations/${id}`);
+
+    return translationsRef.remove().then((snapshot) => {
+      dispatch(deleteTranslation(id));
+    });
+  };
+};
+
+///////////
+//////// Translations
+/////
 export const addTranslations = (translations) => {
   return {
     type: actionTypes.ADD_TRANSLATIONS,
@@ -67,14 +103,15 @@ export const startAddTranslations = () => {
   };
 };
 
-export const updateTranslation = (id, updates) => {
-  return {
-    type: actionTypes.UPDATE_TRANSLATION,
-    id,
-    updates
-  };
-};
 
+
+
+
+///////////
+//////// Authentication
+/////
+
+// Login
 export const login = (uid, displayName, photoURL) => {
   return {
     type: actionTypes.LOGIN,
@@ -83,13 +120,6 @@ export const login = (uid, displayName, photoURL) => {
     pic: photoURL,
   };
 };
-
-export const logout = () => {
-  return {
-    type: actionTypes.LOGOUT
-  };
-};
-
 export const startLogin = () => {
   return (dispatch, getState) => {
   	return firebase.auth().signInWithPopup(facebookAuthProvider).then((result) => {
@@ -99,6 +129,12 @@ export const startLogin = () => {
   };
 }
 
+// Logout
+export const logout = () => {
+  return {
+    type: actionTypes.LOGOUT
+  };
+};
 export const startLogout = () => {
   return (dispatch, getState) => {
     return firebase.auth().signOut().then(() => {});

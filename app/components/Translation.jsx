@@ -6,13 +6,28 @@ import * as actions from 'actions';
 
 // Raw component
 export class Translation extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+  }
+
+  onDeleteClick(e) {
+    e.preventDefault();
+
+    const { dispatch, id } = this.props;
+
+    dispatch(actions.startDeleteTranslation(id));
+  }
+
   render() {
-    var { id, expression, meaning, createdAt } = this.props;
+    const { id, expression, meaning, createdAt } = this.props;
 
     return (
       <div className='translation'>
         <span className="translation__expression">{ expression }</span>
         <span className="translation__meaning">{ meaning }</span>
+        <a href="#" className="translation__delete button alert" onClick={ this.onDeleteClick }>Delete</a>
       </div>
     )
   }

@@ -9,8 +9,8 @@ import * as actionTypes from 'actionTypes';
 
 describe('TranslationSearch', () => {
   it('should exist', () => {
-    const todoSearch = TestUtils.renderIntoDocument(<TranslationSearch />);
-    expect(todoSearch).toExist();
+    const translationSearch = TestUtils.renderIntoDocument(<TranslationSearch />);
+    expect(translationSearch).toExist();
   });
 
   it('should dispatch SET_SEARCH_TEXT on input change', () => {
@@ -21,8 +21,8 @@ describe('TranslationSearch', () => {
     };
 
     const spy = expect.createSpy();
-    const todoSearch = TestUtils.renderIntoDocument(<TranslationSearch dispatch={ spy } />);
-    const $el = $(ReactDOM.findDOMNode(todoSearch));
+    const translationSearch = TestUtils.renderIntoDocument(<TranslationSearch dispatch={ spy } />);
+    const $el = $(ReactDOM.findDOMNode(translationSearch));
     const input = $el.find('input[name="searchText"]')[0];
 
     input.value = searchText;
