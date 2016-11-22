@@ -9,12 +9,6 @@ export const setSearchText = (searchText) => {
   };
 };
 
-export const toggleShowCompleted = () => {
-  return {
-    type: 'TOGGLE_SHOW_COMPLETED',
-  };
-};
-
 export const addTodo = (todo) => {
   return {
     type: 'ADD_TODO',

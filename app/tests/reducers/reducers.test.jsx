@@ -1,5 +1,5 @@
 import expect from 'expect';
-import { authReducer, searchTextReducer, toggleShowCompletedReducer, todosReducer } from 'reducers';
+import { authReducer, searchTextReducer, todosReducer } from 'reducers';
 import df from 'deep-freeze-strict';
 import moment from 'moment';
 
@@ -13,17 +13,6 @@ describe('Reducers', () => {
 
       const response = searchTextReducer(df(''), df(action));
       expect(response).toEqual(action.searchText);
-    });
-  });
-
-  describe('toggleShowCompletedReducer', () => {
-    it('should toggle showCompleted', () => {
-      const action = {
-        type: 'TOGGLE_SHOW_COMPLETED'
-      };
-
-      const response = toggleShowCompletedReducer(undefined, df(action));
-      expect(response).toEqual(true);
     });
   });
 

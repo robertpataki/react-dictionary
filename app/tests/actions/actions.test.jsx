@@ -46,15 +46,6 @@ describe('Actions', () => {
       expect(response).toEqual(action);
     });
 
-    it('should generate toggle show completed action', () => {
-      const action = {
-        type: 'TOGGLE_SHOW_COMPLETED'
-      };
-
-      const response = actions.toggleShowCompleted();
-      expect(response).toEqual(action);
-    });
-
     it('should generate update todo action', () => {
       const action = {
         type: 'UPDATE_TODO',

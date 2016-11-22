@@ -6,11 +6,11 @@ import TodoAPI from 'TodoAPI';
 
 export class TodoList extends React.Component {
   render() {
-    const { todos, showCompleted, searchText } = this.props;
+    const { todos, searchText } = this.props;
 
     const renderTodos = () => {
 
-      const filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+      const filteredTodos = TodoAPI.filterTodos(todos, searchText);
 
       if (filteredTodos.length === 0) {
         return (
