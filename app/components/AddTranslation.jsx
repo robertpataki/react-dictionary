@@ -35,14 +35,14 @@ export class AddTranslation extends React.Component {
               <h3>Add a new translation</h3>
             </div>
             <div className="row expanded">
-              <div className="columns large-4">
+              <div className="columns large-3">
                 <input type="text" ref="expression" placeholder="Hungarian expression" />
               </div>
-              <div className="columns large-4 large-offset-1">
+              <div className="columns large-3">
                 <input type="text" ref="meaning" placeholder="English meaning" />
               </div>
-              <div className="columns large-2">
-                <button type="submit" className="button expanded">Add Translation</button>
+              <div className="columns large-1 end">
+                <button type="submit" className="button expanded">Add</button>
               </div>
             </div>
           </form>

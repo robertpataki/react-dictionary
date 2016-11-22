@@ -6,9 +6,11 @@
 @import 'foundation';
 @include foundation-everything;
 
+@import "base/layout";
+
 // Components
 @import "components/container";
-@import "components/user-bar";
 @import "components/page-title";
-@import "components/callout-auth";
 @import "components/translation";
+@import "components/callout-auth";
+@import "components/user-bar";
