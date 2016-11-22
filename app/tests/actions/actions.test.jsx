@@ -157,11 +157,10 @@ describe('Actions', () => {
       const action = {
         type: 'LOG_IN',
         uid: '123456',
-        email: 'email@test.com',
         name: 'Anonymous Whoever',
         pic: 'http://placekitten.com/200/300'
       };
-      const response = actions.login(action.uid, action.email, action.name, action.pic);
+      const response = actions.login(action.uid, action.name, action.pic);
 
       expect(response).toEqual(action);
     });

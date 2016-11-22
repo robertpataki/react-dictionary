@@ -101,7 +101,6 @@ describe('Reducers', () => {
       const action = {
         type: 'LOG_IN',
         uid: '123456',
-        email: 'test@test.com',
         name: 'Rob Roy',
         pic: 'http://placekitten.com/200/300',
       };
@@ -109,7 +108,6 @@ describe('Reducers', () => {
       const response = authReducer(undefined, df(action));
       expect(response).toEqual({
         uid: action.uid,
-        email: action.email,
         name: action.name,
         pic: action.pic,
       });

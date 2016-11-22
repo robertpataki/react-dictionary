@@ -53,7 +53,6 @@ export const authReducer = (state = {}, action) => {
     case 'LOG_IN':
       return {
         uid: action.uid,
-        email: action.email,
         name: action.name,
         pic: action.pic,
       };

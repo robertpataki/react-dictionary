@@ -11,7 +11,7 @@ import router from 'app/router/';
 // Authentication state based redirects
 firebase.auth().onAuthStateChanged((user) => {
   if(user) {
-    store.dispatch(actions.login(user.uid, user.email, user.displayName, user.photoURL));
+    store.dispatch(actions.login(user.uid, user.displayName, user.photoURL));
     store.dispatch(actions.startAddTodos());
     browserHistory.push('/todos');
   } else {

@@ -95,11 +95,10 @@ export const startToggleTodo = (id, completed) => {
   };
 };
 
-export const login = (uid, email, displayName, photoURL) => {
+export const login = (uid, displayName, photoURL) => {
   return {
     type: 'LOG_IN',
     uid,
-    email,
     name: displayName,
     pic: photoURL,
   };
