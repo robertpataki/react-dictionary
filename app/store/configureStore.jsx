@@ -1,13 +1,13 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import { authReducer, searchTextReducer, todosReducer } from 'reducers';
+import { authReducer, searchTextReducer, translationsReducer } from 'reducers';
 
 export const configure = (initialState = {}) => {
   const reducer = redux.combineReducers({
     auth: authReducer,
     searchText: searchTextReducer,
-    todos: todosReducer,
+    translations: translationsReducer,
   });
 
   const store = redux.createStore(reducer, initialState, redux.compose(

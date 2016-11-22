@@ -12,6 +12,7 @@ export class TranslationSearch extends React.Component {
   onSearchTextChange() {
     const { dispatch } = this.props;
     const searchText = this.refs.searchText.value;
+
     dispatch(actions.setSearchText(searchText));
   }
 

@@ -1,23 +1,25 @@
 import moment from 'moment';
 import uuid from 'node-uuid';
 
+import * as actionTypes from 'actionTypes';
+
 export const searchTextReducer = (state = '', action) => {
   switch (action.type) {
-    case 'SET_SEARCH_TEXT':
+    case actionTypes.SET_SEARCH_TEXT:
       return action.searchText;
     default:
       return state;
   }
 };
 
-export const todosReducer = (state = [], action) => {
+export const translationsReducer = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case actionTypes.ADD_TRANSLATION:
       return [
         ...state,
-        action.todo
+        action.translation
       ];
-    case 'UPDATE_TODO':
+    case actionTypes.UPDATE_TRANSLATION:
       return state.map((todo) => {
         if(todo.id === action.id) {
           return {
@@ -27,12 +29,12 @@ export const todosReducer = (state = [], action) => {
         }
         return todo;
       });
-    case 'ADD_TODOS':
+    case actionTypes.ADD_TRANSLATIONS:
       return [
         ...state,
-        ...action.todos,
+        ...action.translations,
       ];
-    case 'LOG_OUT':
+    case actionTypes.LOGOUT:
       return [];
     default:
       return state;
@@ -41,13 +43,13 @@ export const todosReducer = (state = [], action) => {
 
 export const authReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'LOG_IN':
+    case actionTypes.LOGIN:
       return {
         uid: action.uid,
         name: action.name,
         pic: action.pic,
       };
-    case 'LOG_OUT':
+    case actionTypes.LOGOUT:
       return {};
     default:
       return state;

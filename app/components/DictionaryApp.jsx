@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import UserBar from 'UserBar';
 import TranslationSearch from 'TranslationSearch';
-import TodoList from 'TodoList';
-import AddTodo from 'AddTodo';
+import Dictionary from 'Dictionary';
+import AddTranslation from 'AddTranslation';
 
 export class DictionaryApp extends React.Component {
   render() {
@@ -14,8 +14,8 @@ export class DictionaryApp extends React.Component {
 
         <div>
           <TranslationSearch />
-          <TodoList />
-          <AddTodo />
+          <Dictionary />
+          <AddTranslation />
         </div>
       </section>
     );

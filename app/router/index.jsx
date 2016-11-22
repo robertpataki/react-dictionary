@@ -16,7 +16,7 @@ const requireLogin = (nextState, replace, next) => {
 
 const redirectIfLoggedIn = (nextState, replace, next) => {
   if(firebase.auth().currentUser) {
-    replace('/todos');
+    replace('/dictionary');
   }
   next();
 };
@@ -25,7 +25,7 @@ export default (
   <Router history={ browserHistory }>
     <Route path="/" component={ Main }>
       <IndexRoute component={ Login } onEnter={ redirectIfLoggedIn } />
-      <Route path="todos" component={ DictionaryApp } onEnter={ requireLogin } />
+      <Route path="dictionary" component={ DictionaryApp } onEnter={ requireLogin } />
     </Route>
   </Router>
 );

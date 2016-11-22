@@ -12,8 +12,8 @@ import router from 'app/router/';
 firebase.auth().onAuthStateChanged((user) => {
   if(user) {
     store.dispatch(actions.login(user.uid, user.displayName, user.photoURL));
-    store.dispatch(actions.startAddTodos());
-    browserHistory.push('/todos');
+    store.dispatch(actions.startAddTranslations());
+    browserHistory.push('/dictionary');
   } else {
     browserHistory.push('/');
     store.dispatch(actions.logout());

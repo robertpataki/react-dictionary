@@ -1,16 +1,18 @@
 import expect from 'expect';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
+
 import firebase, {firebaseRef} from 'app/firebase';
 import * as actions from 'actions';
+import * as actionTypes from 'actionTypes';
 
 const createMockStore = configureMockStore([thunk]);
 
 describe('Actions', () => {
-  describe('Todos', () => {
+  describe('Translations', () => {
     it('should generate search text action', () => {
       const action = {
-        type: 'SET_SEARCH_TEXT',
+        type: actionTypes.SET_SEARCH_TEXT,
         searchText: 'Some search text',
       };
 
@@ -18,64 +20,65 @@ describe('Actions', () => {
       expect(response).toEqual(action);
     });
 
-    it('should generate add todo action', () => {
+    it('should generate add translation action', () => {
       const action = {
-        type: 'ADD_TODO',
-        todo: {
+        type: actionTypes.ADD_TRANSLATION,
+        translation: {
           id: 'abc123',
-          text: 'Something to do',
-          completed: false,
-          createdAt: 0,
+          expression: 'Egy kis tennivaló',
+          meaning: 'Something to do',
+          createdAt: 100,
         }
       };
 
-      const response = actions.addTodo(action.todo);
+      const response = actions.addTranslation(action.translation);
       expect(response).toEqual(action);
     });
 
-    it('should generate add todos action', () => {
+    it('should generate add translations action', () => {
       const action = {
-        type: 'ADD_TODOS',
-        todos: [
-          { id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined },
-          { id: 2, text: 'Meh', createdAt: 200, completed: true, completedAt: 400 }
+        type: actionTypes.ADD_TRANSLATIONS,
+        translations: [
+          { id: 1, expression: 'kutya', meaning: 'dog', createdAt: 100, },
+          { id: 2, expression: 'macska', meaning: 'cat', createdAt: 200, }
         ]
       };
 
-      const response = actions.addTodos(action.todos);
+      const response = actions.addTranslations(action.translations);
       expect(response).toEqual(action);
     });
 
-    it('should generate update todo action', () => {
+    it('should generate update translation action', () => {
       const action = {
-        type: 'UPDATE_TODO',
-        id: '123',
+        type: actionTypes.UPDATE_TRANSLATION,
+        id: '123abc',
         updates: {
-          completed: false
+          expression: 'blah'
         }
       };
 
-      const response = actions.updateTodo(action.id, action.updates);
+      const response = actions.updateTranslation(action.id, action.updates);
       expect(response).toEqual(action);
     });
 
-    describe('Tests with Firebase todos', () => {
-      let testTodoRef;
+
+    describe('Tests with Firebase translations', () => {
+      let testTranslationRef;
       let uid;
-      let todosRef;
+      let translationsRef;
 
       beforeEach((done) => {
         firebase.auth().signInAnonymously().then((user) => {
           uid = user.uid,
-          todosRef = firebaseRef.child(`users/${uid}/todos`);
+          translationsRef = firebaseRef.child(`users/${uid}/translations`);
 
-          return todosRef.remove();
+          return translationsRef.remove();
         }).then(() => {
-          testTodoRef = todosRef.push();
+          testTranslationRef = translationsRef.push();
 
-          return testTodoRef.set({
-            text: 'Something to do',
-            completed: false,
+          return testTranslationRef.set({
+            expression: 'forrás kód',
+            meaning: 'source code',
             createdAt: '1234',
           })
           .then(() => done())
@@ -84,56 +87,40 @@ describe('Actions', () => {
       });
 
       afterEach((done) => {
-        todosRef.remove().then(() => done());
+        translationsRef.remove().then(() => done());
       });
 
-      it('should toggle todo and dispatch UPDATE_TODO action', (done) => {
+      it('should populate translations and dispatch ADD_TRANSLATIONS', (done) => {
         const store = createMockStore({ auth: { uid } });
-        const action = actions.startToggleTodo(testTodoRef.key, true);
+        const action = actions.startAddTranslations();
 
         store.dispatch(action).then(() => {
           const mockActions = store.getActions();
-          const firstAction = mockActions[0];
-
-          expect(firstAction).toInclude({
-            type: 'UPDATE_TODO',
-            id: testTodoRef.key,
-            updates: { completed: true },
-          });
-          expect(firstAction.updates.completedAt).toExist();
-
-          done();
-        }, done);
-      });
-
-      it('should populate todos and dispatch ADD_TODOS', (done) => {
-        const store = createMockStore({ auth: { uid } });
-        const action = actions.startAddTodos();
-
-        store.dispatch(action).then(() => {
-          const mockActions = store.getActions();
-          expect(mockActions[0].type).toEqual('ADD_TODOS');
-          expect(mockActions[0].todos.length).toEqual(1);
-          expect(mockActions[0].todos[0].text).toEqual('Something to do');
+          expect(mockActions[0].type).toEqual(actionTypes.ADD_TRANSLATIONS);
+          expect(mockActions[0].translations.length).toEqual(1);
+          expect(mockActions[0].translations[0].expression).toEqual('forrás kód');
+          expect(mockActions[0].translations[0].meaning).toEqual('source code');
 
           done();
         }, done)
       });
 
-      it('should create todo and dispatch ADD_TODO', (done) => {
+      it('should create translation and dispatch ADD_TRANSLATION', (done) => {
         const store = createMockStore({ auth: { uid } });
-        const todoText = 'This is the text for new todo item';
+        const expression = 'valami';
+        const meaning = 'something';
 
-        store.dispatch(actions.startAddTodo(todoText)).then(() => {
+        store.dispatch(actions.startAddTranslation(expression, meaning)).then(() => {
           const actions = store.getActions();
           const firstAction = actions[0];
           expect(firstAction).toInclude({
-            type: 'ADD_TODO',
+            type: actionTypes.ADD_TRANSLATION,
           });
 
           expect(firstAction).toInclude({
-            todo: {
-              text: todoText,
+            translation: {
+              expression,
+              meaning,
             }
           });
 
@@ -141,28 +128,28 @@ describe('Actions', () => {
         }).catch(done);
       });
     });
-  });
 
-  describe('Authentication', () => {
-    it('should generate login action', () => {
-      const action = {
-        type: 'LOG_IN',
-        uid: '123456',
-        name: 'Anonymous Whoever',
-        pic: 'http://placekitten.com/200/300'
-      };
-      const response = actions.login(action.uid, action.name, action.pic);
+    describe('Authentication', () => {
+      it('should generate login action', () => {
+        const action = {
+          type: actionTypes.LOGIN,
+          uid: '123456',
+          name: 'Anonymous Whoever',
+          pic: 'http://placekitten.com/200/300'
+        };
+        const response = actions.login(action.uid, action.name, action.pic);
 
-      expect(response).toEqual(action);
-    });
+        expect(response).toEqual(action);
+      });
 
-    it('should generate logout action', () => {
-      const action = {
-        type: 'LOG_OUT'
-      };
-      const response = actions.logout();
+      it('should generate logout action', () => {
+        const action = {
+          type: actionTypes.LOGOUT
+        };
+        const response = actions.logout();
 
-      expect(response).toEqual(action);
+        expect(response).toEqual(action);
+      });
     });
   });
 });

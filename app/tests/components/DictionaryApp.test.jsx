@@ -8,7 +8,7 @@ import $ from 'jquery';
 
 import * as configureStore from 'configureStore';
 import { DictionaryApp } from 'DictionaryApp';
-import TodoList from 'TodoList';
+import Dictionary from 'Dictionary';
 
 
 describe('DictionaryApp', () => {
@@ -16,7 +16,7 @@ describe('DictionaryApp', () => {
     expect(DictionaryApp).toExist();
   });
 
-  it('should render TodoList', () => {
+  it('should render Dictionary', () => {
     const authData = {
       uid: '123abc',
       name: 'Dwayne \'The Rock\' Johnson',
@@ -30,8 +30,8 @@ describe('DictionaryApp', () => {
     );
 
     const dictionaryApp = TestUtils.scryRenderedComponentsWithType(provider, DictionaryApp)[0];
-    const todoList = TestUtils.scryRenderedComponentsWithType(dictionaryApp, TodoList);
+    const dictionary = TestUtils.scryRenderedComponentsWithType(dictionaryApp, Dictionary);
 
-    expect(todoList.length).toEqual(1);
+    expect(dictionary.length).toEqual(1);
   });
 });

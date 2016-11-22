@@ -1,0 +1,48 @@
+.translations {
+  position: relative;
+  border-top: 1px solid $light-grey-border;
+  border-bottom: 1px solid $light-grey-border;
+
+  &:not(.translations--empty):before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    background: $divider-color;
+  }
+}
+
+.translation {
+  align-items: center;
+  display: flex;
+  padding: 1rem;
+  user-select: none;
+  cursor: default;
+  transition: background 0.3s ease-out;
+  @include clearfix;
+
+  > div:first-child {
+    display: block;
+  }
+
+  p, input {
+    margin: 0;
+  }
+
+  > :first-child {
+    margin-right: 1rem;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid lighten($light-color, 25%);
+  }
+}
+
+ .translation__expression,
+ .translation__meaning {
+   position: relative;
+   width: 50%;
+   padding-left: 1rem;
+ }

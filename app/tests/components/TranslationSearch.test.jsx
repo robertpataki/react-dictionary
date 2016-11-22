@@ -5,6 +5,7 @@ import $ from 'jquery';
 import expect from 'expect';
 
 import { TranslationSearch } from 'TranslationSearch';
+import * as actionTypes from 'actionTypes';
 
 describe('TranslationSearch', () => {
   it('should exist', () => {
@@ -15,7 +16,7 @@ describe('TranslationSearch', () => {
   it('should dispatch SET_SEARCH_TEXT on input change', () => {
     const searchText = 'Hello World';
     const action = {
-      type: 'SET_SEARCH_TEXT',
+      type: actionTypes.SET_SEARCH_TEXT,
       searchText
     };
 

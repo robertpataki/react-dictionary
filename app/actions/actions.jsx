@@ -1,97 +1,83 @@
 import moment from 'moment';
 
+import * as actionTypes from 'actionTypes';
+
 import firebase, { firebaseRef, facebookAuthProvider } from 'app/firebase';
 
 export const setSearchText = (searchText) => {
   return {
-    type: 'SET_SEARCH_TEXT',
+    type: actionTypes.SET_SEARCH_TEXT,
     searchText,
   };
 };
 
-export const addTodo = (todo) => {
+export const addTranslation = (translation) => {
   return {
-    type: 'ADD_TODO',
-    todo,
+    type: actionTypes.ADD_TRANSLATION,
+    translation,
   };
 };
 
-export const startAddTodo = (text) => {
+export const startAddTranslation = (expression, meaning) => {
   return (dispatch, getState) => {
-    const todo = {
-      text,
-      completed: false,
+    const translation = {
+      expression,
+      meaning,
       createdAt: moment().unix(),
-      completedAt: null,
     }
 
     const uid = getState().auth.uid;
-    const todoRef = firebaseRef.child(`users/${uid}/todos`).push(todo);
+    const translationRef = firebaseRef.child(`users/${uid}/translations`).push(translation);
 
-    return todoRef.then(() => {
-      dispatch(addTodo({
-        ...todo,
-        id: todoRef.key,
+    return translationRef.then(() => {
+      dispatch(addTranslation({
+        ...translation,
+        id: translationRef.key,
       }));
     })
   };
 };
 
-export const addTodos = (todos) => {
+export const addTranslations = (translations) => {
   return {
-    type: 'ADD_TODOS',
-    todos,
+    type: actionTypes.ADD_TRANSLATIONS,
+    translations,
   };
 };
 
-export const startAddTodos = () => {
+export const startAddTranslations = () => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const todosRef = firebaseRef.child(`users/${uid}/todos`);
+    const translationsRef = firebaseRef.child(`users/${uid}/translations`);
 
-    return todosRef.once('value').then((snapshot) => {
+    return translationsRef.once('value').then((snapshot) => {
       const data = snapshot.val() || {};
-      const todos = [];
+      const translations = [];
       const keys = Object.keys(data);
 
       keys.forEach(function(key){
-        todos.push({
+        translations.push({
           id: key,
           ...data[key],
         });
       });
 
-      dispatch(addTodos(todos));
+      dispatch(addTranslations(translations));
     });
   };
 };
 
-export const updateTodo = (id, updates) => {
+export const updateTranslation = (id, updates) => {
   return {
-    type: 'UPDATE_TODO',
+    type: actionTypes.UPDATE_TRANSLATION,
     id,
     updates
   };
 };
 
-export const startToggleTodo = (id, completed) => {
-  return (dispatch, getState) => {
-    const uid = getState().auth.uid;
-    const todoRef = firebaseRef.child(`users/${uid}/todos/${id}`);
-    const updates = {
-      completed,
-      completedAt: completed ? moment().unix() : null
-    };
-
-    return todoRef.update(updates).then(() => {
-      dispatch(updateTodo(id, updates));
-    });
-  };
-};
-
 export const login = (uid, displayName, photoURL) => {
   return {
-    type: 'LOG_IN',
+    type: actionTypes.LOGIN,
     uid,
     name: displayName,
     pic: photoURL,
@@ -100,7 +86,7 @@ export const login = (uid, displayName, photoURL) => {
 
 export const logout = () => {
   return {
-    type: 'LOG_OUT'
+    type: actionTypes.LOGOUT
   };
 };
 

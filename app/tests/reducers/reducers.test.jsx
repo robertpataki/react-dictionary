@@ -1,13 +1,15 @@
 import expect from 'expect';
-import { authReducer, searchTextReducer, todosReducer } from 'reducers';
 import df from 'deep-freeze-strict';
 import moment from 'moment';
+
+import { authReducer, searchTextReducer, translationsReducer } from 'reducers';
+import * as actionTypes from 'actionTypes';
 
 describe('Reducers', () => {
   describe('searchTextReducer', () => {
     it('set searchText', () => {
       const action = {
-        type: 'SET_SEARCH_TEXT',
+        type: actionTypes.SET_SEARCH_TEXT,
         searchText: 'Searching for...'
       };
 
@@ -16,79 +18,55 @@ describe('Reducers', () => {
     });
   });
 
-  describe('todosReducer', () => {
+  describe('translationsReducer', () => {
     it('should add new todo', () => {
       const action = {
-        type: 'ADD_TODO',
-        todo: {
+        type: actionTypes.ADD_TRANSLATION,
+        translation: {
           id: 'abc123',
-          text: 'New todo to be done later',
-          completed: false,
+          expression: 'szeretlek',
+          meaning: 'I love you',
           createdAt: 1234,
         }
       }
 
-      const response = todosReducer(df([]), df(action));
+      const response = translationsReducer(df([]), df(action));
       expect(response.length).toBe(1);
-      expect(response[0]).toEqual(action.todo);
+      expect(response[0]).toEqual(action.translation);
     });
 
-    it('should toggle todo', () => {
-      const todos = [{
-        id: '123',
-        text: 'Todo #1',
-        createdAt: 123,
-        completed: true,
-        completedAt: 125,
-      }];
-      const updates = {
-        completed: false,
-        completedAt: null,
-      };
+    it('should add existing translations', () => {
       const action = {
-        type: 'UPDATE_TODO',
-        id: todos[0].id,
-        updates
-      };
-
-      const response = todosReducer(df(todos), df(action));
-
-      expect(response[0].completed).toBe(updates.completed);
-      expect(response[0].completedAt).toEqual(updates.completedAt);
-      expect(response[0].text).toEqual(todos[0].text);
-    });
-
-    it('should add existing todos', () => {
-      const action = {
-        type: 'ADD_TODOS',
-        todos: [
-          { id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined }
+        type: actionTypes.ADD_TRANSLATIONS,
+        translations: [
+          { id: '123abc', expression: 'papír pohár', meaning: 'paper cup', createdAt: 100 },
+          { id: '234bcd', expression: 'repülő', meaning: 'airplane', createdAt: 200 },
         ]
       };
 
-      const response = todosReducer(df([]), df(action));
-      expect(response.length).toEqual(1);
-      expect(response[0]).toEqual(action.todos[0]);
+      const response = translationsReducer(df([]), df(action));
+      expect(response.length).toEqual(2);
+      expect(response).toEqual(action.translations);
     });
 
-    it('should clear all todos on logout', () => {
-      const todos = [
-        { id: '123', text: 'Blah', createdAt: 100, completed: false, completedAt: undefined },
-        { id: '234', text: 'Fooh', createdAt: 200, completed: true, completedAt: '1234' }
+    it('should clear all translations on logout', () => {
+      const translations = [
+        { id: '123abc', expression: 'medve', meaning: 'bear', createdAt: 100 },
+        { id: '234bcd', expression: 'macska', meaning: 'cat', createdAt: 200 },
       ];
       const action = {
-        type: 'LOG_OUT'
+        type: actionTypes.LOGOUT
       };
 
-      const response = todosReducer(df(todos), df(action));
+      const response = translationsReducer(df(translations), df(action));
       expect(response.length).toEqual(0);
     });
   });
 
   describe('authReducer', () => {
-    it('should toggle LOG_IN', () => {
+    it('should toggle LOGIN', () => {
       const action = {
-        type: 'LOG_IN',
+        type: actionTypes.LOGIN,
         uid: '123456',
         name: 'Rob Roy',
         pic: 'http://placekitten.com/200/300',
@@ -102,12 +80,12 @@ describe('Reducers', () => {
       });
     });
 
-    it('should toggle LOG_OUT', () => {
+    it('should toggle LOGOUT', () => {
       const authData = {
         uid: '123456'
       };
       const action = {
-        type: 'LOG_OUT'
+        type: actionTypes.LOGOUT
       };
 
       const response = authReducer(df(authData), df(action));
