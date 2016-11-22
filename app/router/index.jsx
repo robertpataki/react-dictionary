@@ -3,7 +3,7 @@ import firebase from 'app/firebase/';
 import { Router, IndexRoute, Route, browserHistory } from 'react-router';
 
 import Main from 'Main';
-import TodoApp from 'TodoApp';
+import DictionaryApp from 'DictionaryApp';
 import Login from 'Login';
 
 // Middleware
@@ -25,7 +25,7 @@ export default (
   <Router history={ browserHistory }>
     <Route path="/" component={ Main }>
       <IndexRoute component={ Login } onEnter={ redirectIfLoggedIn } />
-      <Route path="todos" component={ TodoApp } onEnter={ requireLogin } />
+      <Route path="todos" component={ DictionaryApp } onEnter={ requireLogin } />
     </Route>
   </Router>
 );

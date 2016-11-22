@@ -52,7 +52,10 @@ export const authReducer = (state = {}, action) => {
   switch (action.type) {
     case 'LOG_IN':
       return {
-        uid: action.uid
+        uid: action.uid,
+        email: action.email,
+        name: action.name,
+        pic: action.pic,
       };
     case 'LOG_OUT':
       return {};

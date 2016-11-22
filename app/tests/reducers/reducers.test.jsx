@@ -100,11 +100,19 @@ describe('Reducers', () => {
     it('should toggle LOG_IN', () => {
       const action = {
         type: 'LOG_IN',
-        uid: '123456'
+        uid: '123456',
+        email: 'test@test.com',
+        name: 'Rob Roy',
+        pic: 'http://placekitten.com/200/300',
       };
 
       const response = authReducer(undefined, df(action));
-      expect(response).toEqual({ uid: action.uid });
+      expect(response).toEqual({
+        uid: action.uid,
+        email: action.email,
+        name: action.name,
+        pic: action.pic,
+      });
     });
 
     it('should toggle LOG_OUT', () => {
