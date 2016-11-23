@@ -3,7 +3,7 @@
   border-top: 1px solid $light-grey-border;
   border-bottom: 1px solid $light-grey-border;
 
-  &:not(.translations--empty):before {
+  &:not(.translations--with-message):before {
     content: "";
     display: block;
     position: absolute;

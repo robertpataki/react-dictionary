@@ -7,14 +7,21 @@ import TranslationAPI from 'TranslationAPI';
 export class Dictionary extends React.Component {
   render() {
     const { translations, searchText } = this.props;
+    const filteredTranslations = TranslationAPI.filterTranslations(translations, searchText);
 
     const renderTranslations = () => {
-      const filteredTranslations = TranslationAPI.filterTranslations(translations, searchText);
-
-      if (filteredTranslations.length === 0) {
+      if (!translations.length) {
         return (
-          <p className="container__message">(◕⌓◕;) You haven't added any translations yet</p>
-        )
+          <div className="container">
+            <p className="container__message" data-message-type="no-translations">(◕⌓◕;) You haven't added any translations yet</p>
+          </div>
+        );
+      } else if(!filteredTranslations.length) {
+        return (
+          <div className="container">
+            <p className="container__message" data-message-type="no-search-results">(●´⌓`●) No such find</p>
+          </div>
+        );
       }
 
       return filteredTranslations.map((translation) => {
@@ -27,7 +34,7 @@ export class Dictionary extends React.Component {
     return (
       <div className="row expanded">
         <h3 className="container__title">Dictionary</h3>
-        <div className={ !translations.length ? "translations translations--empty" : "translations" }>
+        <div className={ !translations.length || !filteredTranslations.length ? "translations translations--with-message" : "translations" }>
           { renderTranslations() }
         </div>
       </div>
