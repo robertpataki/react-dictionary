@@ -7,7 +7,7 @@ describe('TranslationAPI', () => {
   });
 
   describe('filterTranslations', () => {
-    var translations = [{
+    const translations = [{
       id: '1-1',
       expression: 'akármi',
       meaning: 'anything'
@@ -23,12 +23,12 @@ describe('TranslationAPI', () => {
 
     // Filter by search keyword
     it('should return matching translation item if the search keyword is an empty string', () => {
-      var filteredTranslations = TranslationAPI.filterTranslations(translations, '');
+      const filteredTranslations = TranslationAPI.filterTranslations(translations, '');
       expect(filteredTranslations.length).toBe(3);
     });
 
     it('should return every translation item if the search keyword is a valid string', () => {
-      var filteredTranslations = TranslationAPI.filterTranslations(translations, 'ma');
+      const filteredTranslations = TranslationAPI.filterTranslations(translations, 'ma');
       expect(filteredTranslations.length).toBe(2);
     });
   });
