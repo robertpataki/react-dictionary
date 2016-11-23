@@ -83,14 +83,22 @@ describe('Actions', () => {
       let testTranslationRef;
       let uid;
       let translationsRef;
+      let translationCount;
 
       beforeEach((done) => {
+        // First we login and remove all translations from the test db
         firebase.auth().signInAnonymously().then((user) => {
           uid = user.uid,
           translationsRef = firebaseRef.child(`users/${uid}/translations`);
 
+          // Keep track of the number of translations added to the db
+          translationsRef.on('value', (snapshot) => {
+            translationCount = snapshot.numChildren();
+          })
+
           return translationsRef.remove();
         }).then(() => {
+          // Then we create a new translation in the db
           testTranslationRef = translationsRef.push();
 
           return testTranslationRef.set({
@@ -104,6 +112,7 @@ describe('Actions', () => {
       });
 
       afterEach((done) => {
+        // When we're done we delete the test translation from the db
         translationsRef.remove().then(() => done());
       });
 
@@ -143,6 +152,37 @@ describe('Actions', () => {
 
           done();
         }).catch(done);
+      });
+
+      it('should delete the selected translation and dispatch DELETE_TRANSLATION', (done) => {
+        const store = createMockStore({ auth: { uid } });
+
+        // First we create a new translation in the db
+        const newTestTranslationRef = translationsRef.push();
+        const newTestTranslationRefKey = newTestTranslationRef.key;
+
+        newTestTranslationRef.set({
+          expression: 'törölj le',
+          meaning: 'delete me',
+          createdAt: '1234',
+        }).then(() => {
+          //1) Confirm that there are now 2 items
+          expect(translationCount).toEqual(2);
+
+          //2) Delete the newest item
+          store.dispatch(actions.startDeleteTranslation(newTestTranslationRefKey)).then(() => {
+            const actions = store.getActions();
+            const firstAction = actions[0];
+
+            //3) Confirm that there is only 1 item, and the latest key doesn't exist anymore
+            expect(translationCount).toEqual(1);
+            expect(firstAction).toInclude({
+              type: actionTypes.DELETE_TRANSLATION,
+              id: newTestTranslationRefKey,
+            });
+            done();
+          }).catch(done);
+        });
       });
     });
 
