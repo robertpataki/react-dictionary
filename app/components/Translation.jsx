@@ -27,7 +27,7 @@ export class Translation extends React.Component {
       <div className='translation'>
         <span className="translation__expression">{ expression }</span>
         <span className="translation__meaning">{ meaning }</span>
-        <a href="#" className="translation__delete button alert" onClick={ this.onDeleteClick }>Delete</a>
+        <button className="translation__delete button alert" onClick={ this.onDeleteClick }>Delete</button>
       </div>
     )
   }
