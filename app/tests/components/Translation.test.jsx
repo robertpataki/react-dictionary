@@ -24,8 +24,8 @@ describe('Translation', () => {
     const translation = TestUtils.renderIntoDocument(<Translation { ...data } />);
     const $wrapper = $(ReactDOM.findDOMNode(translation));
 
-    const $expression = $wrapper.find(`:contains('${data.expression}')`);
-    const $meaning = $wrapper.find(`:contains('${data.meaning}')`);
+    const $expression = $wrapper.find(`span:contains('${data.expression}')`);
+    const $meaning = $wrapper.find(`span:contains('${data.meaning}')`);
 
     expect($expression.length).toEqual(1);
     expect($meaning.length).toEqual(1);
