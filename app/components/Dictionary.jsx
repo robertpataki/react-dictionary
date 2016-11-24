@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import TransitionGroup from 'react-addons-transition-group';
 
 import Translation from 'Translation';
 import TranslationAPI from 'TranslationAPI';
@@ -13,13 +14,13 @@ export class Dictionary extends React.Component {
       if (!translations.length) {
         return (
           <div className="container">
-            <p className="container__message" data-message-type="no-translations">(◕⌓◕;) You haven't added any translations yet</p>
+            <p className="container__message" data-message-type="no-translations">(●´⌓`●) You haven't added any translations yet</p>
           </div>
         );
       } else if(!filteredTranslations.length) {
         return (
           <div className="container">
-            <p className="container__message" data-message-type="no-search-results">(●´⌓`●) No such find</p>
+            <p className="container__message" data-message-type="no-search-results">(ノಠ益ಠ)ノ彡┻━┻ No such find</p>
           </div>
         );
       }
@@ -35,7 +36,9 @@ export class Dictionary extends React.Component {
       <div className="row expanded">
         <h3 className="container__title">Dictionary</h3>
         <div className={ !translations.length || !filteredTranslations.length ? "translations translations--with-message" : "translations" }>
-          { renderTranslations() }
+          <TransitionGroup>
+            { renderTranslations() }
+          </TransitionGroup>
         </div>
       </div>
     );

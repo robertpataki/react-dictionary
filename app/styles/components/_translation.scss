@@ -11,7 +11,6 @@
   user-select: none;
   cursor: default;
   transition: background 0.3s ease-out;
-  background: green;
   @include clearfix;
 
   p, input {
@@ -22,23 +21,12 @@
     border-bottom: 1px solid lighten($light-color, 25%);
   }
 
-  &:after {
-    content: "";
-    position: absolute;
-    display: block;
-    height: 110%;
-    left: 50%;
-    top: 0;
-    width: 1px;
-    z-index: 10;
-    background: $divider-color;
-  }
-
   &:last-child:after {
     height: 100%;
   }
 }
 
+/* Wrappers */
 .translation__wrapper {
   position: absolute;
   width: 100%;
@@ -47,10 +35,10 @@
   left: 0;
   @include clearfix;
 }
-
  .translation__wrapper--buttons {
    display: flex;
    align-items: center;
+   background: lighten($light-color, 30%);
    z-index: 0;
  }
  .translation__wrapper--contents {
@@ -58,25 +46,26 @@
    z-index: 1;
    background: $col-translation;
  }
- .translation__wrapper--hitarea {
+ .translation__wrapper--triggers {
    z-index: 2;
-   background: rgba(255, 0, 0, 0.2);
  }
 
- .translation__hitarea {
+ /* Triggers */
+ .translation__trigger {
    content: "";
    display: inline-block;
    position: absolute;
-   background: rgba(0, 255, 0, 0.3);
    top: 0;
-   width: 15%;
+   width: 12%;
+   max-width: 142px;
    height: 100%;
    cursor: pointer;
  }
- .translation__hitarea--right {
+ .translation__trigger--right {
    right: 0;
  }
 
+/* Labels */
  .translation__expression,
  .translation__meaning {
    position: relative;
@@ -84,8 +73,21 @@
    width: 50%;
    padding: 1rem;
  }
+ .translation__expression {
+   border-right: 1px solid $divider-color;
+   padding-left: 2rem;
+ }
+ .translation__meaning {
+   padding-right: 2rem;
+ }
 
- .translation__delete {
-   position: absolute;
+/* Buttons */
+.translation__button {
+    position: absolute;
+}
+ .translation__button--delete {
    right: 2rem;
+ }
+ .translation__button--edit {
+   left: 2rem;
  }
