@@ -17,16 +17,12 @@ export class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1 className="page-title">Dictionary</h1>
-
-        <div className="row">
-          <div className="columns small-centered small-11 medium-6 large-4">
-            <div className="callout callout-auth">
-              <h2>Log in</h2>
-              <p>Login with your Facebook account below.</p>
-              <button className="button" onClick={ this.onLogin }>Login with Facebook</button>
-            </div>
+      <div className="login">
+        <div className="login__contents">
+          <img src="images/logo.svg" className="login__logo" />
+          <button className="login__button" onClick={ this.onLogin }><i>login</i></button>
+          <div className="login__copy">
+            <p>Please log in using<br />your Facebook</p>
           </div>
         </div>
       </div>
