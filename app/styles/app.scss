@@ -1,11 +1,6 @@
 @import 'base/variables';
 @import 'base/base';
 
-// Foundation
-@import 'base/foundation-settings';
-@import 'foundation';
-@include foundation-everything;
-
 @import "base/layout";
 
 // Components
@@ -13,5 +8,4 @@
 @import "components/page-title";
 @import "components/login";
 @import "components/translation";
-@import "components/callout-auth";
 @import "components/user-bar";

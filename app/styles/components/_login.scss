@@ -46,8 +46,6 @@
   &:hover {
     background: darken($col-facebook, 10%);
   }
-
-  @extend .button;
 }
 
 .login__copy {

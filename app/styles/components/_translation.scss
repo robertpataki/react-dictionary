@@ -11,7 +11,7 @@
   user-select: none;
   cursor: default;
   transition: background 0.3s ease-out;
-  @include clearfix;
+  // @include clearfix;
 
   p, input {
     margin: 0;
@@ -33,7 +33,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  @include clearfix;
+  // @include clearfix;
 }
  .translation__wrapper--buttons {
    display: flex;
