@@ -1,11 +1,12 @@
 .translations {
   position: relative;
-  border-top: 1px solid $col-white-grey;
-  border-bottom: 1px solid $col-white-grey;
+  border-top: 1px solid $col-light-grey;
+  border-bottom: 1px solid $col-light-grey;
+  margin-bottom: 10rem;
 }
 
 .translations__message {
-  padding: 0 2rem;
+  padding: 0 $translation-padding;
 }
 
 .translation {
@@ -75,23 +76,61 @@
    position: relative;
    display: inline-block;
    width: 50%;
-   padding: 1rem;
+   padding: 0.65rem;
  }
  .translation__expression {
    border-right: 1px solid $col-aubergine;
-   padding-left: 2rem;
+   padding-left: $translation-padding;
  }
  .translation__meaning {
-   padding-right: 2rem;
+   padding-right: $translation-padding;
  }
 
 /* Buttons */
+%icon {
+  content: "";
+  display: inline-block;
+  position: relative;
+  background-size: cover;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
 .translation__button {
     position: absolute;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    overflow: hidden;
+    @include link-hover(0.3s);
 }
- .translation__button--delete {
-   right: 2rem;
+
+.translation__button--delete {
+   right: 0;
+   background: $col-pink;
+
+   &:after {
+     @extend %icon;
+     background-image: url("/images/cross.svg");
+   }
+
+   &:hover {
+     background: darken($col-pink, 10%);
+   }
  }
  .translation__button--edit {
-   left: 2rem;
+   left: 0;
+   background: $col-mid-blue;
+
+   &:after {
+     @extend %icon;
+     background-image: url("/images/edit.svg");
+   }
+
+   &:hover {
+     background: darken($col-mid-blue, 10%);
+   }
  }

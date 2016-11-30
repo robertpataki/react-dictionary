@@ -70,6 +70,8 @@ export class Translation extends React.Component {
     // DOM cache
     const target = utils.target;
     const contents = target.find({ name: 'contents' })[0];
+    const deleteButton = target.find({ name: 'deleteButton' })[0];
+    const editButton = target.find({ name: 'editButton' })[0];
     const trigger = utils.options.trigger;
     const state = utils.options.state || 'off';
     const leftTrigger = target.find({ name: 'leftTrigger' })[0];
@@ -78,10 +80,10 @@ export class Translation extends React.Component {
     let targetOffsetX;
     switch(trigger) {
       case leftTrigger:
-        targetOffsetX = state === 'off' ? 0 : trigger.offsetWidth;
+        targetOffsetX = state === 'off' ? 0 : editButton.offsetWidth;
         break;
       case rightTrigger:
-        targetOffsetX = state === 'off' ? 0 : -1 * trigger.offsetWidth;
+        targetOffsetX = state === 'off' ? 0 : -1 * deleteButton.offsetWidth;
         break;
     }
 
@@ -150,8 +152,8 @@ export class Translation extends React.Component {
         </div>
 
         <div className="translation__wrapper translation__wrapper--buttons">
-          <button className="translation__button translation__button--edit button" onClick={ this.onEditClick }>Edit</button>
-          <button className="translation__button translation__button--delete button alert" onClick={ this.onDeleteClick }>Delete</button>
+          <button className="translation__button translation__button--edit" name="editButton" onClick={ this.onEditClick }></button>
+          <button className="translation__button translation__button--delete" name="deleteButton" onClick={ this.onDeleteClick }></button>
         </div>
 
         <div className="translation__wrapper translation__wrapper--triggers">
