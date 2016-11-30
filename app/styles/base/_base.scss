@@ -52,8 +52,12 @@ input[type="text"] {
   box-shadow: none;
 }
 button {
-  -webkit-appearance: none;
-  appearance: none;
+  @include appearance(none);
+	border: none;
+
+	&, & > * {
+		cursor: pointer;
+	}
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
