@@ -3,6 +3,21 @@
   padding: $header-padding;
 }
 
+.search-bar--focus {
+  .search-bar__icon--magnify {
+    opacity: 1;
+  }
+}
+
+.search-bar--has-text {
+  .search-bar__icon--close {
+    cursor: pointer;
+    pointer-events: auto;
+    opacity: 1;
+    @include transform(scale(1));
+  }
+}
+
 .search-bar__input {
   width: 100%;
   height: auto;
@@ -13,12 +28,12 @@
   color: $col-white;
   background-color: rgba(255, 255, 255, 0.1);
   cursor: auto;
-  @include link-hover;
+  @include link-hover(0.6s);
 
   @include placeholder {
     color: $col-white;
     opacity: 0.3;
-    @include link-hover;
+    @include link-hover(0.6s);
   }
 
   &:focus {
@@ -42,6 +57,8 @@
 
 .search-bar__icon--magnify {
   left: 1.5rem;
+  opacity: 0.5;
+  @include link-hover(0.6s);
   background-image: url("/images/magnify.svg");
 }
 
@@ -50,5 +67,9 @@
   width: $header-padding;
   height: $header-padding;
   background-image: url("/images/cross.svg");
-  cursor: pointer;
+  cursor: default;
+  pointer-events: none;
+  opacity: 0;
+  @include transform(scale(0));
+  @include link-hover(0.18s);
 }

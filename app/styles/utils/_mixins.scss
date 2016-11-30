@@ -31,8 +31,8 @@
 	left: 0;
 }
 
-@mixin link-hover {
-  @include transition-property(opacity, color, border, background);
-  @include transition-duration(0.12s);
+@mixin link-hover($duration: 0.12s) {
+  @include transition-property(opacity, color, border, background, transform);
+  @include transition-duration($duration);
   @include transition-timing-function(ease-out);
 }
