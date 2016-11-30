@@ -33,13 +33,10 @@ export class Dictionary extends React.Component {
     };
 
     return (
-      <div className="row expanded">
-        <h3 className="container__title">Dictionary</h3>
-        <div className={ !translations.length || !filteredTranslations.length ? "translations translations--with-message" : "translations" }>
-          <TransitionGroup>
-            { renderTranslations() }
-          </TransitionGroup>
-        </div>
+      <div className={ !translations.length || !filteredTranslations.length ? "translations translations--with-message" : "translations" }>
+        <TransitionGroup>
+          { renderTranslations() }
+        </TransitionGroup>
       </div>
     );
   }

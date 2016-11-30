@@ -1,5 +1,16 @@
 .app-header {
   background: $col-dark-blue;
   height: 60px;
-  color: $col-light;
+  color: $col-white;
+
+  @include flex-center;
+}
+
+.app-header__left {
+  @include span(10);
+}
+
+.app-header__right {
+  @include span(2);
+  @include last;
 }

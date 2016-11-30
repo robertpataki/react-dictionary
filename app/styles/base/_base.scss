@@ -1,17 +1,67 @@
-button {
-  -webkit-appearance: none;
-  appearance: none;
+body, html {
+	width: 100%;
+	min-height: 100%;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	text-shadow: none;
+	@include font-moothing;
+	filter: none;
 }
 
-*:focus {
+* {
+	&, &:before, &:after {
+	  @include box-sizing(border-box);
+	}
+	backface-visibility: hidden;
+	cursor: default;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+a  {
+	text-decoration: none;
 	outline: none;
+  color: inherit;
+  @include no-tap-highlight();
+
+  &:focus, &:hover {
+		text-decoration: none;
+		outline: none;
+	}
 }
 
+img {
+  display: inline-block;
+  margin: 0;
+  margin: 0;
+	outline: 0;
+}
+
+/* Form elements */
 label {
   -webkit-user-select: none;
   cursor: default;
 }
-
 input[type="checkbox"] {
   cursor: pointer;
+}
+input[type="text"] {
+	border: none;
+  outline: none;
+  box-shadow: none;
+}
+button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  color: #000 !important;
+  -webkit-text-fill-color: #000;
 }

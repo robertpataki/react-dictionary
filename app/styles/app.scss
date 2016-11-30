@@ -1,11 +1,21 @@
-@import 'base/variables';
-@import 'base/base';
+// Vendor imports
+@import "normalize/import-now";
+@import "bourbon";
 
-@import "base/layout";
+// Utils
+@import "utils/variables";
+@import "utils/mixins";
+
+// Grid styling
+@import "susy";
+@import "base/grid";
+
+// Base styling
+@import "base/base";
 
 // Components
-@import "components/container";
-@import "components/page-title";
+@import "components/app-header";
+@import "components/user-bar";
+@import "components/search-bar";
 @import "components/login";
 @import "components/translation";
-@import "components/user-bar";

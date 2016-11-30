@@ -28,26 +28,12 @@ export class AddTranslation extends React.Component {
 
   render() {
     return (
-      <div className="row expanded">
-        <div className="container container--footer">
-          <form ref="form" onSubmit={ this.onSubmit } className="add-translation">
-            <div className="row expanded">
-              <h3>Add a new translation</h3>
-            </div>
-            <div className="row expanded">
-              <div className="columns large-3">
-                <input type="text" ref="expression" placeholder="Hungarian expression" />
-              </div>
-              <div className="columns large-3">
-                <input type="text" ref="meaning" placeholder="English meaning" />
-              </div>
-              <div className="columns large-1 end">
-                <button type="submit" className="button expanded">Add</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+      <form ref="form" onSubmit={ this.onSubmit } className="add-translation">
+        <h3>Add a new translation</h3>
+        <input type="text" ref="expression" placeholder="Hungarian expression" />
+        <input type="text" ref="meaning" placeholder="English meaning" />
+        <button type="submit" className="button expanded">Add</button>
+      </form>
     );
   }
 }

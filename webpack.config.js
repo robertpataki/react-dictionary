@@ -79,6 +79,9 @@ module.exports = {
   },
   sassLoader: {
     includePaths: [
+      path.resolve(__dirname, './node_modules/bourbon/app/assets/stylesheets/'),
+      path.resolve(__dirname, './node_modules/susy/sass/'),
+      path.resolve(__dirname, './node_modules/normalize-scss/sass/'),
     ]
   },
   devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map',
