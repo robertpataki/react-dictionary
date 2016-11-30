@@ -7,7 +7,7 @@ export class SearchBar extends React.Component {
     super(props);
 
     this.state = {
-      focus: false,
+      focus: false
     };
 
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
@@ -57,6 +57,10 @@ export class SearchBar extends React.Component {
     );
   }
 }
+
+SearchBar.defaultProps = {
+  searchText: '',
+};
 
 export default connect(
   (state) => {

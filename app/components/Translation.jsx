@@ -137,7 +137,6 @@ export class Translation extends React.Component {
     e.preventDefault();
 
     const { dispatch, id } = this.props;
-    console.log('Edit');
   }
 
   render() {

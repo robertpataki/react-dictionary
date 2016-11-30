@@ -36,7 +36,7 @@ describe('Translation', () => {
     const translation = TestUtils.renderIntoDocument(<Translation { ...data } dispatch={ spy }/>);
     const action = actions.startDeleteTranslation(data.id);
     const $wrapper = $(ReactDOM.findDOMNode(translation));
-    const deleteButton = $($wrapper.find('button'))[0];
+    const deleteButton = $($wrapper.find('.translation__button--delete'))[0];
 
     TestUtils.Simulate.click(deleteButton);
     expect(spy).toHaveBeenCalledWith(action);
