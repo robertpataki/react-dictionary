@@ -23,7 +23,7 @@ export class UserBar extends React.Component {
     return (
       <div className="user-bar">
         <span className="user-bar__name">{ `Hello ${firstName}` }</span>
-        <img className="user-bar__pic" src={ pic } alt="Profile picture" />
+        <img className="user-bar__pic" src={ pic } alt="Profile picture" onClick={ this.onLogout } />
         <a className="user-bar__logout" href="#" onClick={ this.onLogout }>Log out</a>
       </div>
     );

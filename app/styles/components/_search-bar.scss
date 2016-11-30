@@ -1,6 +1,5 @@
 .search-bar {
   position: relative;
-  padding: $header-padding;
 }
 
 .search-bar--focus {
@@ -47,7 +46,7 @@
 
 .search-bar__icon {
   position: absolute;
-  top: 1.4rem;
+  top: $header-padding * 1.2;
   width: 0.75rem;
   height: 0.75rem;
   background-position: 50% 50%;
@@ -56,14 +55,14 @@
 }
 
 .search-bar__icon--magnify {
-  left: 1.5rem;
+  left: $header-padding * 1.2;
   opacity: 0.5;
   @include link-hover(0.6s);
   background-image: url("/images/magnify.svg");
 }
 
 .search-bar__icon--close {
-  right: 1.6rem;
+  right: $header-padding * 1.2;
   width: $header-padding;
   height: $header-padding;
   background-image: url("/images/cross.svg");

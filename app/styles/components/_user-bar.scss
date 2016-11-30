@@ -1,17 +1,13 @@
 .user-bar {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: $header-padding;
   user-select: none;
-  line-height: 2.625rem;
 }
 
 .user-bar__pic {
-  display: inline-block;
-  margin: 0;
+  display: block;
   border-radius: 100%;
   width: 2.625rem;
   height: 2.625rem;
+  cursor: pointer;
 }
 
 .user-bar__name {
@@ -26,10 +22,8 @@
   }
 }
 
-@media screen and (max-width: 640px) {
-  .user-bar__logout,
-  .user-bar__name {
-    display: none;
-    visibility: hidden;
-  }
+.user-bar__name,
+.user-bar__logout {
+  display: none;
+  visibility: hidden;
 }

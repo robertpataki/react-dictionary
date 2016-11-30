@@ -13,15 +13,11 @@ export class Dictionary extends React.Component {
     const renderTranslations = () => {
       if (!translations.length) {
         return (
-          <div className="container">
-            <p className="container__message" data-message-type="no-translations">(●´⌓`●) You haven't added any translations yet</p>
-          </div>
+          <p className="translations__message" data-message-type="no-translations">(●´⌓`●) You haven't added any translations yet</p>
         );
       } else if(!filteredTranslations.length) {
         return (
-          <div className="container">
-            <p className="container__message" data-message-type="no-search-results">(ノಠ益ಠ)ノ彡┻━┻ No such find</p>
-          </div>
+          <p className="translations__message" data-message-type="no-search-results">(ノಠ益ಠ)ノ彡┻━┻ No such find</p>
         );
       }
 
