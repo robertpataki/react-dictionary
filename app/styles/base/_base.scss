@@ -6,6 +6,9 @@ body, html {
 	text-shadow: none;
 	@include font-moothing;
 	filter: none;
+	overflow-x: hidden;
+
+	font-family: 'Open Sans', sans-serif;
 }
 
 * {
