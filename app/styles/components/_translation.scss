@@ -104,7 +104,8 @@
 .translation__button {
     position: absolute;
     width: 4rem;
-    height: 4rem;
+    // height: 4rem;
+    height: 100%;
     padding: 0;
     overflow: hidden;
     background: $col-mid-grey;

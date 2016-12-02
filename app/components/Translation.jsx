@@ -18,8 +18,7 @@ export class Translation extends React.Component {
     super(props);
 
     this.state = {
-      offsetX: 0,
-      activityHighlight: undefined,
+      offsetX: 0
     };
 
     this.onEditSelect = this.onEditSelect.bind(this);
@@ -168,23 +167,26 @@ export class Translation extends React.Component {
       this.tween = undefined;
     }
     this.clientX = e.touches[0].clientX;
+    this.clientY = e.touches[0].clientY;
   }
 
   handleTouchMove(e) {
-    const buttonActivationOffsetX = 100;
-    const maxOffsetX = 200;
+    const buttonActivationOffsetX = 50;
+    const maxOffsetX = 100;
 
     const clientX = e.touches[0].clientX;
     let offsetX = clientX - this.clientX;
 
-    // if (offsetX > maxOffsetX) {
-    //   offsetX = maxOffsetX;
-    // } else if (offsetX < -1 * maxOffsetX) {
-    //   offsetX = -1 * maxOffsetX;
-    // }
+    /* Prevents scrolling if the user is panning the item */
+    if (offsetX >= 20) {
+      e.preventDefault();
+    }
 
-    this.offsetX = offsetX;
-    this.applyContentOffsetX(offsetX);
+    if (offsetX > maxOffsetX) {
+      offsetX = maxOffsetX;
+    } else if (offsetX < -1 * maxOffsetX) {
+      offsetX = -1 * maxOffsetX;
+    }
 
     let activityHighlight = undefined;
     if (offsetX >= buttonActivationOffsetX) {
@@ -194,19 +196,15 @@ export class Translation extends React.Component {
     }
 
     this.setState({
-      activityHighlight,
+      offsetX: offsetX,
+      activityHighlight: activityHighlight
     });
+
+    this.offsetX = offsetX;
+    this.applyContentOffsetX(offsetX);
   }
 
-  // touchMoveAnim(utils) {
-  //   return TweenMax.set(this.contentsEl, {
-  //     x: utils.options.offsetX,
-  //   });
-  // }
-
   handleTouchEnd(e) {
-    // console.log('handleTouchEnd');
-
     const animController = this.addAnimation(this.panAnim, {
       offsetX: 0,
     });
@@ -228,7 +226,10 @@ export class Translation extends React.Component {
   }
 
   applyContentOffsetX(x) {
-    console.log(this.contentsEl);
+    if (!this.contentsEl) {
+      return;
+    }
+
     this.contentsEl.style.transform = `translate3d(${x}px, 0, 0)`;
     this.contentsEl.style.webKitTransform = `translate3d(${x}px, 0, 0)`;
   }
@@ -258,12 +259,13 @@ export class Translation extends React.Component {
   }
 
   render() {
+    this.applyContentOffsetX(this.state.offsetX);
+
     const { id, expression, meaning, createdAt } = this.props;
-    const { activityHighlight } = this.state;
 
     let className = 'translation';
 
-    switch(activityHighlight) {
+    switch(this.state.activityHighlight) {
       case 'EDIT':
         className += ' translation--edit-active';
         break;
@@ -286,7 +288,7 @@ export class Translation extends React.Component {
           <button className="translation__button translation__button--delete" name="deleteButton" onClick={ this.onDeleteSelect }></button>
         </div>
 
-        { this.renderTriggers(true) }
+        { this.renderTriggers(br.device.touch) }
       </div>
     )
   }
