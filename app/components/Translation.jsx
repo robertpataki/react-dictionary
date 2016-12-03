@@ -4,13 +4,10 @@ import { connect } from 'react-redux';
 import { TimelineMax, TweenMax, Expo } from 'gsap';
 import GSAP from 'react-gsap-enhancer';
 import connectWithTransitionGroup from 'connect-with-transition-group';
-
-import Brewser from 'brewser';
 import Hammer from 'react-hammerjs';
+const BREWSER = require('Brewser').BREWSER;
 
 import * as actions from 'actions';
-
-const br = Brewser.br;
 
 // Raw component
 export class Translation extends React.Component {
@@ -21,16 +18,22 @@ export class Translation extends React.Component {
       offsetX: 0
     };
 
+    // Generic events
     this.onEditSelect = this.onEditSelect.bind(this);
     this.onDeleteSelect = this.onDeleteSelect.bind(this);
+
+    // Mouse events
     this.onTriggerMouseOver = this.onTriggerMouseOver.bind(this);
     this.onTriggerMouseOut = this.onTriggerMouseOut.bind(this);
+
+    // Touch events
     this.onTouchStart = this.handleTouchStart.bind(this);
     this.onTouchMove = this.handleTouchMove.bind(this);
     this.onTouchEnd = this.handleTouchEnd.bind(this);
 
+    // Animations
     this.panAnim = this.panAnim.bind(this);
-    // this.touchMoveAnim = this.touchMoveAnim.bind(this);
+    this.hoverAnim = this.hoverAnim.bind(this);
   }
 
   createAnim(utils) {
@@ -85,20 +88,17 @@ export class Translation extends React.Component {
     // DOM cache
     const target = utils.target;
     const contents = target.find({ name: 'contents' })[0];
-    const deleteButton = target.find({ name: 'deleteButton' })[0];
-    const editButton = target.find({ name: 'editButton' })[0];
+
     const trigger = utils.options.trigger;
     const state = utils.options.state || 'off';
-    const leftTrigger = target.find({ name: 'leftTrigger' })[0];
-    const rightTrigger = target.find({ name: 'rightTrigger' })[0];
 
     let targetOffsetX;
     switch(trigger) {
-      case leftTrigger:
-        targetOffsetX = state === 'off' ? 0 : editButton.offsetWidth;
+      case this.leftTrigger:
+        targetOffsetX = state === 'off' ? 0 : this.editButton.offsetWidth;
         break;
-      case rightTrigger:
-        targetOffsetX = state === 'off' ? 0 : -1 * deleteButton.offsetWidth;
+      case this.rightTrigger:
+        targetOffsetX = state === 'off' ? 0 : -1 * this.deleteButton.offsetWidth;
         break;
     }
 
@@ -140,8 +140,15 @@ export class Translation extends React.Component {
   componentDidAppear() {}
   componentDidLeave() {}
   componentDidEnter() {}
-  componentDidMount() {}
   componentWillUnmount() {}
+
+  componentDidMount() {
+    // Set trigger width
+    if (this.leftTrigger && this.rightTrigger) {
+      this.leftTrigger.style.maxWidth = this.editButton.outerWidth;
+      this.rightTrigger.style.maxWidth = this.deleteButton.outerWidth;
+    }
+  }
 
 //////////////////
 ///////// User interaction events
@@ -195,10 +202,10 @@ export class Translation extends React.Component {
       activityHighlight = 'DELETE';
     }
 
-    this.setState({
-      offsetX: offsetX,
-      activityHighlight: activityHighlight
-    });
+    // this.setState({
+    //   offsetX: offsetX,
+    //   activityHighlight: activityHighlight
+    // });
 
     this.offsetX = offsetX;
     this.applyContentOffsetX(offsetX);
@@ -237,29 +244,24 @@ export class Translation extends React.Component {
   renderTriggers(touchDevice) {
     if(touchDevice) {
       return(
-        <div onTouchStart={ this.onTouchStart } onTouchMove={ this.onTouchMove } onTouchEnd={ this.onTouchEnd }>
-          <div className="translation__wrapper translation__wrapper--triggers">
-            <Hammer onTap={ this.onEditSelect } name="leftTrigger">
-              <span className="translation__trigger translation__trigger--left"></span>
-            </Hammer>
-            <Hammer>
-              <span className="translation__trigger translation__trigger--right" onTap={ this.onEditSelect } name="rightTrigger"></span>
-            </Hammer>
-          </div>
-        </div>
+          <div className="translation__wrapper translation__wrapper--triggers" onTouchStart={ this.onTouchStart } onTouchMove={ this.onTouchMove } onTouchEnd={ this.onTouchEnd }></div>
       );
     } else {
       return(
         <div className="translation__wrapper translation__wrapper--triggers">
-          <span className="translation__trigger translation__trigger--left" onClick={ this.onEditSelect } onMouseOver={ this.onTriggerMouseOver } onMouseOut={ this.onTriggerMouseOut } name="leftTrigger"></span>
-          <span className="translation__trigger translation__trigger--right" onClick={ this.onDeleteSelect } onMouseOver={ this.onTriggerMouseOver } onMouseOut={ this.onTriggerMouseOut } name="rightTrigger"></span>
+          <span className="translation__trigger translation__trigger--left" onClick={ this.onEditSelect } onMouseOver={ this.onTriggerMouseOver } onMouseOut={ this.onTriggerMouseOut } ref={(ref) => {
+            this.leftTrigger = ref;
+          }}></span>
+          <span className="translation__trigger translation__trigger--right" onClick={ this.onDeleteSelect } onMouseOver={ this.onTriggerMouseOver } onMouseOut={ this.onTriggerMouseOut } ref={(ref) => {
+            this.rightTrigger = ref;
+          }}></span>
         </div>
       );
     }
   }
 
   render() {
-    this.applyContentOffsetX(this.state.offsetX);
+    // this.applyContentOffsetX(this.state.offsetX);
 
     const { id, expression, meaning, createdAt } = this.props;
 
@@ -284,11 +286,15 @@ export class Translation extends React.Component {
         </div>
 
         <div className="translation__wrapper translation__wrapper--buttons" name="buttons">
-          <button className="translation__button translation__button--edit" name="editButton" onClick={ this.onEditSelect }></button>
-          <button className="translation__button translation__button--delete" name="deleteButton" onClick={ this.onDeleteSelect }></button>
+          <button className="translation__button translation__button--edit" ref={(ref) => {
+            this.editButton = ref;
+          }} onClick={ this.onEditSelect }></button>
+          <button className="translation__button translation__button--delete" ref={(ref) => {
+            this.deleteButton = ref;
+          }} onClick={ this.onDeleteSelect }></button>
         </div>
 
-        { this.renderTriggers(br.device.touch) }
+        { this.renderTriggers(BREWSER.device.touch) }
       </div>
     )
   }

@@ -8,6 +8,8 @@ import * as actions from 'actions';
 import firebase from 'app/firebase/';
 import router from 'app/router/';
 
+const BREWSER = require('Brewser').BREWSER;
+
 // Authentication state based redirects
 firebase.auth().onAuthStateChanged((user) => {
   if(user) {
@@ -25,6 +27,10 @@ require('style!css!sass!applicationStyles');
 
 // Redux Store setup
 const store = configureStore.configure();
+
+if(BREWSER.device.touch) {
+  document.querySelector('html').className += ' is-touch';
+}
 
 ReactDOM.render(
   <Provider store={ store }>
