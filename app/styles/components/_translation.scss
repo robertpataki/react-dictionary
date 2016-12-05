@@ -15,7 +15,7 @@
 
 .translation {
   position: relative;
-  @include flex-center;
+  @include flex-vertical-center;
   cursor: default;
   @include no-user-select;
   @include clearfix;
@@ -37,7 +37,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  @include flex-center;
+  @include flex-vertical-center;
   @include clearfix;
 }
  .translation__wrapper--buttons {

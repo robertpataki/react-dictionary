@@ -1,5 +1,5 @@
-import moment from 'moment';
 import React from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { TimelineMax, TweenMax, Expo } from 'gsap';
 import GSAP from 'react-gsap-enhancer';
@@ -8,6 +8,7 @@ import Hammer from 'react-hammerjs';
 const BREWSER = require('Brewser').BREWSER;
 
 import * as actions from 'actions';
+import * as screenTypes from 'screenTypes';
 
 const STATUS = {
   EDIT: 'edit',
@@ -182,8 +183,8 @@ export class Translation extends React.Component {
   }
 
   handleEditButtonSelect() {
-    const { dispatch, id } = this.props;
-    console.log('EDIT is coming soon to your screen...');
+    const { dispatch} = this.props;
+    dispatch(actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN));
   }
 
   handleTouchStart(e) {
@@ -375,7 +376,7 @@ Translation.propTypes = {
 
 // Reduxed component
 export default connectWithTransitionGroup(connect(
-  false,
+  (state) => state,
   null,
   null,
   // IMPORTANT: must pass this flag to react-redux/connect

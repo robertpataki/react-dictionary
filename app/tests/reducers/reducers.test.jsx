@@ -2,8 +2,9 @@ import expect from 'expect';
 import df from 'deep-freeze-strict';
 import moment from 'moment';
 
-import { authReducer, searchTextReducer, translationsReducer } from 'reducers';
+import { authReducer, screenTypeReducer, searchTextReducer, translationsReducer } from 'reducers';
 import * as actionTypes from 'actionTypes';
+import * as screenTypes from 'screenTypes';
 
 describe('Reducers', () => {
   describe('searchTextReducer', () => {
@@ -105,6 +106,18 @@ describe('Reducers', () => {
 
       const response = authReducer(df(authData), df(action));
       expect(response).toEqual({});
+    });
+  });
+
+  describe('screenTypeReducer', () => {
+    it('should set screenType to EDIT_TRANSLATION_SCREEN', () => {
+      const action = {
+        type: actionTypes.SET_SCREEN_TYPE,
+        screenType: screenTypes.EDIT_TRANSLATION_SCREEN,
+      };
+
+      const response = screenTypeReducer(df(''), df(action));
+      expect(response).toEqual(action.screenType);
     });
   });
 });

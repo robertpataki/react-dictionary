@@ -1,12 +1,13 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import { authReducer, searchTextReducer, translationsReducer } from 'reducers';
+import { authReducer, screenTypeReducer, searchTextReducer, translationsReducer } from 'reducers';
 
 export const configure = (initialState = {}) => {
   const reducer = redux.combineReducers({
     auth: authReducer,
     searchText: searchTextReducer,
+    screenType: screenTypeReducer,
     translations: translationsReducer,
   });
 

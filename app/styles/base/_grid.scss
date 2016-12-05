@@ -5,7 +5,9 @@ $susy: (
   /* Tells Susy that the container has a max-width of 1120px */
   container: 120rem,
   /* Tells Susy to use border-box */
-  global-box-sizing: border-box
+  global-box-sizing: border-box,
+  /* Setting the gutter position to be within the column */
+  gutter-position: inside,
 );
 
 // $total-columns: 12; // 10 columns

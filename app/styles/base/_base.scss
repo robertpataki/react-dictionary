@@ -68,3 +68,10 @@ input:-webkit-autofill:active {
   color: #000 !important;
   -webkit-text-fill-color: #000;
 }
+
+/* Text selection colour */
+
+@include selection() {
+  background: $col-pink;
+  color: $col-white;
+}

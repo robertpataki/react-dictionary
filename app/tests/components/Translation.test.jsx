@@ -7,6 +7,7 @@ import expect from 'expect';
 import { Translation } from 'Translation';
 import * as actions from 'actions';
 import * as actionTypes from 'actionTypes';
+import * as screenTypes from 'screenTypes';
 
 describe('Translation', () => {
   const data = {
@@ -39,6 +40,17 @@ describe('Translation', () => {
     const deleteButton = $($wrapper.find('.translation__button--delete'))[0];
 
     TestUtils.Simulate.click(deleteButton);
+    expect(spy).toHaveBeenCalledWith(action);
+  });
+
+  it.only('should dispatch setScreenType', () => {
+    const spy = expect.createSpy();
+    const translation = TestUtils.renderIntoDocument(<Translation { ...data } dispatch={ spy }/>);
+    const action = actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN);
+    const $wrapper = $(ReactDOM.findDOMNode(translation));
+    const editButton = $($wrapper.find('.translation__button--edit'))[0];
+
+    TestUtils.Simulate.click(editButton);
     expect(spy).toHaveBeenCalledWith(action);
   });
 });

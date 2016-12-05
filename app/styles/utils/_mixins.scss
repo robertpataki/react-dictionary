@@ -7,10 +7,14 @@
 	font-weight: 400;
 }
 
-@mixin flex-center {
+@mixin flex-vertical-center {
 	@include display(flex);
 	@include align-items(center);
-	// @include justify-content(center);
+}
+
+@mixin flex-horizontal-center {
+	@include display(flex);
+	@include justify-content(center);
 }
 
 @mixin no-tap-highlight() {

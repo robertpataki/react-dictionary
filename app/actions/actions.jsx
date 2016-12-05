@@ -71,6 +71,13 @@ export const startDeleteTranslation = (id) => {
   };
 };
 
+export const markTranslationForEditing = (id) => {
+  return {
+    type: actionTypes.MARK_TRANSLATION_FOR_EDITING,
+    id
+  }
+}
+
 ///////////
 //////// Translations
 /////
@@ -140,3 +147,14 @@ export const startLogout = () => {
     return firebase.auth().signOut().then(() => {});
   };
 }
+
+
+///////////
+//////// App Status
+/////
+export const setScreenType = (screenType) => {
+  return {
+    type: actionTypes.SET_SCREEN_TYPE,
+    screenType,
+  };
+};

@@ -1,0 +1,71 @@
+.slide {
+  @include full-screen;
+  color: $col-white;
+  text-align: center;
+}
+
+.slide__contents {
+  @include full-screen;
+  @include flex-vertical-center;
+  @include flex-horizontal-center;
+}
+
+.slide__title {
+  font-size: 1.2rem;
+  margin-top: 1.375rem;
+  font-weight: 400;
+  color: $col-dark-blue;
+}
+
+.slide__input {
+  color: $col-white;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  padding: 1rem 5rem;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
+}
+
+.slide__buttons {
+  @include container;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: $col-dark-blue;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 46%;
+    left: 50%;
+    top: 27%;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .slide__button:last-of-type {
+    @include last;
+  }
+}
+.slide__button {
+  @include span(6 no-gutters);
+  text-align: center;
+  background: none;
+  color: $col-white;
+  font-size: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+html:not(.is-touch) {
+  .slide__button {
+    @include link-hover(0.3s);
+
+    &:hover {
+      background: darken($col-dark-blue, 5%);
+    }
+  }
+}

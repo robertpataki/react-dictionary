@@ -1,6 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+// GSAP Animation imports
+import { TimelineMax, Expo } from 'gsap';
+import GSAP from 'react-gsap-enhancer';
 import TransitionGroup from 'react-addons-transition-group';
+import connectWithTransitionGroup from 'connect-with-transition-group';
+// END OF GSAP Animation imports
 
 import Translation from 'Translation';
 import TranslationAPI from 'TranslationAPI';
@@ -48,8 +54,10 @@ Dictionary.propTypes = {
   translations: React.PropTypes.array.isRequired,
 }
 
-export default connect(
-  (state) => {
-    return state
-  }
-)(Dictionary);
+export default connectWithTransitionGroup(connect(
+  (state) => state,
+  null,
+  null,
+  // IMPORTANT: must pass this flag to react-redux/connect
+  { withRef: true, }
+)(GSAP()(Dictionary)));

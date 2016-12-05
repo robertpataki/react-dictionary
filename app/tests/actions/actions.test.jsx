@@ -5,6 +5,7 @@ import configureMockStore from 'redux-mock-store';
 import firebase, {firebaseRef} from 'app/firebase';
 import * as actions from 'actions';
 import * as actionTypes from 'actionTypes';
+import * as screenTypes from 'screenTypes';
 
 const createMockStore = configureMockStore([thunk]);
 
@@ -205,6 +206,35 @@ describe('Actions', () => {
         };
         const response = actions.logout();
 
+        expect(response).toEqual(action);
+      });
+    });
+
+    describe('Screen Type', () => {
+      it('should generate setScreenType action for EDIT_TRANSLATION_SCREEN', () => {
+        const action = {
+          screenType: screenTypes.EDIT_TRANSLATION_SCREEN,
+          type: actionTypes.SET_SCREEN_TYPE,
+        };
+
+        const response = actions.setScreenType(action.screenType);
+        expect(response).toEqual(action);
+      });
+    });
+
+    describe('Marking a translation for editing', () => {
+      it('should generate markTranslationForEditing action', () => {
+        const action = {
+          translation: {
+            id: '123abc',
+            expression: 'editálj',
+            meaning: 'edit me',
+            createdAt: 1
+          },
+          type: actionTypes.MARK_TRANSLATION_FOR_EDITING,
+        };
+
+        const response = actions.markTranslationForEditing(action.translation.id);
         expect(response).toEqual(action);
       });
     });
