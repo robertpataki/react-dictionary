@@ -24,8 +24,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      'Brewser': 'BREWSER'
+      'window.jQuery': 'jquery'
     }),
     new webpack.DefinePlugin({
       'process.env': {

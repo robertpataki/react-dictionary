@@ -8,7 +8,7 @@ import * as actions from 'actions';
 import firebase from 'app/firebase/';
 import router from 'app/router/';
 
-const BREWSER = require('Brewser').BREWSER;
+const BREWSER = require('brewser').BREWSER;
 
 // Authentication state based redirects
 firebase.auth().onAuthStateChanged((user) => {

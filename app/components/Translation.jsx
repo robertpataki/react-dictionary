@@ -5,7 +5,7 @@ import { TimelineMax, TweenMax, Expo } from 'gsap';
 import GSAP from 'react-gsap-enhancer';
 import connectWithTransitionGroup from 'connect-with-transition-group';
 import Hammer from 'react-hammerjs';
-const BREWSER = require('Brewser').BREWSER;
+const BREWSER = require('brewser').BREWSER;
 
 import * as actions from 'actions';
 import * as screenTypes from 'screenTypes';
