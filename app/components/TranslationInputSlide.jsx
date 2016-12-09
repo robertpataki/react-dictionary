@@ -14,7 +14,7 @@ export class TranslationInputSlide extends React.Component {
   }
 
   /* Lifecycle methods */
-  componentDidMount() {
+  componentDidUpdate() {
     const lastCharPos = this.input.value.length;
     this.input.focus();
     this.input.setSelectionRange(lastCharPos, lastCharPos);
@@ -26,17 +26,7 @@ export class TranslationInputSlide extends React.Component {
   }
 
   /* User events */
-  handleLeftButtonSelect() {
-    this.props.onLeftButtonSelect();
-  }
-
-  handleRightButtonSelect() {
-    this.props.onRightButtonSelect();
-  }
-
-  handleChange() {
-
-  }
+  handleChange() {}
 
   /* Render */
   render() {
@@ -53,8 +43,8 @@ export class TranslationInputSlide extends React.Component {
         </div>
 
         <div className="slide__buttons">
-          <button className="slide__button" onClick={ this.handleLeftButtonSelect }>{ leftButtonLabel }</button>
-          <button className="slide__button" onClick={ this.handleRightButtonSelect }>{ rightButtonLabel }</button>
+          <button className="slide__button" onClick={ this.props.onLeftButtonSelect }>{ leftButtonLabel }</button>
+          <button className="slide__button" onClick={ this.props.onRightButtonSelect }>{ rightButtonLabel }</button>
         </div>
       </div>
     );
