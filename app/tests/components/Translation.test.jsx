@@ -43,7 +43,7 @@ describe('Translation', () => {
     expect(spy).toHaveBeenCalledWith(action);
   });
 
-  it.only('should dispatch setScreenType', () => {
+  it('should dispatch setScreenType', () => {
     const spy = expect.createSpy();
     const translation = TestUtils.renderIntoDocument(<Translation { ...data } dispatch={ spy }/>);
     const action = actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN);

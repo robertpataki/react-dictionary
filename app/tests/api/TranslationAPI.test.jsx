@@ -32,4 +32,37 @@ describe('TranslationAPI', () => {
       expect(filteredTranslations.length).toBe(2);
     });
   });
+
+  describe('findTranslationById', () => {
+    const translations = [{
+      id: '1-1',
+      expression: 'akármi',
+      meaning: 'anything'
+    }, {
+      id: '2-2',
+      expression: 'macska',
+      meaning: 'cat'
+    }];
+
+    it('should return the translation matching the id', () => {
+      const result = TranslationAPI.findTranslationById(translations, '2-2');
+      expect(result).toEqual(translations[1]);
+    });
+
+    it('should return undefined if there is no match with id', () => {
+      const result = TranslationAPI.findTranslationById(translations, '?');
+      expect(result).toEqual(undefined);
+    });
+
+    it('should return undefined if no id and/or translations were passed in', () => {
+      let result = TranslationAPI.findTranslationById(translations);
+      expect(result).toEqual(undefined);
+
+      result = TranslationAPI.findTranslationById(undefined, '2-2');
+      expect(result).toEqual(undefined);
+
+      result = TranslationAPI.findTranslationById(translations);
+      expect(result).toEqual(undefined);
+    });
+  });
 });

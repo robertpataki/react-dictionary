@@ -9,12 +9,10 @@ import connectWithTransitionGroup from 'connect-with-transition-group';
 // END OF GSAP Animation imports
 
 import Translation from 'Translation';
-import TranslationAPI from 'TranslationAPI';
 
 export class Dictionary extends React.Component {
   render() {
-    const { translations, searchText } = this.props;
-    const filteredTranslations = TranslationAPI.filterTranslations(translations, searchText);
+    const { translations, filteredTranslations } = this.props;
 
     const renderTranslations = () => {
       if (!translations.length) {

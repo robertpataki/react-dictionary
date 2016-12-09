@@ -5,6 +5,7 @@ import AppHeader from 'AppHeader';
 import Dictionary from 'Dictionary';
 import AddTranslation from 'AddTranslation';
 import EditScreen from 'EditScreen';
+import TranslationAPI from 'TranslationAPI';
 
 import * as screenTypes from 'screenTypes';
 
@@ -16,7 +17,11 @@ export class DictionaryApp extends React.Component {
   }
 
   renderScreen() {
-    const { screenType } = this.props;
+    const { screenType, translations, searchText } = this.props;
+    const filteredTranslations = TranslationAPI.filterTranslations(translations, searchText);
+
+    console.log('translations: ', translations);
+    console.log('filtered translations: ', filteredTranslations);
 
     switch (screenType) {
       case screenTypes.EDIT_TRANSLATION_SCREEN:
@@ -26,7 +31,7 @@ export class DictionaryApp extends React.Component {
       case screenTypes.DICTIONARY_SCREEN:
       default:
         return (
-          <Dictionary />
+          <Dictionary filteredTranslations={ filteredTranslations } />
         );
     }
   }
