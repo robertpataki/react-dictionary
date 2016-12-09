@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 module.exports = {
   filterTranslations: function (translations, searchText) {
     if(typeof searchText !== 'string') {
