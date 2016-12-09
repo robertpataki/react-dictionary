@@ -113,7 +113,10 @@ describe('Reducers', () => {
     it('should set screenType to EDIT_TRANSLATION_SCREEN', () => {
       const action = {
         type: actionTypes.SET_SCREEN_TYPE,
-        screenType: screenTypes.EDIT_TRANSLATION_SCREEN,
+        screenType: {
+          type: screenTypes.EDIT_TRANSLATION_SCREEN,
+          options: { editableTranslationId: '123abc' },
+        }
       };
 
       const response = screenTypeReducer(df(''), df(action));

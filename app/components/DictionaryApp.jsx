@@ -19,14 +19,13 @@ export class DictionaryApp extends React.Component {
   renderScreen() {
     const { screenType, translations, searchText } = this.props;
     const filteredTranslations = TranslationAPI.filterTranslations(translations, searchText);
+    const screenOptions = screenType.options;
+    const editableTranslation = TranslationAPI.findTranslationById(translations, screenOptions.editableTranslationId);
 
-    console.log('translations: ', translations);
-    console.log('filtered translations: ', filteredTranslations);
-
-    switch (screenType) {
+    switch (screenType.type) {
       case screenTypes.EDIT_TRANSLATION_SCREEN:
         return (
-          <EditScreen bgColor="#0074A6" />
+          <EditScreen bgColor="#0074A6" translation={ editableTranslation }/>
         );
       case screenTypes.DICTIONARY_SCREEN:
       default:

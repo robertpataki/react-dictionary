@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { TimelineMax, TweenMax, Expo } from 'gsap';
 import GSAP from 'react-gsap-enhancer';
 import connectWithTransitionGroup from 'connect-with-transition-group';
-import Hammer from 'react-hammerjs';
 const BREWSER = require('Brewser').BREWSER;
 
 import * as actions from 'actions';
@@ -183,8 +182,8 @@ export class Translation extends React.Component {
   }
 
   handleEditButtonSelect() {
-    const { dispatch} = this.props;
-    dispatch(actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN));
+    const { dispatch, id} = this.props;
+    dispatch(actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN, id));
   }
 
   handleTouchStart(e) {

@@ -7,6 +7,7 @@ import moment from 'moment';
 import $ from 'jquery';
 
 import * as configureStore from 'configureStore';
+import * as screenTypes from 'screenTypes';
 import { DictionaryApp } from 'DictionaryApp';
 import Dictionary from 'Dictionary';
 
@@ -25,7 +26,7 @@ describe('DictionaryApp', () => {
     const store = configureStore.configure({ auth: authData });
     const provider = TestUtils.renderIntoDocument(
       <Provider store={ store }>
-        <DictionaryApp />
+        <DictionaryApp screenType={{ type: screenTypes.DICTIONARY_SCREEN, options: {} }}/>
       </Provider>
     );
 

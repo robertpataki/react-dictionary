@@ -71,13 +71,6 @@ export const startDeleteTranslation = (id) => {
   };
 };
 
-export const markTranslationForEditing = (id) => {
-  return {
-    type: actionTypes.MARK_TRANSLATION_FOR_EDITING,
-    id
-  }
-}
-
 ///////////
 //////// Translations
 /////
@@ -152,9 +145,18 @@ export const startLogout = () => {
 ///////////
 //////// App Status
 /////
-export const setScreenType = (screenType) => {
-  return {
+export const setScreenType = (screenType, editableTranslationId) => {
+  let response = {
     type: actionTypes.SET_SCREEN_TYPE,
-    screenType,
-  };
+    screenType: {
+      type: screenType,
+      options: {},
+    }
+  }
+
+  if (typeof editableTranslationId !== 'undefined') {
+    response.screenType.options.editableTranslationId = editableTranslationId;
+  }
+
+  return response;
 };

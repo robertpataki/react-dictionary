@@ -36,7 +36,7 @@ describe('Dictionary', () => {
 
     const provider = TestUtils.renderIntoDocument(
       <Provider store={ store }>
-        <ConnectedDictionary />
+        <ConnectedDictionary filteredTranslations={ translations } />
       </Provider>
     );
     const dictionary = TestUtils.scryRenderedComponentsWithType(provider, ConnectedDictionary)[0];
@@ -67,7 +67,7 @@ describe('Dictionary', () => {
 
     const provider = TestUtils.renderIntoDocument(
       <Provider store={ store }>
-        <ConnectedDictionary />
+        <ConnectedDictionary filteredTranslations={ [] } />
       </Provider>
     );
 

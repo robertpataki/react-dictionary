@@ -82,8 +82,7 @@ module.exports = {
       path.resolve(__dirname, './node_modules/bourbon/app/assets/stylesheets/'),
       path.resolve(__dirname, './node_modules/susy/sass/'),
       path.resolve(__dirname, './node_modules/normalize-scss/sass/'),
-      path.resolve(__dirname, './node_modules/brewser/dist/'),
-      path.resolve(__dirname, './node_modules/react-hammerjs/dist'),
+      path.resolve(__dirname, './node_modules/brewser/dist/'),,
     ]
   },
   devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map',

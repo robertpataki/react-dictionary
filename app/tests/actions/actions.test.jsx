@@ -213,28 +213,14 @@ describe('Actions', () => {
     describe('Screen Type', () => {
       it('should generate setScreenType action for EDIT_TRANSLATION_SCREEN', () => {
         const action = {
-          screenType: screenTypes.EDIT_TRANSLATION_SCREEN,
           type: actionTypes.SET_SCREEN_TYPE,
+          screenType: {
+              type: screenTypes.EDIT_TRANSLATION_SCREEN,
+              options: {}
+          }
         };
 
-        const response = actions.setScreenType(action.screenType);
-        expect(response).toEqual(action);
-      });
-    });
-
-    describe('Marking a translation for editing', () => {
-      it('should generate markTranslationForEditing action', () => {
-        const action = {
-          translation: {
-            id: '123abc',
-            expression: 'editálj',
-            meaning: 'edit me',
-            createdAt: 1
-          },
-          type: actionTypes.MARK_TRANSLATION_FOR_EDITING,
-        };
-
-        const response = actions.markTranslationForEditing(action.translation.id);
+        const response = actions.setScreenType(action.screenType.type, action.screenType.options);
         expect(response).toEqual(action);
       });
     });
