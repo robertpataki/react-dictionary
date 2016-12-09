@@ -73,7 +73,6 @@ export class EditScreen extends React.Component {
         return (
           <TranslationInputSlide title="Mit jelent?" inputValue={ translation.meaning } leftButtonLabel="Vissza" rightButtonLabel="Tovább" onLeftButtonSelect={ this.onMeaningBackButtonSelect } onRightButtonSelect={ this.onMeaningDoneButtonSelect } />
         );
-        break;
       case SLIDES.SLIDE_1:
       default:
         return (
