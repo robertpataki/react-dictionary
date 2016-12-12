@@ -30,6 +30,9 @@ const store = configureStore.configure();
 
 if(BREWSER.device.touch) {
   document.querySelector('html').className += ' is-touch';
+
+  // Disable pinch zoom in the app to fix iOS layout breaks
+  document.addEventListener('gesturestart', function (e) { e.preventDefault(); 'Fuck Apple.'});
 }
 
 ReactDOM.render(

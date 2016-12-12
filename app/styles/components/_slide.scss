@@ -26,12 +26,12 @@
 
 .slide__input
 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 400;
 
     width: 100%;
-    max-width: 25rem;
-    padding: 1rem 3rem;
+    max-width: 17.5rem;
+    padding: 1rem;
 
     text-align: center;
 
@@ -108,5 +108,16 @@ html:not(.is-touch)
         {
             background: darken($col-dark-blue, 5%);
         }
+    }
+}
+
+@media screen and (min-width: 40rem)
+{
+    .slide__input
+    {
+        font-size: 2rem;
+
+        max-width: 25rem;
+        padding: 1rem 3rem;
     }
 }

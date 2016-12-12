@@ -1,17 +1,25 @@
-.app-header {
-  width: 100%;
-  padding: 1rem;
-  background: $col-dark-blue;
-  color: $col-white;
-  @include clearfix;
+.app-header
+{
+    width: 100%;
+    padding: 1rem;
+
+    user-select: none;
+
+    color: $col-white;
+    background: $col-dark-blue;
+
+    @include clearfix;
 }
 
-.app-header__left {
-  padding-top: 0.1875rem;
-  margin-right: 3.625rem;
+.app-header__left
+{
+    margin-right: 3.625rem;
+    padding-top: .1875rem;
 }
 
-.app-header__right {
-  width: 2.625rem;
-  float: right;
+.app-header__right
+{
+    float: right;
+
+    width: 2.625rem;
 }

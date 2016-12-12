@@ -19,7 +19,7 @@ export const COPY_DOC = {
           rightButton: 'Tovább',
         },
         expression: {
-          title: 'Mi a szó - kifejezés?',
+          title: 'Mi a szó / kifejezés?',
           leftButton: 'Mégse',
           rightButton: 'Tovább',
         }
