@@ -74,3 +74,11 @@
 
     margin-top: .5rem;
 }
+
+@media screen and (max-height: 25rem)
+{
+    .login__logo
+    {
+        margin-bottom: 2rem;
+    }
+}
