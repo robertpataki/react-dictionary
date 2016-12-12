@@ -161,17 +161,13 @@ export const startLogout = () => {
 ///////////
 //////// App Status
 /////
-export const setScreenType = (screenType, editableTranslationId) => {
+export const setScreenType = (screenType, options) => {
   let response = {
     type: actionTypes.SET_SCREEN_TYPE,
     screenType: {
       type: screenType,
-      options: {},
+      options,
     }
-  }
-
-  if (typeof editableTranslationId !== 'undefined') {
-    response.screenType.options.editableTranslationId = editableTranslationId;
   }
 
   return response;

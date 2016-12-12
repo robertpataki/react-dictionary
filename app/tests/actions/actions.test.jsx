@@ -185,6 +185,29 @@ describe('Actions', () => {
           }).catch(done);
         });
       });
+
+      it('should edit the selected translation and dispatch UPDATE_TRANSLATION action', (done) => {
+        const store = createMockStore({ auth: { uid } });
+        const updatedExpression = 'Updated expression';
+        const updatedMeaning = 'Updated meaning';
+        const action = actions.startEditTranslation(testTranslationRef.key, updatedExpression, updatedMeaning);
+
+        store.dispatch(action).then(() => {
+          const mockActions = store.getActions();
+          const firstAction = mockActions[0];
+
+          expect(firstAction).toInclude({
+            type: 'UPDATE_TRANSLATION',
+            id: testTranslationRef.key,
+            updates: {
+              expression: updatedExpression,
+              meaning: updatedMeaning
+            },
+          });
+
+          done();
+        }, done);
+      });
     });
 
     describe('Authentication', () => {
