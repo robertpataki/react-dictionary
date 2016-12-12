@@ -27,7 +27,8 @@ export class DictionaryApp extends React.Component {
 
   renderScreen() {
     const { screenType, translations, searchText } = this.props;
-    const filteredTranslations = TranslationAPI.filterTranslations(translations, searchText);
+    const filteredTranslations = TranslationAPI.filterTranslations(translations, searchText).sort((a, b) => a.createdAt < b.createdAt);
+
     const screenOptions = screenType.options;
     const editableTranslation = TranslationAPI.findTranslationById(translations, screenOptions);
 
