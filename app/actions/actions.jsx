@@ -71,6 +71,22 @@ export const startDeleteTranslation = (id) => {
   };
 };
 
+// Edit translation
+export const startEditTranslation = (id, expression, meaning) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    const translationRef = firebaseRef.child(`users/${uid}/translations/${id}`);
+    const updates = {
+      expression,
+      meaning,
+    };
+
+    return translationRef.update(updates).then(() => {
+      dispatch(updateTranslation(id, updates));
+    });
+  };
+};
+
 ///////////
 //////// Translations
 /////

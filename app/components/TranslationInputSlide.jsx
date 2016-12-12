@@ -6,41 +6,41 @@ export class TranslationInputSlide extends React.Component {
     super(props);
 
     // Initial state
-    this.state = {};
+    this.state = {
+      inputValue: props.inputValue
+    };
 
-    this.handleLeftButtonSelect = this.handleLeftButtonSelect.bind(this);
-    this.handleRightButtonSelect = this.handleRightButtonSelect.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.init = this.init.bind(this);
+
+    this.onChange = this.onChange.bind(this);
   }
 
   /* Lifecycle methods */
+  componentDidUpdate() {
+    this.init();
+  }
   componentDidMount() {
+    this.init();
+  }
+
+  onChange(e) {
+    const updatedInputValue = this.input.value;
+    this.setState({
+      updatedInputValue,
+    });
+
+    this.props.onChange(updatedInputValue);
+  }
+
+  init() {
     const lastCharPos = this.input.value.length;
     this.input.focus();
     this.input.setSelectionRange(lastCharPos, lastCharPos);
   }
 
-  componentWillUnmount() {
-    const { inputValue } = this.props;
-    console.log('[TranslationInputSlide] - componentWillUnmount() - inputValue: ', inputValue);
-  }
-
-  /* User events */
-  handleLeftButtonSelect() {
-    this.props.onLeftButtonSelect();
-  }
-
-  handleRightButtonSelect() {
-    this.props.onRightButtonSelect();
-  }
-
-  handleChange() {
-
-  }
-
   /* Render */
   render() {
-    const { title, inputValue, leftButtonLabel, rightButtonLabel } = this.props;
+    const { title, leftButtonLabel, rightButtonLabel, inputValue } = this.props;
 
     return (
       <div className="slide">
@@ -49,12 +49,12 @@ export class TranslationInputSlide extends React.Component {
         <div className="slide__contents">
           <input type="text" className="slide__input" ref={(ref) => {
               this.input = ref;
-            }} defaultValue={ inputValue } value={ inputValue } onChange={ this.handleChange } />
+            }} value={ inputValue } onChange={ this.onChange } />
         </div>
 
         <div className="slide__buttons">
-          <button className="slide__button" onClick={ this.handleLeftButtonSelect }>{ leftButtonLabel }</button>
-          <button className="slide__button" onClick={ this.handleRightButtonSelect }>{ rightButtonLabel }</button>
+          <button className="slide__button" onClick={ this.props.onLeftButtonSelect }>{ leftButtonLabel }</button>
+          <button className="slide__button" onClick={ this.props.onRightButtonSelect }>{ rightButtonLabel }</button>
         </div>
       </div>
     );
