@@ -36,9 +36,12 @@ export class Translation extends React.Component {
     // Animations
     this.slideBackAnim = this.slideBackAnim.bind(this);
     this.hoverAnim = this.hoverAnim.bind(this);
+    this.createAnim = this.createAnim.bind(this);
 
     // Initial state
-    this.state = {};
+    this.state = {
+      fading: false,
+    };
     this.ignoreUser = false;
   }
 
@@ -49,8 +52,15 @@ export class Translation extends React.Component {
     const callback = utils.options.callback;
     const contentsHeight = contents.offsetHeight;
 
+    this.setState({
+      fading: true,
+    });
+
     var tween = new TimelineMax({
       onComplete: () => {
+        this.setState({
+          fading: false,
+        });
         callback.call();
       }
     });
@@ -279,7 +289,7 @@ export class Translation extends React.Component {
     }
 
     const buttonWidth = this.editButton.offsetWidth;
-    const buttonActivationOffsetX = BREWSER.windowWidth * 0.5;
+    const buttonActivationOffsetX = BREWSER.windowWidth * 0.42;
 
     if (offsetX > 0) {
       // EDIT button
@@ -340,6 +350,9 @@ export class Translation extends React.Component {
 
   render() {
     const { id, expression, meaning, createdAt } = this.props;
+    const { fading } = this.state;
+
+    const visClassName = fading ? 'is-hidden' : '';
 
     return (
       <div className="translation">
@@ -350,7 +363,7 @@ export class Translation extends React.Component {
           <span className="translation__meaning">{ meaning }</span>
         </div>
 
-        <div className="translation__wrapper translation__wrapper--buttons" ref={(ref) => {
+        <div className={ `translation__wrapper translation__wrapper--buttons ${visClassName}` } ref={(ref) => {
             this.buttonWrapper = ref; }}>
           <button className="translation__button translation__button--edit" ref={(ref) => {
             this.editButton = ref;
