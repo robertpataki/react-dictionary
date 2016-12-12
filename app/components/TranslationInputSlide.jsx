@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+const BREWSER = require('brewser').BREWSER;
+
 export class TranslationInputSlide extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,17 @@ export class TranslationInputSlide extends React.Component {
   }
   componentDidMount() {
     this.init();
+
+    if (BREWSER.device.touch) {
+      this.updateDimensions();
+      window.addEventListener('resize', this.updateDimensions.bind(this));
+    }
+  }
+
+  componentWillUnmount() {
+    if (BREWSER.device.touch) {
+      window.removeEventListener('resize', this.updateDimensions.bind(this));
+    }
   }
 
   onChange(e) {
@@ -50,6 +63,12 @@ export class TranslationInputSlide extends React.Component {
     const lastCharPos = this.input.value.length;
     this.input.focus();
     this.input.setSelectionRange(lastCharPos, lastCharPos);
+  }
+
+  updateDimensions(e) {
+    //TODO - Find a decent solution for the mobile keyboard resize issue,
+    // which causes the content to be outside the visible area
+    window.scroll(0, 10000);
   }
 
   /* Render */
