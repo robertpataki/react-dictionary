@@ -13,6 +13,7 @@ export class TranslationInputSlide extends React.Component {
     // Function binding
     this.init = this.init.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
   }
 
   /* Lifecycle methods */
@@ -32,6 +33,19 @@ export class TranslationInputSlide extends React.Component {
     this.props.onChange(updatedInputValue);
   }
 
+  onKeyUp(e) {
+    switch (e.key) {
+      case 'Enter':
+        if (this.props.inputValue.length) {
+          this.props.onRightButtonSelect();
+        }
+        break;
+      case 'Escape':
+        this.props.onLeftButtonSelect();
+        break;
+    }
+  }
+
   init() {
     const lastCharPos = this.input.value.length;
     this.input.focus();
@@ -46,13 +60,13 @@ export class TranslationInputSlide extends React.Component {
     const rightButtonClassName = rightButtonEnabled ? 'slide__button' : 'slide__button is-disabled';
 
     return (
-      <div className="slide">
+      <div className="slide" tabIndex="0" onKeyUp={ this.onKeyUp }>
         <h3 className="slide__title">{ title }</h3>
 
         <div className="slide__contents">
           <input type="text" className="slide__input" ref={(ref) => {
               this.input = ref;
-            }} value={ inputValue } onChange={ this.onChange } />
+            }} value={ inputValue } maxLength="32" onChange={ this.onChange } />
         </div>
 
         <div className="slide__buttons">

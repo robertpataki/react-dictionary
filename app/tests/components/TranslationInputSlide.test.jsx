@@ -79,9 +79,6 @@ describe('TranslationInputSlide', () => {
       const input = $wrapper.find('input');
       const rightButton = $wrapper.find("button:contains('" + buttonLabel + "')")[0];
 
-      console.log('Input value: ', input.value);
-      console.log('Button: ', rightButton);
-
       TestUtils.Simulate.click(rightButton);
       expect(spy).toNotHaveBeenCalled();
     });
@@ -109,6 +106,35 @@ describe('TranslationInputSlide', () => {
       inputField.value += 'o';
       TestUtils.Simulate.change(inputField);
       expect(spy).toHaveBeenCalledWith('Hello');
+    });
+  });
+
+  describe('Keyboard controls', () => {
+    it('should handle the ENTER key to select the right button with valid input', () => {
+      const spy = expect.createSpy();
+      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide inputValue="Foo" onRightButtonSelect={ spy } />);
+      const wrapper = $(ReactDOM.findDOMNode(translationInputSlide))[0];
+
+      TestUtils.Simulate.keyUp(wrapper, {key: 'Enter'});
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should ignore the ENTER key with empty input', () => {
+      const spy = expect.createSpy();
+      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide inputValue="" onRightButtonSelect={ spy } />);
+      const wrapper = $(ReactDOM.findDOMNode(translationInputSlide))[0];
+
+      TestUtils.Simulate.keyUp(wrapper, {key: 'Enter'});
+      expect(spy).toNotHaveBeenCalled();
+    });
+
+    it('should handle the ESCAPE key to select the left button', () => {
+      const spy = expect.createSpy();
+      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide onLeftButtonSelect={ spy } />);
+      const wrapper = $(ReactDOM.findDOMNode(translationInputSlide))[0];
+
+      TestUtils.Simulate.keyUp(wrapper, {key: 'Escape'});
+      expect(spy).toHaveBeenCalled();
     });
   });
 });
