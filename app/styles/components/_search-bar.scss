@@ -1,74 +1,119 @@
-.search-bar {
-  position: relative;
+.search-bar
+{
+    position: relative;
 }
 
-.search-bar--focus {
-  .search-bar__icon--magnify {
-    opacity: 1;
-  }
-}
-
-.search-bar--has-text {
-  .search-bar__icon--close {
-    cursor: pointer;
-    pointer-events: auto;
-    opacity: 1;
-    @include transform(scale(1));
-  }
-}
-
-.search-bar__input {
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: $header-padding $header-padding $header-padding 2.2rem;
-  border-radius: 2.25rem;
-  font-size: 0.875rem;
-  color: $col-white;
-  background-color: rgba(255, 255, 255, 0.1);
-  cursor: auto;
-  @include link-hover(0.6s);
-
-  @include placeholder {
-    color: $col-white;
-    opacity: 0.3;
-    @include link-hover(0.6s);
-  }
-
-  &:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-
-    @include placeholder {
-      opacity: 1;
+.search-bar--focus
+{
+    .search-bar__icon--magnify
+    {
+        opacity: 1;
     }
-  }
 }
 
-.search-bar__icon {
-  position: absolute;
-  top: $header-padding * 1.2;
-  width: 0.75rem;
-  height: 0.75rem;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
+.search-bar--has-text
+{
+    .search-bar__icon--close
+    {
+        cursor: pointer;
+        pointer-events: auto;
+
+        opacity: 1;
+
+        @include transform(scale(1));
+
+        &:after
+        {
+            position: absolute;
+            top: -125%;
+            left: -125%;
+
+            display: block;
+
+            width: 350%;
+            height: 350%;
+
+            content: '';
+            cursor: pointer;
+            pointer-events: auto;
+
+            border-radius: 100%;
+            background: rgba(255, 0, 0, .3);
+        }
+    }
 }
 
-.search-bar__icon--magnify {
-  left: $header-padding * 1.2;
-  opacity: 0.5;
-  @include link-hover(0.6s);
-  background-image: url("/images/magnify.svg");
+.search-bar__input
+{
+    font-size: .875rem;
+
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: $header-padding $header-padding $header-padding 2.2rem;
+
+    cursor: auto;
+
+    color: $col-white;
+    border-radius: 2.25rem;
+    background-color: rgba(255, 255, 255, .1);
+
+    @include link-hover(.6s);
+    @include placeholder
+    {
+        opacity: .3;
+        color: $col-white;
+
+        @include link-hover(.6s);
+    }
+
+    &:focus
+    {
+        background-color: rgba(255, 255, 255, .15);
+
+        @include placeholder
+        {
+            opacity: 1;
+        }
+    }
 }
 
-.search-bar__icon--close {
-  right: $header-padding * 1.2;
-  width: $header-padding;
-  height: $header-padding;
-  background-image: url("/images/cross.svg");
-  cursor: default;
-  pointer-events: none;
-  opacity: 0;
-  @include transform(scale(0));
-  @include link-hover(0.18s);
+.search-bar__icon
+{
+    position: absolute;
+    top: $header-padding * 1.2;
+
+    width: .75rem;
+    height: .75rem;
+
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+.search-bar__icon--magnify
+{
+    left: $header-padding * 1.2;
+
+    opacity: .5;
+    background-image: url('/images/magnify.svg');
+
+    @include link-hover(.6s);
+}
+
+.search-bar__icon--close
+{
+    right: $header-padding * 1.2;
+
+    width: $header-padding;
+    height: $header-padding;
+
+    cursor: default;
+    pointer-events: none;
+
+    opacity: 0;
+    background-image: url('/images/cross.svg');
+
+    @include transform(scale(0));
+    @include link-hover(.18s);
 }

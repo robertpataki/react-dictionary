@@ -46,4 +46,23 @@ describe('SearchBar', () => {
 
     expect(spy).toHaveBeenCalledWith(action);
   });
+
+  it('should clear searchText when hitting ESC', () => {
+    const action = {
+      type: actionTypes.SET_SEARCH_TEXT,
+      searchText: '',
+    };
+    const spy = expect.createSpy();
+
+    const searchBar = TestUtils.renderIntoDocument(<SearchBar dispatch={ spy } />);
+    const $el = $(ReactDOM.findDOMNode(searchBar));
+    const input = $el.find('input[name="searchText"]')[0];
+
+    input.value = 'Searching for Foo Bar';
+    TestUtils.Simulate.change(input);
+
+    TestUtils.Simulate.keyUp($el[0], {key: 'Escape'});
+
+    expect(spy).toHaveBeenCalledWith(action);
+  });
 });

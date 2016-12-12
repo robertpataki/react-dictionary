@@ -13,10 +13,12 @@ export class SearchBar extends React.Component {
       copy: COPY_DOC.en.dictionary
     };
 
+    this.resetSearchText = this.resetSearchText.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onCloseClick = this.onCloseClick.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
   }
 
   onFocus(e) {
@@ -31,6 +33,12 @@ export class SearchBar extends React.Component {
     });
   }
 
+  onKeyUp(e) {
+    if (e.key === 'Escape') {
+      this.resetSearchText();
+    }
+  }
+
   onSearchTextChange() {
     const { dispatch } = this.props;
     const searchText = this.refs.searchText.value;
@@ -39,6 +47,10 @@ export class SearchBar extends React.Component {
   }
 
   onCloseClick() {
+    this.resetSearchText();
+  }
+
+  resetSearchText() {
     const { dispatch } = this.props;
     dispatch(actions.setSearchText(''));
   }
@@ -54,7 +66,7 @@ export class SearchBar extends React.Component {
     }
 
     return (
-      <div className={ className }>
+      <div className={ className } tabIndex="0" onKeyUp={ this.onKeyUp }>
         <i className="search-bar__icon search-bar__icon--magnify"></i>
         <input className="search-bar__input" type="text" name="searchText" ref="searchText" placeholder={ copy.search } value={ searchText } onChange={ this.onSearchTextChange } onFocus={ this.onFocus } onBlur={ this.onBlur } />
         <i className="search-bar__icon search-bar__icon--close" onClick={ this.onCloseClick } ></i>
