@@ -10,8 +10,8 @@ export class TranslationInputSlide extends React.Component {
       inputValue: props.inputValue
     };
 
+    // Function binding
     this.init = this.init.bind(this);
-
     this.onChange = this.onChange.bind(this);
   }
 
