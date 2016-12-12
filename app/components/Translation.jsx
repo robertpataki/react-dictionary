@@ -37,6 +37,7 @@ export class Translation extends React.Component {
     this.slideBackAnim = this.slideBackAnim.bind(this);
     this.hoverAnim = this.hoverAnim.bind(this);
     this.createAnim = this.createAnim.bind(this);
+    this.deleteAnim = this.deleteAnim.bind(this);
 
     // Initial state
     this.state = {
@@ -84,8 +85,15 @@ export class Translation extends React.Component {
     const target = utils.target;
     const callback = utils.options.callback;
 
+    this.setState({
+      fading: true,
+    });
+
     var tween = new TimelineMax({
       onComplete: () => {
+        this.setState({
+          fading: false,
+        });
         callback.call();
       }
     });
