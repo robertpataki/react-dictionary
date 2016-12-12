@@ -201,7 +201,7 @@ export class Translation extends React.Component {
 
   handleTouchMove(e) {
     if (!this.ignoreUser && typeof this.clientX !== 'undefined') {
-      const maxOffsetX = 150;
+      const maxOffsetX = BREWSER.windowWidth * 0.75;
 
       const clientX = e.touches[0].clientX;
       let offsetX = clientX - this.clientX;
@@ -279,7 +279,7 @@ export class Translation extends React.Component {
     }
 
     const buttonWidth = this.editButton.offsetWidth;
-    const buttonActivationOffsetX = 75;
+    const buttonActivationOffsetX = BREWSER.windowWidth * 0.5;
 
     if (offsetX > 0) {
       // EDIT button
