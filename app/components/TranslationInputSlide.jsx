@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 export class TranslationInputSlide extends React.Component {
   constructor(props) {
@@ -96,4 +95,4 @@ TranslationInputSlide.defaultProps = {
   onRightButtonSelect: () => {},
 }
 
-export default connect((state) => state)(TranslationInputSlide);
+export default TranslationInputSlide;
