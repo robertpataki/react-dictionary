@@ -24,7 +24,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-      'window.jQuery': 'jquery'
+      'window.jQuery': 'jquery',
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -82,7 +82,8 @@ module.exports = {
       path.resolve(__dirname, './node_modules/bourbon/app/assets/stylesheets/'),
       path.resolve(__dirname, './node_modules/susy/sass/'),
       path.resolve(__dirname, './node_modules/normalize-scss/sass/'),
-      path.resolve(__dirname, './node_modules/brewser/dist/'),,
+      path.resolve(__dirname, './node_modules/brewser/dist/'),
+      path.resolve(__dirname, './node_modules/react-fastclick/lib/'),
     ]
   },
   devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map',

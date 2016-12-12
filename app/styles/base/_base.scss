@@ -72,6 +72,7 @@ input
     -webkit-border-radius: 0;
 
     -webkit-appearance: none;
+    @include no-tap-highlight();
 }
 input[type='text']
 {
@@ -85,6 +86,7 @@ button
 {
     border: none;
 
+    @include no-tap-highlight();
     @include appearance(none);
 
     &,
