@@ -59,10 +59,13 @@ export const authReducer = (state = {}, action) => {
   }
 };
 
-export const screenTypeReducer = (state = screenTypes.DICTIONARY_SCREEN, action) => {
+export const screenTypeReducer = (state = { type: screenTypes.DICTIONARY_SCREEN, options: {} }, action) => {
   switch (action.type) {
     case actionTypes.SET_SCREEN_TYPE:
-      return action.screenType;
+      return {
+        type: action.screenType.type,
+        options: action.screenType.options,
+      }
     default:
       return state;
   }

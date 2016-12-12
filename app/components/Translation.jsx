@@ -182,8 +182,8 @@ export class Translation extends React.Component {
   }
 
   handleEditButtonSelect() {
-    const { dispatch} = this.props;
-    dispatch(actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN));
+    const { dispatch, id} = this.props;
+    dispatch(actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN, id));
   }
 
   handleTouchStart(e) {

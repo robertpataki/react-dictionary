@@ -19,5 +19,13 @@ module.exports = {
     });
 
     return filteredTranslations;
+  },
+
+  findTranslationById: function(translations, id) {
+    if(typeof translations === 'undefined' || typeof id === 'undefined') {
+      return;
+    }
+
+    return translations.find((translation) => translation.id === id);
   }
 };

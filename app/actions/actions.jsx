@@ -71,12 +71,21 @@ export const startDeleteTranslation = (id) => {
   };
 };
 
-export const markTranslationForEditing = (id) => {
-  return {
-    type: actionTypes.MARK_TRANSLATION_FOR_EDITING,
-    id
-  }
-}
+// Edit translation
+export const startEditTranslation = (id, expression, meaning) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    const translationRef = firebaseRef.child(`users/${uid}/translations/${id}`);
+    const updates = {
+      expression,
+      meaning,
+    };
+
+    return translationRef.update(updates).then(() => {
+      dispatch(updateTranslation(id, updates));
+    });
+  };
+};
 
 ///////////
 //////// Translations
@@ -152,9 +161,14 @@ export const startLogout = () => {
 ///////////
 //////// App Status
 /////
-export const setScreenType = (screenType) => {
-  return {
+export const setScreenType = (screenType, options) => {
+  let response = {
     type: actionTypes.SET_SCREEN_TYPE,
-    screenType,
-  };
+    screenType: {
+      type: screenType,
+      options,
+    }
+  }
+
+  return response;
 };

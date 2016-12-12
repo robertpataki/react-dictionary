@@ -43,10 +43,10 @@ describe('Translation', () => {
     expect(spy).toHaveBeenCalledWith(action);
   });
 
-  it.only('should dispatch setScreenType', () => {
+  it('should dispatch setScreenType with editableTranslationId set for EDIT_TRANSLATION_SCREEN type screen', () => {
     const spy = expect.createSpy();
     const translation = TestUtils.renderIntoDocument(<Translation { ...data } dispatch={ spy }/>);
-    const action = actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN);
+    const action = actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN, data.id);
     const $wrapper = $(ReactDOM.findDOMNode(translation));
     const editButton = $($wrapper.find('.translation__button--edit'))[0];
 

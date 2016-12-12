@@ -185,6 +185,29 @@ describe('Actions', () => {
           }).catch(done);
         });
       });
+
+      it('should edit the selected translation and dispatch UPDATE_TRANSLATION action', (done) => {
+        const store = createMockStore({ auth: { uid } });
+        const updatedExpression = 'Updated expression';
+        const updatedMeaning = 'Updated meaning';
+        const action = actions.startEditTranslation(testTranslationRef.key, updatedExpression, updatedMeaning);
+
+        store.dispatch(action).then(() => {
+          const mockActions = store.getActions();
+          const firstAction = mockActions[0];
+
+          expect(firstAction).toInclude({
+            type: 'UPDATE_TRANSLATION',
+            id: testTranslationRef.key,
+            updates: {
+              expression: updatedExpression,
+              meaning: updatedMeaning
+            },
+          });
+
+          done();
+        }, done);
+      });
     });
 
     describe('Authentication', () => {
@@ -213,28 +236,14 @@ describe('Actions', () => {
     describe('Screen Type', () => {
       it('should generate setScreenType action for EDIT_TRANSLATION_SCREEN', () => {
         const action = {
-          screenType: screenTypes.EDIT_TRANSLATION_SCREEN,
           type: actionTypes.SET_SCREEN_TYPE,
+          screenType: {
+              type: screenTypes.EDIT_TRANSLATION_SCREEN,
+              options: {}
+          }
         };
 
-        const response = actions.setScreenType(action.screenType);
-        expect(response).toEqual(action);
-      });
-    });
-
-    describe('Marking a translation for editing', () => {
-      it('should generate markTranslationForEditing action', () => {
-        const action = {
-          translation: {
-            id: '123abc',
-            expression: 'editálj',
-            meaning: 'edit me',
-            createdAt: 1
-          },
-          type: actionTypes.MARK_TRANSLATION_FOR_EDITING,
-        };
-
-        const response = actions.markTranslationForEditing(action.translation.id);
+        const response = actions.setScreenType(action.screenType.type, action.screenType.options);
         expect(response).toEqual(action);
       });
     });
