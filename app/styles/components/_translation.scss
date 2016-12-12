@@ -1,164 +1,222 @@
-.translations {
-  position: relative;
-  border-top: 1px solid $col-light-grey;
-  border-bottom: 1px solid $col-light-grey;
-  margin-bottom: 10rem;
+.translations
+{
+    position: relative;
+
+    margin-bottom: 10rem;
+
+    border-top: 1px solid $col-light-grey;
+    border-bottom: 1px solid $col-light-grey;
 }
 
-.translations__message {
-  text-align: center;
-  padding: 0 $translation-padding;
+.translations__message
+{
+    padding: 0 $translation-padding;
+
+    text-align: center;
 }
-.translations__emoji {
-  font-weight: 700;
+.translations__emoji
+{
+    font-weight: 700;
 }
 
-.translation {
-  position: relative;
-  @include flex-vertical-center;
-  cursor: default;
-  @include no-user-select;
-  @include clearfix;
-  overflow-x: hidden;
+.translation
+{
+    position: relative;
 
-  &:not(:last-child) {
-    border-bottom: 1px solid lighten($col-mid-grey, 25%);
-  }
+    overflow-x: hidden;
 
-  &:last-child:after {
-    height: 100%;
-  }
+    cursor: default;
+
+    @include flex-vertical-center;
+    @include no-user-select;
+    @include clearfix;
+
+    &:not(:last-child)
+    {
+        border-bottom: 1px solid lighten($col-mid-grey, 25%);
+    }
+
+    &:last-child:after
+    {
+        height: 100%;
+    }
 }
 
 /* Wrappers */
-.translation__wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  @include flex-vertical-center;
-  @include clearfix;
-}
- .translation__wrapper--buttons {
-   display: flex;
-   align-items: center;
-   z-index: 0;
-   @include link-hover();
- }
- .translation__wrapper--contents {
-   position: relative;
-   z-index: 1;
-   background: $col-white;
-   @include transform(translateZ(0));
- }
- .translation__wrapper--triggers {
-   z-index: 2;
- }
+.translation__wrapper
+{
+    position: absolute;
+    top: 0;
+    left: 0;
 
- /* Triggers */
- .translation__trigger {
-   content: "";
-   display: inline-block;
-   position: absolute;
-   top: 0;
-   width: 10%;
-   height: 100%;
-   cursor: pointer;
- }
- .translation__trigger--right {
-   right: 0;
- }
+    width: 100%;
+    height: 100%;
+
+    @include flex-vertical-center;
+    @include clearfix;
+}
+.translation__wrapper--buttons
+{
+    z-index: 0;
+
+    display: flex;
+
+    align-items: center;
+    @include link-hover();
+}
+.translation__wrapper--contents
+{
+    position: relative;
+    z-index: 1;
+
+    background: $col-white;
+
+    @include transform(translateZ(0));
+}
+.translation__wrapper--triggers
+{
+    z-index: 2;
+}
+
+/* Triggers */
+.translation__trigger
+{
+    position: absolute;
+    top: 0;
+
+    display: inline-block;
+
+    width: 10%;
+    height: 100%;
+
+    content: '';
+    cursor: pointer;
+}
+.translation__trigger--right
+{
+    right: 0;
+}
 
 /* Labels */
- .translation__expression,
- .translation__meaning {
-   position: relative;
-   display: inline-block;
-   width: 50%;
-   padding: 2rem;
- }
- .translation__expression {
-   border-right: 1px solid $col-aubergine;
-   padding-left: $translation-padding;
- }
- .translation__meaning {
-   padding-right: $translation-padding;
- }
+.translation__expression,
+.translation__meaning
+{
+    position: relative;
+
+    display: inline-block;
+
+    width: 50%;
+    padding: 2rem;
+}
+.translation__expression
+{
+    padding-left: $translation-padding;
+
+    border-right: 1px solid $col-aubergine;
+}
+.translation__meaning
+{
+    padding-right: $translation-padding;
+}
 
 /* Buttons */
-%icon {
-  content: "";
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  width: 1rem;
-  height: 1rem;
+%icon
+{
+    position: relative;
+
+    display: inline-block;
+
+    width: 1rem;
+    height: 1rem;
+
+    content: '';
+    vertical-align: middle;
+
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
 }
 
-.translation__button {
+.translation__button
+{
     position: absolute;
+
     min-width: 4rem;
     height: 100%;
-    background: none;
     padding: 0;
+
+    background: none;
 }
 
-.translation__button--delete {
-   right: 0;
+.translation__button--delete
+{
+    right: 0;
 
-   &:after {
-     @extend %icon;
-     width: 0.8rem;
-     height: 0.8rem;
-     background-image: url("/images/cross.svg");
-   }
+    &:after
+    {
+        width: .8rem;
+        height: .8rem;
+
+        background-image: url('/images/cross.svg');
+
+        @extend %icon;
+    }
 }
-.translation__button--edit {
-   left: 0;
+.translation__button--edit
+{
+    left: 0;
 
-   &:after {
-     @extend %icon;
-     background-image: url("/images/edit.svg");
-   }
+    &:after
+    {
+        background-image: url('/images/edit.svg');
+
+        @extend %icon;
+    }
 }
 
 
 // Desktop styles
-html.is-touch {
-  .translation__wrapper--buttons {
-    background: $col-mid-grey;
+html.is-touch
+{
+    .translation__wrapper--buttons
+    {
+        background: $col-mid-grey;
 
-    &.edit {
-      background: $col-mid-blue;
+        &.edit
+        {
+            background: $col-mid-blue;
+        }
+        &.delete
+        {
+            background: $col-pink;
+        }
     }
-    &.delete {
-      background: $col-pink;
-    }
-  }
 }
 
-html:not(.is-touch) {
-  .translation__button {
-    @include link-hover(0.3s);
-  }
-
-  .translation__button--edit {
-    background: $col-mid-blue;
-
-    &:hover {
-      background: darken($col-mid-blue, 10%);
+html:not(.is-touch)
+{
+    .translation__button
+    {
+        @include link-hover(.3s);
     }
-  }
 
-  .translation__button--delete {
-    background: $col-pink;
+    .translation__button--edit
+    {
+        background: $col-mid-blue;
 
-    &:hover {
-      background: darken($col-pink, 10%);
+        &:hover
+        {
+            background: darken($col-mid-blue, 10%);
+        }
     }
-  }
+
+    .translation__button--delete
+    {
+        background: $col-pink;
+
+        &:hover
+        {
+            background: darken($col-pink, 10%);
+        }
+    }
 }

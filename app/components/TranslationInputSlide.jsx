@@ -42,6 +42,9 @@ export class TranslationInputSlide extends React.Component {
   render() {
     const { title, leftButtonLabel, rightButtonLabel, inputValue } = this.props;
 
+    const rightButtonEnabled = Boolean(inputValue.length);
+    const rightButtonClassName = rightButtonEnabled ? 'slide__button' : 'slide__button is-disabled';
+
     return (
       <div className="slide">
         <h3 className="slide__title">{ title }</h3>
@@ -54,7 +57,7 @@ export class TranslationInputSlide extends React.Component {
 
         <div className="slide__buttons">
           <button className="slide__button" onClick={ this.props.onLeftButtonSelect }>{ leftButtonLabel }</button>
-          <button className="slide__button" onClick={ this.props.onRightButtonSelect }>{ rightButtonLabel }</button>
+          <button className={ rightButtonClassName } onClick={ this.props.onRightButtonSelect } disabled={ !rightButtonEnabled }>{ rightButtonLabel }</button>
         </div>
       </div>
     );

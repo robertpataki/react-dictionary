@@ -20,7 +20,7 @@ export class DictionaryApp extends React.Component {
     const { screenType, translations, searchText } = this.props;
     const filteredTranslations = TranslationAPI.filterTranslations(translations, searchText);
     const screenOptions = screenType.options;
-    const editableTranslation = TranslationAPI.findTranslationById(translations, screenOptions.editableTranslationId);
+    const editableTranslation = TranslationAPI.findTranslationById(translations, screenOptions);
 
     switch (screenType.type) {
       case screenTypes.EDIT_TRANSLATION_SCREEN:

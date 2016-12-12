@@ -70,6 +70,21 @@ describe('TranslationInputSlide', () => {
       TestUtils.Simulate.click(rightButton);
       expect(spy).toHaveBeenCalled();
     });
+
+    it('should not dispatch event when selected but the input field is empty', () => {
+      const spy = expect.createSpy();
+      const buttonLabel = 'Right Button Label';
+      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide rightButtonLabel={ buttonLabel } onRightButtonSelect={ spy } inputValue="" />);
+      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
+      const input = $wrapper.find('input');
+      const rightButton = $wrapper.find("button:contains('" + buttonLabel + "')")[0];
+
+      console.log('Input value: ', input.value);
+      console.log('Button: ', rightButton);
+
+      TestUtils.Simulate.click(rightButton);
+      expect(spy).toNotHaveBeenCalled();
+    });
   });
 
   describe('input field', () => {
