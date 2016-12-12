@@ -2,10 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from 'actions';
+import { COPY_DOC } from 'copyDoc';
 
 export class Login extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      copy: COPY_DOC.en.auth,
+    };
 
     this.onLogin = this.onLogin.bind(this);
   }
@@ -16,13 +21,15 @@ export class Login extends React.Component {
   }
 
   render() {
+    const { copy } = this.state;
+
     return (
       <div className="login">
         <div className="login__contents">
           <img src="images/logo.svg" className="login__logo" />
-          <button className="login__button" onClick={ this.onLogin }><i>login</i></button>
+          <button className="login__button" onClick={ this.onLogin }><i>{ copy.login }</i></button>
           <div className="login__copy">
-            <p>Please log in using<br />your Facebook</p>
+            <p>{ copy.welcome }</p>
           </div>
         </div>
       </div>

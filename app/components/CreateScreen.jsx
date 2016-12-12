@@ -7,8 +7,6 @@ import * as screenTypes from 'screenTypes';
 import TranslationInputSlide from 'TranslationInputSlide';
 import { COPY_DOC } from 'copyDoc';
 
-console.log('COPY_DOC: ', COPY_DOC);
-
 const SLIDES = {
   SLIDE_1: 'EXPRESSION_SLIDE',
   SLIDE_2: 'MEANING_SLIDE',
@@ -26,7 +24,7 @@ export class CreateScreen extends React.Component {
       editedExpression: '',
       defaultMeaning: '',
       editedMeaning: '',
-      copy: COPY_DOC.hu.editScreen.slides,
+      copy: COPY_DOC.en.editScreen.slides,
     };
 
     // Mouse events

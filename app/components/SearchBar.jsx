@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import * as actions from 'actions';
+import { COPY_DOC } from 'copyDoc';
 
 export class SearchBar extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      focus: false
+      focus: false,
+      copy: COPY_DOC.en.dictionary
     };
 
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
@@ -42,6 +45,8 @@ export class SearchBar extends React.Component {
 
   render() {
     const { dispatch, searchText } = this.props;
+    const { copy } = this.state;
+
     let className = this.state.focus ? "search-bar search-bar--focus" : "search-bar";
 
     if(searchText.length) {
@@ -51,7 +56,7 @@ export class SearchBar extends React.Component {
     return (
       <div className={ className }>
         <i className="search-bar__icon search-bar__icon--magnify"></i>
-        <input className="search-bar__input" type="text" name="searchText" ref="searchText" placeholder="Search" value={ searchText } onChange={ this.onSearchTextChange } onFocus={ this.onFocus } onBlur={ this.onBlur } />
+        <input className="search-bar__input" type="text" name="searchText" ref="searchText" placeholder={ copy.search } value={ searchText } onChange={ this.onSearchTextChange } onFocus={ this.onFocus } onBlur={ this.onBlur } />
         <i className="search-bar__icon search-bar__icon--close" onClick={ this.onCloseClick } ></i>
       </div>
     );
