@@ -1,0 +1,52 @@
+.add-button
+{
+    position: fixed;
+    z-index: 1000;
+    right: 1rem;
+    bottom: 1rem;
+
+    background: $col-green;
+
+    @extend %round-button;
+
+    &:before
+    {
+        position: absolute;
+        top: -40%;
+        left: -40%;
+
+        display: block;
+
+        width: 180%;
+        height: 180%;
+
+        content: '';
+        pointer-events: auto;
+
+        border-radius: 100%;
+        background: transparent;
+    }
+
+    &:after
+    {
+        width: 1.1rem;
+        height: 1.1rem;
+
+        background-image: url('/images/add.svg');
+
+        @extend %icon;
+    }
+}
+
+html:not(.is-touch)
+{
+    .add-button
+    {
+        @include link-hover(.3s);
+
+        &:hover
+        {
+            @include transform(scale(1.1));
+        }
+    }
+}

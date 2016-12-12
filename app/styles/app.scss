@@ -1,23 +1,25 @@
 // Vendor imports
-@import "normalize/import-now";
-@import "bourbon";
+@import 'normalize/import-now';
+@import 'bourbon';
 
 // Utils
-@import "utils/variables";
-@import "utils/mixins";
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/placeholders';
 
 // Grid styling
-@import "susy";
-@import "base/grid";
+@import 'susy';
+@import 'base/grid';
 
 // Base styling
-@import "base/base";
+@import 'base/base';
 
 // Components
-@import "components/app-header";
-@import "components/user-bar";
-@import "components/search-bar";
-@import "components/login";
-@import "components/translation";
-@import "components/screen";
-@import "components/slide";
+@import 'components/app-header';
+@import 'components/user-bar';
+@import 'components/search-bar';
+@import 'components/login';
+@import 'components/translation';
+@import 'components/screen';
+@import 'components/slide';
+@import 'components/add-button';

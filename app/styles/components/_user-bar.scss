@@ -1,29 +1,32 @@
-.user-bar {
-  user-select: none;
+.user-bar
+{
+    user-select: none;
 }
 
-.user-bar__pic {
-  display: block;
-  border-radius: 100%;
-  width: 2.625rem;
-  height: 2.625rem;
-  cursor: pointer;
+.user-bar__pic
+{
+    @extend %round-button;
 }
 
-.user-bar__name {
-  margin-right: 1rem;
+.user-bar__name
+{
+    margin-right: 1rem;
 }
-.user-bar__logout {
-  margin-left: 1rem;
-  color: $col-white;
+.user-bar__logout
+{
+    margin-left: 1rem;
 
-  &:hover {
     color: $col-white;
-  }
+
+    &:hover
+    {
+        color: $col-white;
+    }
 }
 
 .user-bar__name,
-.user-bar__logout {
-  display: none;
-  visibility: hidden;
+.user-bar__logout
+{
+    display: none;
+    visibility: hidden;
 }

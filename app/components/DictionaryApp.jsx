@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import AppHeader from 'AppHeader';
 import Dictionary from 'Dictionary';
-import AddTranslation from 'AddTranslation';
 import EditScreen from 'EditScreen';
+import CreateScreen from 'CreateScreen';
 import TranslationAPI from 'TranslationAPI';
 
+import * as actions from 'actions';
 import * as screenTypes from 'screenTypes';
 
 export class DictionaryApp extends React.Component {
@@ -14,6 +15,14 @@ export class DictionaryApp extends React.Component {
     super(props);
 
     this.renderScreen = this.renderScreen.bind(this);
+    this.onAddButtonSelect = this.onAddButtonSelect.bind(this);
+  }
+
+  onAddButtonSelect(e) {
+    e.preventDefault();
+
+    const { dispatch } = this.props;
+    dispatch(actions.setScreenType(screenTypes.CREATE_TRANSLATION_SCREEN));
   }
 
   renderScreen() {
@@ -23,6 +32,10 @@ export class DictionaryApp extends React.Component {
     const editableTranslation = TranslationAPI.findTranslationById(translations, screenOptions);
 
     switch (screenType.type) {
+      case screenTypes.CREATE_TRANSLATION_SCREEN:
+        return (
+          <CreateScreen bgColor="#ABD30C" />
+        );
       case screenTypes.EDIT_TRANSLATION_SCREEN:
         return (
           <EditScreen bgColor="#0074A6" translation={ editableTranslation }/>
@@ -40,11 +53,11 @@ export class DictionaryApp extends React.Component {
       <section className="l-page">
         <AppHeader />
 
-        <div>
-          { this.renderScreen() }
+        { this.renderScreen() }
 
-          <AddTranslation />
-        </div>
+        <button className="add-button" ref={(ref) => {
+          this.addButton=ref;
+        }} onClick={ this.onAddButtonSelect }></button>
       </section>
     );
   }
