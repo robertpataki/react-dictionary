@@ -5,6 +5,7 @@ import AppHeader from 'AppHeader';
 import Dictionary from 'Dictionary';
 import EditScreen from 'EditScreen';
 import CreateScreen from 'CreateScreen';
+import UserScreen from 'UserScreen';
 import TranslationAPI from 'TranslationAPI';
 
 import * as actions from 'actions';
@@ -38,6 +39,10 @@ export class DictionaryApp extends React.Component {
     const editableTranslation = TranslationAPI.findTranslationById(translations, screenOptions);
 
     switch (screenType.type) {
+      case screenTypes.USER_PROFILE_SCREEN:
+        return (
+          <UserScreen />
+        );
       case screenTypes.CREATE_TRANSLATION_SCREEN:
         return (
           <CreateScreen bgColor="#ABD30C" />

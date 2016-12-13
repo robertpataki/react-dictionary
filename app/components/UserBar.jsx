@@ -1,19 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import * as actions from 'actions';
+import * as screenTypes from 'screenTypes';
 
 export class UserBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onLogout = this.onLogout.bind(this);
+    this.onProfilePicSelect = this.onProfilePicSelect.bind(this);
   }
 
-  onLogout(e) {
+  onProfilePicSelect(e) {
     const { dispatch } = this.props;
-    e.preventDefault();
-
-    dispatch(actions.startLogout());
+    dispatch(actions.setScreenType(screenTypes.USER_PROFILE_SCREEN));
   }
 
   render() {
@@ -23,7 +23,7 @@ export class UserBar extends React.Component {
     return (
       <div className="user-bar">
         <span className="user-bar__name">{ `Hello ${firstName}` }</span>
-        <img className="user-bar__pic" src={ pic } alt="Profile picture" onClick={ this.onLogout } />
+        <img className="user-bar__pic" src={ pic } alt="Profile picture" onClick={ this.onProfilePicSelect } />
         <a className="user-bar__logout" href="#" onClick={ this.onLogout }>Log out</a>
       </div>
     );

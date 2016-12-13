@@ -4,6 +4,11 @@ export const COPY_DOC = {
       welcome: 'Jelentkezz be a\nFacebook profiloddal',
       login: 'bejelentkezés',
     },
+    userScreen: {
+      greeting: 'Szia',
+      leftButton: 'Vissza',
+      rightButton: 'Kilépés',
+    },
     dictionary: {
       search: 'Keresés',
       noResultsEmoji: '(ノಠ益ಠ)ノ彡┻━┻',
@@ -30,6 +35,11 @@ export const COPY_DOC = {
     auth: {
       welcome: 'Please log in using\nyour Facebook',
       login: 'login',
+    },
+    userScreen: {
+      greeting: 'Hi',
+      leftButton: 'Back',
+      rightButton: 'Logout',
     },
     dictionary: {
       search: 'Search',
