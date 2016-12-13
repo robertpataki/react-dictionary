@@ -1,19 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// GSAP Animation imports
-import { TimelineMax } from 'gsap';
-import GSAP from 'react-gsap-enhancer';
-import TransitionGroup from 'react-addons-transition-group';
-import connectWithTransitionGroup from 'connect-with-transition-group';
-// END OF GSAP Animation imports
-
 import * as actions from 'actions';
 import * as screenTypes from 'screenTypes';
 
-// import ExpressionSlide from 'ExpressionSlide';
-// import MeaningSlide from 'MeaningSlide';
 import TranslationInputSlide from 'TranslationInputSlide';
+import { COPY_DOC } from 'copyDoc';
 
 const SLIDES = {
   SLIDE_1: 'EXPRESSION_SLIDE',
@@ -34,6 +26,7 @@ export class EditScreen extends React.Component {
       editedExpression: translation.expression,
       defaultMeaning: translation.meaning,
       editedMeaning: translation.meaning,
+      copy: COPY_DOC.en.editScreen.slides,
     };
 
     // Mouse events
@@ -93,7 +86,7 @@ export class EditScreen extends React.Component {
   }
 
   renderSlides() {
-    const { currentSlide, editedMeaning, editedExpression } = this.state;
+    const { copy, currentSlide, editedMeaning, editedExpression } = this.state;
     const { translation } = this.props;
 
     switch (currentSlide) {
@@ -119,12 +112,12 @@ export class EditScreen extends React.Component {
         );
       case SLIDES.SLIDE_2:
         return (
-          <TranslationInputSlide title="Mit jelent?" inputValue={ editedMeaning } leftButtonLabel="Vissza" rightButtonLabel="Tovább" onLeftButtonSelect={ this.onMeaningBackButtonSelect } onRightButtonSelect={ this.onMeaningDoneButtonSelect } onChange={ this.onMeaningChange } />
+          <TranslationInputSlide title={ copy.meaning.title } inputValue={ editedMeaning } leftButtonLabel={ copy.meaning.leftButton } rightButtonLabel={ copy.meaning.rightButton } onLeftButtonSelect={ this.onMeaningBackButtonSelect } onRightButtonSelect={ this.onMeaningDoneButtonSelect } onChange={ this.onMeaningChange } />
         );
       case SLIDES.SLIDE_1:
       default:
         return (
-          <TranslationInputSlide title="Mi a szó - kifejezés?" inputValue={ editedExpression } leftButtonLabel="Mégse" rightButtonLabel="Tovább" onLeftButtonSelect={ this.onExpressionCancelButtonSelect } onRightButtonSelect={ this.onExpressionNextButtonSelect } onChange={ this.onExpressionChange } />
+          <TranslationInputSlide title={ copy.expression.title } inputValue={ editedExpression } leftButtonLabel={ copy.expression.leftButton } rightButtonLabel={ copy.expression.rightButton } onLeftButtonSelect={ this.onExpressionCancelButtonSelect } onRightButtonSelect={ this.onExpressionNextButtonSelect } onChange={ this.onExpressionChange } />
         );
     }
   }
@@ -155,10 +148,4 @@ EditScreen.propTypes = {
   translation: React.PropTypes.object,
 }
 
-export default connectWithTransitionGroup(connect(
-  (state) => state,
-  null,
-  null,
-  // IMPORTANT: must pass this flag to react-redux/connect
-  { withRef: true, }
-)(GSAP()(EditScreen)));
+export default connect((state) => state)(EditScreen)
