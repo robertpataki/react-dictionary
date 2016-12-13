@@ -28,8 +28,10 @@ export class DictionaryApp extends React.Component {
   renderScreen() {
     const { screenType, translations, searchText } = this.props;
     let filteredTranslations = TranslationAPI.filterTranslations(translations, searchText);
+
+    // Descending sorting
     if (filteredTranslations) {
-      filteredTranslations.sort((a, b) => a.createdAt < b.createdAt);
+      filteredTranslations.sort((a, b) => b.createdAt - a.createdAt);
     }
 
     const screenOptions = screenType.options;
