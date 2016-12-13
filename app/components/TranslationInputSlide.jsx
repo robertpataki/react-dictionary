@@ -47,8 +47,10 @@ export class TranslationInputSlide extends React.Component {
 
   init() {
     const lastCharPos = this.input.value.length;
-    this.input.focus();
-    this.input.setSelectionRange(lastCharPos, lastCharPos);
+    if (!lastCharPos) {
+      this.input.focus();
+      this.input.setSelectionRange(lastCharPos, lastCharPos);
+    }
   }
 
   /* Render */
@@ -65,7 +67,7 @@ export class TranslationInputSlide extends React.Component {
         <div className="slide__contents">
           <input type="text" className="slide__input" ref={(ref) => {
               this.input = ref;
-            }} value={ inputValue } maxLength="32" onChange={ this.onChange } />
+            }} value={ inputValue } maxLength="128" onChange={ this.onChange } />
         </div>
 
         <div className="slide__buttons">
