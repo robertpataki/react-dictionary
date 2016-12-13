@@ -49,10 +49,12 @@ export class Dictionary extends React.Component {
     };
 
     return (
-      <div className={ !translations.length || !filteredTranslations.length ? "translations translations--with-message" : "translations" }>
-        <TransitionGroup>
-          { renderTranslations() }
-        </TransitionGroup>
+      <div className="translations__wrapper">
+        <div className={ !translations.length || !filteredTranslations.length ? "translations translations--with-message" : "translations" }>
+          <TransitionGroup>
+            { renderTranslations() }
+          </TransitionGroup>
+        </div>
       </div>
     );
   }
