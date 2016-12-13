@@ -184,6 +184,7 @@ html:not(.is-touch)
     .translation__button
     {
         @include link-hover(.3s);
+        @include transition-property(opacity);
     }
 
     .translation__button--edit
