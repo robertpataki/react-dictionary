@@ -11,20 +11,15 @@
 
     &:before
     {
-        position: absolute;
         top: -40%;
         left: -40%;
-
-        display: block;
 
         width: 180%;
         height: 180%;
 
-        content: '';
-        pointer-events: auto;
-
         border-radius: 100%;
-        background: transparent;
+
+        @extend %hitarea;
     }
 
     &:after

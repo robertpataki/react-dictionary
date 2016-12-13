@@ -86,20 +86,16 @@
 /* Triggers */
 .translation__trigger
 {
-    position: absolute;
-    top: 0;
-
     display: inline-block;
 
     width: 10%;
-    height: 100%;
 
-    content: '';
-    cursor: pointer;
+    @extend %hitarea;
 }
 .translation__trigger--right
 {
     right: 0;
+    left: auto;
 }
 
 /* Labels */

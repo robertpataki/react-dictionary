@@ -56,18 +56,15 @@
 
     &:after
     {
-        position: absolute;
         top: 27%;
         left: 50%;
-
-        display: block;
 
         width: 1px;
         height: 46%;
 
-        content: '';
-
         background: rgba(255, 255, 255, .4);
+
+        @extend %hitarea;
     }
 
     .slide__button:last-of-type

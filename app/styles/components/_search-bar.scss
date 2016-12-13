@@ -24,21 +24,15 @@
 
         &:after
         {
-            position: absolute;
             top: -125%;
             left: -125%;
-
-            display: block;
 
             width: 350%;
             height: 350%;
 
-            content: '';
-            cursor: pointer;
-            pointer-events: auto;
-
             border-radius: 100%;
-            background: rgba(255, 0, 0, .3);
+
+            @extend %hitarea;
         }
     }
 }
