@@ -86,7 +86,7 @@
 
     @include span(6 no-gutters);
 
-    &.is-disabled
+    &:disabled
     {
         cursor: disabled;
         pointer-events: none;

@@ -50,7 +50,7 @@ describe('UserScreen', () => {
     expect(p.textContent).toContain(firstName);
   });
 
-  describe('User interaction', () => {
+  describe('User interaction via buttons', () => {
     it('should close the screen', () => {
       const spy = expect.createSpy();
       const userScreen = TestUtils.renderIntoDocument(<UserScreen name="Foo Bar" pic="http://img.wennermedia.com/480-width/1405624408_the-rock-zoom.jpg" dispatch={ spy } />);

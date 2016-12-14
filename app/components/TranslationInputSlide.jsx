@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ScreenButtons from 'ScreenButtons';
+
 export class TranslationInputSlide extends React.Component {
   constructor(props) {
     super(props);
@@ -56,9 +58,15 @@ export class TranslationInputSlide extends React.Component {
   /* Render */
   render() {
     const { title, leftButtonLabel, rightButtonLabel, inputValue } = this.props;
+    const rightButtonDisabled = Boolean(!inputValue.length);
 
-    const rightButtonEnabled = Boolean(inputValue.length);
-    const rightButtonClassName = rightButtonEnabled ? 'slide__button' : 'slide__button is-disabled';
+    const screenButtonOptions = {
+      leftButtonLabel,
+      rightButtonLabel,
+      rightButtonDisabled,
+      onLeftButtonSelect: this.props.onLeftButtonSelect,
+      onRightButtonSelect: this.props.onRightButtonSelect,
+    };
 
     return (
       <div className="slide" tabIndex="0" onKeyUp={ this.onKeyUp }>
@@ -70,10 +78,7 @@ export class TranslationInputSlide extends React.Component {
             }} value={ inputValue } maxLength="128" onChange={ this.onChange } />
         </div>
 
-        <div className="slide__buttons">
-          <button className="slide__button" onClick={ this.props.onLeftButtonSelect }>{ leftButtonLabel }</button>
-          <button className={ rightButtonClassName } onClick={ this.props.onRightButtonSelect } disabled={ !rightButtonEnabled }>{ rightButtonLabel }</button>
-        </div>
+        <ScreenButtons { ...screenButtonOptions } />
       </div>
     );
   }
@@ -89,8 +94,8 @@ TranslationInputSlide.propTypes = {
 }
 
 TranslationInputSlide.defaultProps = {
-  title: 'Default title',
-  inputValue: 'Default input value',
+  title: 'Title',
+  inputValue: '',
   leftButtonLabel: 'Left button',
   rightButtonLabel: 'Right button',
   onLeftButtonSelect: () => {},

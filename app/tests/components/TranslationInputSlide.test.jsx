@@ -4,6 +4,7 @@ import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 import $ from 'jquery';
 
+import ScreenButtons from 'ScreenButtons';
 import { TranslationInputSlide } from 'TranslationInputSlide';
 
 describe('TranslationInputSlide', () => {
@@ -24,63 +25,19 @@ describe('TranslationInputSlide', () => {
     });
   });
 
-  describe('left button', () => {
-    it('should render `leftButtonLabel` prop', () => {
-      const buttonLabel = 'Left Button Label';
-      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide leftButtonLabel={ buttonLabel } />);
-      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
-      const $leftButton = $wrapper.find("button:contains('" + buttonLabel + "')");
-
-      const actual = $leftButton.length;
-      const expected = 1;
-      expect(actual).toEqual(expected);
-    });
-
-    it('should dispatch event when selected', () => {
+  describe('User interaction via buttons', () => {
+    it('should bypass the button clicks to the prop event handlers', () => {
       const spy = expect.createSpy();
-      const buttonLabel = 'Left Button Label';
-      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide leftButtonLabel={ buttonLabel } onLeftButtonSelect={ spy } />);
-      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
-      const leftButton = $wrapper.find("button:contains('" + buttonLabel + "')")[0];
-
-      TestUtils.Simulate.click(leftButton);
-      expect(spy).toHaveBeenCalled();
-    });
-  });
-
-  describe('right button', () => {
-    it('should render `rightButtonLabel` prop', () => {
-      const buttonLabel = 'Right Button Label';
-      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide rightButtonLabel={ buttonLabel } />);
-      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
-      const $rightButton = $wrapper.find("button:contains('" + buttonLabel + "')");
-
-      const actual = $rightButton.length;
-      const expected = 1;
-      expect(actual).toEqual(expected);
+      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide />);
+      const screenButtons = TestUtils.findRenderedComponentWithType(translationInputSlide, ScreenButtons);
+      expect(screenButtons.props.onLeftButtonSelect).toBe(translationInputSlide.props.onLeftButtonSelect);
+      expect(screenButtons.props.onRightButtonSelect).toBe(translationInputSlide.props.onRightButtonSelect);
     });
 
-    it('should dispatch event when selected', () => {
-      const spy = expect.createSpy();
-      const buttonLabel = 'Right Button Label';
-      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide rightButtonLabel={ buttonLabel } onRightButtonSelect={ spy } />);
-      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
-      const rightButton = $wrapper.find("button:contains('" + buttonLabel + "')")[0];
-
-      TestUtils.Simulate.click(rightButton);
-      expect(spy).toHaveBeenCalled();
-    });
-
-    it('should not dispatch event when selected but the input field is empty', () => {
-      const spy = expect.createSpy();
-      const buttonLabel = 'Right Button Label';
-      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide rightButtonLabel={ buttonLabel } onRightButtonSelect={ spy } inputValue="" />);
-      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
-      const input = $wrapper.find('input');
-      const rightButton = $wrapper.find("button:contains('" + buttonLabel + "')")[0];
-
-      TestUtils.Simulate.click(rightButton);
-      expect(spy).toNotHaveBeenCalled();
+    it('should disable the right hand button when the input field is empty', () => {
+      const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide />);
+      const screenButtons = TestUtils.findRenderedComponentWithType(translationInputSlide, ScreenButtons);
+      expect(screenButtons.props.rightButtonDisabled).toEqual(true);
     });
   });
 
