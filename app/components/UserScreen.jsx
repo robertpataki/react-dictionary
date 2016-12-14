@@ -18,12 +18,12 @@ export class UserScreen extends React.Component {
     this.cancel = this.cancel.bind(this);
   }
 
-  logout(e) {
+  logout() {
     const { dispatch } = this.props;
     dispatch(actions.startLogout());
   }
 
-  cancel(e) {
+  cancel() {
     const { dispatch } = this.props;
     dispatch(actions.setScreenType(screenTypes.DICTIONARY_SCREEN));
   }
