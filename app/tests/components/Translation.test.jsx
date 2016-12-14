@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import TestUtilsAdditions from 'react-testutils-additions';
 import TestUtils from 'react-addons-test-utils';
-import $ from 'jquery';
 import expect from 'expect';
 
 import { Translation } from 'Translation';
@@ -23,21 +24,19 @@ describe('Translation', () => {
 
   it('should render an expression and its matching meaning', () => {
     const translation = TestUtils.renderIntoDocument(<Translation { ...data } />);
-    const $wrapper = $(ReactDOM.findDOMNode(translation));
 
-    const $expression = $wrapper.find(`span:contains('${data.expression}')`);
-    const $meaning = $wrapper.find(`span:contains('${data.meaning}')`);
+    const expression = TestUtils.findRenderedDOMComponentWithClass(translation, 'translation__expression');
+    const meaning = TestUtils.findRenderedDOMComponentWithClass(translation, 'translation__meaning');
 
-    expect($expression.length).toEqual(1);
-    expect($meaning.length).toEqual(1);
+    expect(expression.textContent).toEqual(data.expression);
+    expect(meaning.textContent).toEqual(data.meaning);
   });
 
   it('should dispatch startDeleteTranslation', () => {
     const spy = expect.createSpy();
     const translation = TestUtils.renderIntoDocument(<Translation { ...data } dispatch={ spy }/>);
     const action = actions.startDeleteTranslation(data.id);
-    const $wrapper = $(ReactDOM.findDOMNode(translation));
-    const deleteButton = $($wrapper.find('.translation__button--delete'))[0];
+    const deleteButton = TestUtils.findRenderedDOMComponentWithClass(translation, 'translation__button--delete');
 
     TestUtils.Simulate.click(deleteButton);
     expect(spy).toHaveBeenCalledWith(action);
@@ -47,8 +46,7 @@ describe('Translation', () => {
     const spy = expect.createSpy();
     const translation = TestUtils.renderIntoDocument(<Translation { ...data } dispatch={ spy }/>);
     const action = actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN, data.id);
-    const $wrapper = $(ReactDOM.findDOMNode(translation));
-    const editButton = $($wrapper.find('.translation__button--edit'))[0];
+    const editButton = TestUtils.findRenderedDOMComponentWithClass(translation, 'translation__button--edit');
 
     TestUtils.Simulate.click(editButton);
     expect(spy).toHaveBeenCalledWith(action);

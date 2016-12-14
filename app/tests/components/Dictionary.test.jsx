@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import TestUtils from 'react-addons-test-utils';
-import $ from 'jquery';
+import TestUtilsAdditions from 'react-testutils-additions';
 import expect from 'expect';
 
 import * as configureStore from 'configureStore';
@@ -48,9 +48,9 @@ describe('Dictionary', () => {
   it('should render a message when there are no translations', () => {
     const translations = [];
     const dictionary = TestUtils.renderIntoDocument(<Dictionary translations={ translations } />);
-    const $el = $(ReactDOM.findDOMNode(dictionary));
-    const $message = $el.find("[data-message-type='no-translations']");
-    expect($message.length).toBe(1);
+    const message = TestUtilsAdditions.findRenderedDOMComponentWithAttributeValue(
+      dictionary, 'data-message-type', 'no-translations');
+    expect(message).toExist();
   });
 
   it('should render a warning when there are translations, but the search didn\'t bring any results', () => {
@@ -72,8 +72,8 @@ describe('Dictionary', () => {
     );
 
     const dictionary = TestUtils.scryRenderedComponentsWithType(provider, ConnectedDictionary)[0];
-    const $el = $(ReactDOM.findDOMNode(dictionary));
-    const $message = $el.find("[data-message-type='no-search-results']");
-    expect($message.length).toBe(1);
+    const message = TestUtilsAdditions.findRenderedDOMComponentWithAttributeValue(
+      dictionary, 'data-message-type', 'no-search-results');
+    expect(message).toExist();
   });
 });

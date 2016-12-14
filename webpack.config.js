@@ -14,18 +14,11 @@ try {
 
 module.exports = {
   entry: [
-    'script!jquery/dist/jquery.min.js',
     './app/app.jsx',
   ],
-  externals: {
-    jquery: 'jQuery',
-  },
+  externals: {},
   plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-    }),
+    new webpack.ProvidePlugin({}),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),

@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import TestUtils from 'react-addons-test-utils';
-import $ from 'jquery';
+import TestUtilsAdditions from 'react-testutils-additions';
 import expect from 'expect';
 
 import { SearchBar } from 'SearchBar';
@@ -22,8 +23,8 @@ describe('SearchBar', () => {
 
     const spy = expect.createSpy();
     const searchBar = TestUtils.renderIntoDocument(<SearchBar dispatch={ spy } />);
-    const $el = $(ReactDOM.findDOMNode(searchBar));
-    const input = $el.find('input[name="searchText"]')[0];
+    const input = TestUtilsAdditions.findRenderedDOMComponentWithAttributeValue(
+      searchBar, 'name', 'searchText');
 
     input.value = searchText;
     TestUtils.Simulate.change(input);
@@ -39,8 +40,7 @@ describe('SearchBar', () => {
 
     const spy = expect.createSpy();
     const searchBar = TestUtils.renderIntoDocument(<SearchBar dispatch={ spy } />);
-    const $el = $(ReactDOM.findDOMNode(searchBar));
-    const button = $el.find('.search-bar__icon--close')[0];
+    const button = TestUtils.findRenderedDOMComponentWithClass(searchBar, 'search-bar__icon--close');
 
     TestUtils.Simulate.click(button);
 
@@ -55,13 +55,14 @@ describe('SearchBar', () => {
     const spy = expect.createSpy();
 
     const searchBar = TestUtils.renderIntoDocument(<SearchBar dispatch={ spy } />);
-    const $el = $(ReactDOM.findDOMNode(searchBar));
-    const input = $el.find('input[name="searchText"]')[0];
+    const wrapper = TestUtils.findRenderedDOMComponentWithTag(searchBar, 'div');
+    const input = TestUtilsAdditions.findRenderedDOMComponentWithAttributeValue(
+      searchBar, 'name', 'searchText');
 
     input.value = 'Searching for Foo Bar';
     TestUtils.Simulate.change(input);
 
-    TestUtils.Simulate.keyUp($el[0], {key: 'Escape'});
+    TestUtils.Simulate.keyUp(wrapper, {key: 'Escape'});
 
     expect(spy).toHaveBeenCalledWith(action);
   });

@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import TestUtilsAdditions from 'react-testutils-additions';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
-import $ from 'jquery';
 
 import SlideButtons from 'SlideButtons';
 import { TranslationInputSlide } from 'TranslationInputSlide';
@@ -16,12 +17,10 @@ describe('TranslationInputSlide', () => {
     it('should render `title` prop', () => {
       const slideTitle = 'Title of the slide';
       const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide title={ slideTitle } />);
-      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
-      const $title = $wrapper.find(":contains('" + slideTitle + "')");
-      const actual = $title.length;
-      const expected = 1;
-
-      expect(actual).toBe(expected);
+      const title = TestUtils.findRenderedDOMComponentWithClass(translationInputSlide, 'slide__title');
+      const expected = slideTitle;
+      const actual = title.textContent;
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -45,8 +44,7 @@ describe('TranslationInputSlide', () => {
     it('should render `inputValue` prop as value of the input field', () => {
       const defaultValue = 'Boo Far';
       const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide inputValue={ defaultValue } />);
-      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
-      const inputField = $wrapper.find('input')[0];
+      const inputField = TestUtils.findRenderedDOMComponentWithTag(translationInputSlide, 'input');
 
       const actual = inputField.value;
       const expected = defaultValue;
@@ -57,8 +55,7 @@ describe('TranslationInputSlide', () => {
       const spy = expect.createSpy();
       const defaultValue = 'Hell';
       const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide inputValue={ defaultValue } onChange={ spy } />);
-      const $wrapper = $(ReactDOM.findDOMNode(translationInputSlide));
-      const inputField = $wrapper.find('input')[0];
+      const inputField = TestUtils.findRenderedDOMComponentWithTag(translationInputSlide, 'input');
 
       inputField.value += 'o';
       TestUtils.Simulate.change(inputField);
@@ -70,7 +67,7 @@ describe('TranslationInputSlide', () => {
     it('should handle the ENTER key to select the right button with valid input', () => {
       const spy = expect.createSpy();
       const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide inputValue="Foo" onRightButtonSelect={ spy } />);
-      const wrapper = $(ReactDOM.findDOMNode(translationInputSlide))[0];
+      const wrapper = TestUtils.scryRenderedDOMComponentsWithTag(translationInputSlide, 'div')[0];
 
       TestUtils.Simulate.keyUp(wrapper, {key: 'Enter'});
       expect(spy).toHaveBeenCalled();
@@ -79,7 +76,7 @@ describe('TranslationInputSlide', () => {
     it('should ignore the ENTER key with empty input', () => {
       const spy = expect.createSpy();
       const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide inputValue="" onRightButtonSelect={ spy } />);
-      const wrapper = $(ReactDOM.findDOMNode(translationInputSlide))[0];
+      const wrapper = TestUtils.scryRenderedDOMComponentsWithTag(translationInputSlide, 'div')[0];
 
       TestUtils.Simulate.keyUp(wrapper, {key: 'Enter'});
       expect(spy).toNotHaveBeenCalled();
@@ -88,7 +85,7 @@ describe('TranslationInputSlide', () => {
     it('should handle the ESCAPE key to select the left button', () => {
       const spy = expect.createSpy();
       const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide onLeftButtonSelect={ spy } />);
-      const wrapper = $(ReactDOM.findDOMNode(translationInputSlide))[0];
+      const wrapper = TestUtils.scryRenderedDOMComponentsWithTag(translationInputSlide, 'div')[0];
 
       TestUtils.Simulate.keyUp(wrapper, {key: 'Escape'});
       expect(spy).toHaveBeenCalled();
