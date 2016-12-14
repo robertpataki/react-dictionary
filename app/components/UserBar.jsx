@@ -17,28 +17,23 @@ export class UserBar extends React.Component {
   }
 
   render() {
-    const { name, pic } = this.props;
-    const firstName = name.split(' ')[0];
+    const { pic } = this.props;
 
     return (
       <div className="user-bar">
-        <span className="user-bar__name">{ `Hello ${firstName}` }</span>
         <img className="user-bar__pic" src={ pic } alt="Profile picture" onClick={ this.onProfilePicSelect } />
-        <a className="user-bar__logout" href="#" onClick={ this.onLogout }>Log out</a>
       </div>
     );
   }
 }
 
 UserBar.propTypes = {
-  name: React.PropTypes.string.isRequired,
   pic: React.PropTypes.string.isRequired,
 }
 
 export default connect(
   (state) => {
     return {
-      name: state.auth.name,
       pic: state.auth.pic
     }
   }
