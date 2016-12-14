@@ -15,6 +15,12 @@ $susy: (
 // $gutter-width: 1rem; // with 1em gutters
 // $grid-padding: 1rem; // and 1em padding on the grid container
 
-.l-page {
-  @include container;
+.l-page
+{
+    overflow: hidden;
+
+    margin-bottom: 4.5rem;
+    padding-bottom: 4.6rem;
+
+    @include container;
 }
