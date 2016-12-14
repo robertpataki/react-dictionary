@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ScreenButtons from 'ScreenButtons';
+import SlideButtons from 'SlideButtons';
 
 export class TranslationInputSlide extends React.Component {
   constructor(props) {
@@ -60,7 +60,7 @@ export class TranslationInputSlide extends React.Component {
     const { title, leftButtonLabel, rightButtonLabel, inputValue } = this.props;
     const rightButtonDisabled = Boolean(!inputValue.length);
 
-    const screenButtonOptions = {
+    const slideButtonsSettings = {
       leftButtonLabel,
       rightButtonLabel,
       rightButtonDisabled,
@@ -78,7 +78,7 @@ export class TranslationInputSlide extends React.Component {
             }} value={ inputValue } maxLength="128" onChange={ this.onChange } />
         </div>
 
-        <ScreenButtons { ...screenButtonOptions } />
+        <SlideButtons { ...slideButtonsSettings } />
       </div>
     );
   }

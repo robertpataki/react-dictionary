@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 
-import ScreenButtons from 'ScreenButtons';
+import SlideButtons from 'SlideButtons';
 
-describe('ScreenButtons', () => {
+describe('SlideButtons', () => {
   it('should exist', () => {
-    expect(ScreenButtons).toExist();
+    expect(SlideButtons).toExist();
   });
 
   it('should have a left and a right button', () => {
-    const screenButtons = TestUtils.renderIntoDocument(<ScreenButtons leftButtonLabel="Leftie" rightButtonLabel="Rightie" />);
+    const slideButtons = TestUtils.renderIntoDocument(<SlideButtons leftButtonLabel="Leftie" rightButtonLabel="Rightie" />);
 
-    const buttons = TestUtils.scryRenderedDOMComponentsWithTag(screenButtons, 'button');
+    const buttons = TestUtils.scryRenderedDOMComponentsWithTag(slideButtons, 'button');
     const leftButton = buttons[0];
     const rightButton = buttons[1];
 
@@ -24,9 +24,9 @@ describe('ScreenButtons', () => {
   describe('Left button', () => {
     it('should call a callback when clicked', () => {
       const spy = expect.createSpy();
-      const screenButtons = TestUtils.renderIntoDocument(<ScreenButtons onLeftButtonSelect={ spy } />);
+      const slideButtons = TestUtils.renderIntoDocument(<SlideButtons onLeftButtonSelect={ spy } />);
 
-      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(screenButtons, 'button');
+      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(slideButtons, 'button');
       const leftButton = buttons[0];
 
       TestUtils.Simulate.click(leftButton);
@@ -36,9 +36,9 @@ describe('ScreenButtons', () => {
 
     it('should be disabled when told to be', () => {
       const spy = expect.createSpy();
-      const screenButtons = TestUtils.renderIntoDocument(<ScreenButtons leftButtonDisabled={ true } />);
+      const slideButtons = TestUtils.renderIntoDocument(<SlideButtons leftButtonDisabled={ true } />);
 
-      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(screenButtons, 'button');
+      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(slideButtons, 'button');
       const leftButton = buttons[0];
 
       expect(leftButton.disabled).toEqual(true);
@@ -48,9 +48,9 @@ describe('ScreenButtons', () => {
   describe('Right button', () => {
     it('should call a callback when clicked', () => {
       const spy = expect.createSpy();
-      const screenButtons = TestUtils.renderIntoDocument(<ScreenButtons onRightButtonSelect={ spy } />);
+      const slideButtons = TestUtils.renderIntoDocument(<SlideButtons onRightButtonSelect={ spy } />);
 
-      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(screenButtons, 'button');
+      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(slideButtons, 'button');
       const rightButton = buttons[1];
 
       TestUtils.Simulate.click(rightButton);

@@ -9,7 +9,7 @@ import * as actionTypes from 'actionTypes';
 import * as screenTypes from 'screenTypes';
 
 import * as configureStore from 'configureStore';
-import ScreenButtons from 'ScreenButtons';
+import SlideButtons from 'SlideButtons';
 import ConnectedUserScreen, { UserScreen } from 'UserScreen';
 
 describe('UserScreen', () => {
@@ -63,9 +63,9 @@ describe('UserScreen', () => {
     it('should call cancel() when the left button is selected and logout() when right button is selected', () => {
       const userScreen = TestUtils.renderIntoDocument(<UserScreen name="Foo Bar" pic="http://img.wennermedia.com/480-width/1405624408_the-rock-zoom.jpg" />);
 
-      const screenButtons = TestUtils.findRenderedComponentWithType(userScreen, ScreenButtons);
-      expect(screenButtons.props.onLeftButtonSelect).toBe(userScreen.cancel);
-      expect(screenButtons.props.onRightButtonSelect).toBe(userScreen.logout);
+      const slideButtons = TestUtils.findRenderedComponentWithType(userScreen, SlideButtons);
+      expect(slideButtons.props.onLeftButtonSelect).toBe(userScreen.cancel);
+      expect(slideButtons.props.onRightButtonSelect).toBe(userScreen.logout);
     });
 
     it('should log the user out', () => {

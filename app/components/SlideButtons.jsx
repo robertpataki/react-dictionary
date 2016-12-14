@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class ScreenButtons extends React.Component {
+export class SlideButtons extends React.Component {
   render() {
     const { leftButtonLabel,
             rightButtonLabel,
@@ -20,7 +20,7 @@ export class ScreenButtons extends React.Component {
   }
 }
 
-ScreenButtons.propTypes = {
+SlideButtons.propTypes = {
   leftButtonLabel: React.PropTypes.string,
   rightButtonLabel: React.PropTypes.string,
   onLeftButtonSelect: React.PropTypes.func,
@@ -29,7 +29,7 @@ ScreenButtons.propTypes = {
   rightButtonDisabled: React.PropTypes.bool,
 }
 
-ScreenButtons.defaultProps = {
+SlideButtons.defaultProps = {
   leftButtonLabel: 'Left button',
   rightButtonLabel: 'Right button',
   onLeftButtonSelect: () => {},
@@ -38,4 +38,4 @@ ScreenButtons.defaultProps = {
   rightButtonDisabled: false,
 }
 
-export default ScreenButtons;
+export default SlideButtons;

@@ -4,7 +4,7 @@ import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 import $ from 'jquery';
 
-import ScreenButtons from 'ScreenButtons';
+import SlideButtons from 'SlideButtons';
 import { TranslationInputSlide } from 'TranslationInputSlide';
 
 describe('TranslationInputSlide', () => {
@@ -29,15 +29,15 @@ describe('TranslationInputSlide', () => {
     it('should bypass the button clicks to the prop event handlers', () => {
       const spy = expect.createSpy();
       const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide />);
-      const screenButtons = TestUtils.findRenderedComponentWithType(translationInputSlide, ScreenButtons);
-      expect(screenButtons.props.onLeftButtonSelect).toBe(translationInputSlide.props.onLeftButtonSelect);
-      expect(screenButtons.props.onRightButtonSelect).toBe(translationInputSlide.props.onRightButtonSelect);
+      const slideButtons = TestUtils.findRenderedComponentWithType(translationInputSlide, SlideButtons);
+      expect(slideButtons.props.onLeftButtonSelect).toBe(translationInputSlide.props.onLeftButtonSelect);
+      expect(slideButtons.props.onRightButtonSelect).toBe(translationInputSlide.props.onRightButtonSelect);
     });
 
     it('should disable the right hand button when the input field is empty', () => {
       const translationInputSlide = TestUtils.renderIntoDocument(<TranslationInputSlide />);
-      const screenButtons = TestUtils.findRenderedComponentWithType(translationInputSlide, ScreenButtons);
-      expect(screenButtons.props.rightButtonDisabled).toEqual(true);
+      const slideButtons = TestUtils.findRenderedComponentWithType(translationInputSlide, SlideButtons);
+      expect(slideButtons.props.rightButtonDisabled).toEqual(true);
     });
   });
 

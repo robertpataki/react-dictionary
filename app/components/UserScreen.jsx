@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as actions from 'actions';
 import * as screenTypes from 'screenTypes';
-import ScreenButtons from 'ScreenButtons';
+import SlideButtons from 'SlideButtons';
 import { COPY_DOC } from 'copyDoc';
 
 export class UserScreen extends React.Component {
@@ -43,7 +43,7 @@ export class UserScreen extends React.Component {
             </div>
           </div>
 
-          <ScreenButtons leftButtonLabel={ copy.leftButton } onLeftButtonSelect={ this.cancel } rightButtonLabel={ copy.rightButton } onRightButtonSelect={ this.logout } />
+          <SlideButtons leftButtonLabel={ copy.leftButton } onLeftButtonSelect={ this.cancel } rightButtonLabel={ copy.rightButton } onRightButtonSelect={ this.logout } />
         </div>
       </div>
     );
