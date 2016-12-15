@@ -34,11 +34,12 @@ export const COPY_DOC = {
   },
   en: {
     auth: {
-      welcome: 'Please log in using\nyour Facebook',
+      welcome: 'Please log in using<br/>your Facebook',
       login: 'login',
     },
     userScreen: {
       greeting: 'Hi',
+      total: 'You have {RPC01} translations in your dictionary, keep it up!',
       leftButton: 'Back',
       rightButton: 'Logout',
     },

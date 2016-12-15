@@ -6,7 +6,56 @@
     border-radius: 100%;
 }
 
+.profile__octocat
+{
+    position: absolute;
+    top: 3.2rem;
+    right: 1.2rem;
+
+    display: block;
+
+    width: 2.1rem;
+    height: auto;
+    margin: 0 auto;
+
+    cursor: pointer;
+
+    opacity: .42;
+}
+
 .profile__greeting
 {
     font-size: 1.2rem;
+
+    margin-top: 0;
+}
+
+.profile__total
+{
+    width: 100%;
+    max-width: 18rem;
+    margin: 2rem auto 0 auto;
+
+    text-align: center;
+}
+
+.profile__total-num
+{
+    font-weight: 700;
+}
+
+
+html:not(.is-touch)
+{
+    .profile__octocat
+    {
+        @include link-hover(.2s);
+
+        &:hover
+        {
+            opacity: .75;
+
+            @include transform(scale(1.05));
+        }
+    }
 }
