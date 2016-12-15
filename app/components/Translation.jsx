@@ -222,13 +222,7 @@ export class Translation extends React.Component {
   onTouchMove(e) {
     if (!this.ignoreUser && typeof this.deltaX !== 'undefined') {
       const maxOffsetX = BREWSER.windowWidth * 0.75;
-
       let offsetX = e.deltaX - this.deltaX;
-
-      // /* Prevents scrolling if the user is panning the item */
-      if (offsetX >= 20) {
-        e.preventDefault();
-      }
 
       if (offsetX > maxOffsetX) {
         offsetX = maxOffsetX;
@@ -298,7 +292,7 @@ export class Translation extends React.Component {
     }
 
     const buttonWidth = this.editButton.offsetWidth;
-    const buttonActivationOffsetX = BREWSER.windowWidth * 0.42;
+    const buttonActivationOffsetX = BREWSER.windowWidth * 0.3;
 
     if (offsetX > 0) {
       // EDIT button
