@@ -1,11 +1,12 @@
 export const COPY_DOC = {
   hu: {
     auth: {
-      welcome: 'Jelentkezz be a\nFacebook profiloddal',
+      welcome: 'Jelentkezz be a<br/>Facebook profiloddal',
       login: 'bejelentkezés',
     },
     userScreen: {
       greeting: 'Szia',
+      total: '{RPC01} kifejezés van a szótáradban, csak így tovább!',
       leftButton: 'Vissza',
       rightButton: 'Kilépés',
     },
