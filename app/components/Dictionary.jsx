@@ -9,6 +9,7 @@ import connectWithTransitionGroup from 'connect-with-transition-group';
 // END OF GSAP Animation imports
 
 import { COPY_DOC } from 'copyDoc';
+import Scrollie from 'Scrollie';
 import Translation from 'Translation';
 
 export class Dictionary extends React.Component {
@@ -17,60 +18,21 @@ export class Dictionary extends React.Component {
 
     this.state = {
       copy: COPY_DOC.en.dictionary,
-      scrolling: false,
+      isScrolling: false,
     };
 
-    // Scrolling stuff
-    this.handleScroll = this.handleScroll.bind(this);
-    this.startScrollTicker = this.startScrollTicker.bind(this);
-    this.stopScrollTicker = this.stopScrollTicker.bind(this);
-    this.handleScrollTick = this.handleScrollTick.bind(this);
+    this.onScrollieUpdate = this.onScrollieUpdate.bind(this);
   }
 
-  componentDidMount() {
-    console.log('componentDidMount()')
-    window.addEventListener('scroll', this.handleScroll);
-
-    this.testTicker = setInterval(() => {
-      console.log('Scrolling: ', this.state.scrolling);
-    }, 500);
-  }
-
-  componentWillUnmount() {
-    console.log('componentWillUnmount()')
-    window.removeEventListener('scroll', this.handleScroll);
-
-    clearInterval(this.testTicker);
-  }
-
-  /* SCROLL */
-  handleScroll(e) {
+  onScrollieUpdate(isScrolling) {
     this.setState({
-      scrolling: true,
-    });
-    this.startScrollTicker();
-  }
-  startScrollTicker() {
-    this.stopScrollTicker();
-    this.ticker = setTimeout(this.handleScrollTick, 300);
-  }
-  stopScrollTicker() {
-    if (!this.ticker) return;
-
-    clearTimeout(this.ticker);
-    this.ticker = undefined;
-  }
-
-  handleScrollTick(e) {
-    this.setState({
-      scrolling: false,
+      isScrolling,
     });
   }
-
 
   render() {
     const { translations, filteredTranslations } = this.props;
-    const { copy, scrolling } = this.state;
+    const { copy, isScrolling } = this.state;
 
     const renderTranslations = () => {
       if (!translations.length) {
@@ -91,19 +53,21 @@ export class Dictionary extends React.Component {
 
       return filteredTranslations.map((translation) => {
         return (
-          <Translation key={ translation.id } { ...translation } scrolling={ scrolling } />
+          <Translation key={ translation.id } { ...translation } isScrolling={ isScrolling } />
         );
       });
     };
 
     return (
-      <div className="translations__wrapper">
-        <div className={ !translations.length || !filteredTranslations.length ? "translations translations--with-message" : "translations" }>
-          <TransitionGroup>
-            { renderTranslations() }
-          </TransitionGroup>
+      <Scrollie onUpdate={ this.onScrollieUpdate }>
+        <div className="translations__wrapper">
+          <div className={ !translations.length || !filteredTranslations.length ? "translations translations--with-message" : "translations" }>
+            <TransitionGroup>
+              { renderTranslations() }
+            </TransitionGroup>
+          </div>
         </div>
-      </div>
+      </Scrollie>
     );
   }
 }

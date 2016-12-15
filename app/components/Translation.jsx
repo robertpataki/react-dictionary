@@ -207,27 +207,25 @@ export class Translation extends React.Component {
 
   /* Touch events */
   onTouchStart(e) {
-    const { scrolling } = this.props;
-    if (!this.ignoreUser && !scrolling) {
+    const { isScrolling } = this.props;
+    if (!this.ignoreUser && !isScrolling) {
       if (this.tween) {
         this.tween.kill().remove();
         this.tween = undefined;
       }
-      this.clientX = e.deltaX;
-      this.clientY = e.deltaY;
+      this.deltaX = e.deltaX;
     } else {
-      this.clientX = this.clientY = undefined;
+      this.deltaX = undefined;
     }
   }
 
   onTouchMove(e) {
-    if (!this.ignoreUser && typeof this.clientX !== 'undefined') {
+    if (!this.ignoreUser && typeof this.deltaX !== 'undefined') {
       const maxOffsetX = BREWSER.windowWidth * 0.75;
 
-      const clientX = e.deltaX;
-      let offsetX = clientX - this.clientY;
+      let offsetX = e.deltaX - this.deltaX;
 
-      /* Prevents scrolling if the user is panning the item */
+      // /* Prevents scrolling if the user is panning the item */
       if (offsetX >= 20) {
         e.preventDefault();
       }
@@ -245,7 +243,7 @@ export class Translation extends React.Component {
   }
 
   onTouchEnd(e) {
-    if (!this.ignoreUser && typeof this.clientX !== 'undefined') {
+    if (!this.ignoreUser && typeof this.deltaX !== 'undefined') {
       const cachedStatus = this.status;
 
       // Play out animation
@@ -362,7 +360,7 @@ export class Translation extends React.Component {
   }
 
   render() {
-    const { id, expression, meaning, createdAt, scrolling } = this.props;
+    const { id, expression, meaning, createdAt, isScrolling } = this.props;
     const { fading } = this.state;
 
     const visClassName = fading ? 'is-hidden' : '';
