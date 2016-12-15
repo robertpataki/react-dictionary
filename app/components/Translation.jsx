@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { TimelineMax, TweenMax, Expo } from 'gsap';
 import GSAP from 'react-gsap-enhancer';
 import connectWithTransitionGroup from 'connect-with-transition-group';
+import Hammer from 'react-hammerjs';
 const BREWSER = require('brewser').BREWSER;
 
 import * as actions from 'actions';
@@ -29,9 +30,9 @@ export class Translation extends React.Component {
     this.onTriggerMouseOut = this.onTriggerMouseOut.bind(this);
 
     // Touch events
-    this.onTouchStart = this.handleTouchStart.bind(this);
-    this.onTouchMove = this.handleTouchMove.bind(this);
-    this.onTouchEnd = this.handleTouchEnd.bind(this);
+    this.onTouchStart = this.onTouchStart.bind(this);
+    this.onTouchMove = this.onTouchMove.bind(this);
+    this.onTouchEnd = this.onTouchEnd.bind(this);
 
     // Animations
     this.slideBackAnim = this.slideBackAnim.bind(this);
@@ -204,25 +205,27 @@ export class Translation extends React.Component {
     dispatch(actions.setScreenType(screenTypes.EDIT_TRANSLATION_SCREEN, id));
   }
 
-  handleTouchStart(e) {
-    if (!this.ignoreUser) {
+  /* Touch events */
+  onTouchStart(e) {
+    const { scrolling } = this.props;
+    if (!this.ignoreUser && !scrolling) {
       if (this.tween) {
         this.tween.kill().remove();
         this.tween = undefined;
       }
-      this.clientX = e.touches[0].clientX;
-      this.clientY = e.touches[0].clientY;
+      this.clientX = e.deltaX;
+      this.clientY = e.deltaY;
     } else {
       this.clientX = this.clientY = undefined;
     }
   }
 
-  handleTouchMove(e) {
+  onTouchMove(e) {
     if (!this.ignoreUser && typeof this.clientX !== 'undefined') {
       const maxOffsetX = BREWSER.windowWidth * 0.75;
 
-      const clientX = e.touches[0].clientX;
-      let offsetX = clientX - this.clientX;
+      const clientX = e.deltaX;
+      let offsetX = clientX - this.clientY;
 
       /* Prevents scrolling if the user is panning the item */
       if (offsetX >= 20) {
@@ -241,7 +244,7 @@ export class Translation extends React.Component {
     }
   }
 
-  handleTouchEnd(e) {
+  onTouchEnd(e) {
     if (!this.ignoreUser && typeof this.clientX !== 'undefined') {
       const cachedStatus = this.status;
 
@@ -340,7 +343,9 @@ export class Translation extends React.Component {
   renderTriggers(touchDevice) {
     if(touchDevice) {
       return(
-          <div className="translation__wrapper translation__wrapper--triggers" onTouchStart={ this.onTouchStart } onTouchMove={ this.onTouchMove } onTouchEnd={ this.onTouchEnd }></div>
+        <Hammer onPanStart={ this.onTouchStart } onPan={ this.onTouchMove } onPanEnd={ this.onTouchEnd }>
+          <div className="translation__wrapper translation__wrapper--triggers"></div>
+        </Hammer>
       );
     } else {
       return(
@@ -357,7 +362,7 @@ export class Translation extends React.Component {
   }
 
   render() {
-    const { id, expression, meaning, createdAt } = this.props;
+    const { id, expression, meaning, createdAt, scrolling } = this.props;
     const { fading } = this.state;
 
     const visClassName = fading ? 'is-hidden' : '';
