@@ -28,18 +28,29 @@ export class UserScreen extends React.Component {
     dispatch(actions.setScreenType(screenTypes.DICTIONARY_SCREEN));
   }
 
-  render() {
+  renderTotalTranslationsCopy() {
+    const { totalTranslations } = this.props;
     const { copy } = this.state;
+    const totalString = copy.total.replace('{RPC01}', `<span class="profile__total-num">${totalTranslations}</span>`);
+
+    return { __html: totalString };
+  }
+
+  render() {
     const { bgColor, name, pic } = this.props;
+    const { copy } = this.state;
     const firstName = name.split(' ')[0];
 
     return (
       <div className="screen" style={{ background: bgColor }}>
         <div className="slide">
           <div className="slide__contents">
+            <a href="https://github.com/robertpataki/react-dictionary" target="_blank"><img className="profile__octocat" src='/images/octocat.svg' alt="Octocat" /></a>
+
             <div className="profile">
-              <img className="profile__pic" src={ pic } alt="Profile picture" />
               <p className="profile__greeting">{ `${copy.greeting} ${firstName}!` }</p>
+              <img className="profile__pic" src={ pic } alt="Profile picture" />
+              <p className="profile__total" dangerouslySetInnerHTML={ this.renderTotalTranslationsCopy() }></p>
             </div>
           </div>
 
@@ -62,6 +73,7 @@ UserScreen.propTypes = {
 export default connect((state) => {
   return {
     name: state.auth.name,
-    pic: state.auth.pic
+    pic: state.auth.pic,
+    totalTranslations: state.translations.length,
   }
 })(UserScreen);

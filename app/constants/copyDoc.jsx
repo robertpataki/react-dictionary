@@ -1,11 +1,12 @@
 export const COPY_DOC = {
   hu: {
     auth: {
-      welcome: 'Jelentkezz be a\nFacebook profiloddal',
+      welcome: 'Jelentkezz be a<br/>Facebook profiloddal',
       login: 'bejelentkezés',
     },
     userScreen: {
       greeting: 'Szia',
+      total: '{RPC01} kifejezés van a szótáradban, csak így tovább!',
       leftButton: 'Vissza',
       rightButton: 'Kilépés',
     },
@@ -33,11 +34,12 @@ export const COPY_DOC = {
   },
   en: {
     auth: {
-      welcome: 'Please log in using\nyour Facebook',
+      welcome: 'Please log in using<br/>your Facebook',
       login: 'login',
     },
     userScreen: {
       greeting: 'Hi',
+      total: 'You have {RPC01} translations in your dictionary, keep it up!',
       leftButton: 'Back',
       rightButton: 'Logout',
     },

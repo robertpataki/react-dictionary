@@ -20,6 +20,12 @@ export class Login extends React.Component {
     dispatch(actions.startLogin());
   }
 
+  renderWelcomeMessage() {
+    const { copy } = this.state;
+
+    return { __html: copy.welcome };
+  }
+
   render() {
     const { copy } = this.state;
 
@@ -29,7 +35,7 @@ export class Login extends React.Component {
           <img src="images/logo.svg" className="login__logo" />
           <button className="login__button" onClick={ this.onLogin }><i>{ copy.login }</i></button>
           <div className="login__copy">
-            <p>{ copy.welcome }</p>
+            <p dangerouslySetInnerHTML={ this.renderWelcomeMessage() }></p>
           </div>
         </div>
       </div>

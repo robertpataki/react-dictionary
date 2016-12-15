@@ -9,6 +9,9 @@
 
 .slide__contents
 {
+    // Move up by footer's height * 0.5
+    margin-top: -2rem;
+
     @include full-screen;
     @include flex-vertical-center;
     @include flex-horizontal-center;
