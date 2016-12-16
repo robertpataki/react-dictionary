@@ -7,6 +7,10 @@
     @include full-screen;
 }
 
+.slide__wrapper {
+  @include full-screen;
+}
+
 .slide__contents
 {
     // Move up by footer's height * 0.5

@@ -34,7 +34,6 @@
     "moment": "^2.15.1",
     "node-env-file": "^0.1.8",
     "node-sass": "^3.9.3",
-    "node-uuid": "^1.4.7",
     "normalize-scss": "^6.0.0",
     "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.8",
@@ -43,6 +42,7 @@
     "react-fastclick": "^2.1.2",
     "react-gsap-enhancer": "^0.3.0",
     "react-hammerjs": "^0.5.0",
+    "react-motion": "^0.4.6",
     "react-redux": "^4.4.5",
     "react-router": "^2.0.0",
     "react-testutils-additions": "^15.1.0",
@@ -53,6 +53,7 @@
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",
     "susy": "^2.2.12",
+    "uuid": "^3.0.1",
     "webpack": "^1.12.13"
   },
   "devDependencies": {
